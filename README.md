@@ -1,2 +1,2 @@
-# LearnLinux
-学习Linux所记的笔记和代码示例。
+# Front-end-interview-questions
+自己搜集的一些前端面试题。
