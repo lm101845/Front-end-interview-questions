@@ -1,0 +1,41 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-09-02 14:10:06
+ * @LastEditTime: 2021-09-02 14:21:49
+ * @FilePath: \01-2021年9月\面试后查漏补缺\01-有关代码\05-手写防抖和节流\03-B站视频\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        width: 100%;
+        height: 200px;
+        line-height: 200px;
+        text-align: center;
+        color: #fff;
+        background-color: #444;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src='underscore.js'></script>
+    <script>
+        let count = 0;
+        //演示事件是如何频繁发生的
+        let container = document.querySelector('#container')
+        function doSomething(){
+            //可能会做回调或AJAX请求
+            container.innerHTML = count++;
+        }
+        _debounce()
+        container.onmousemove = doSomething
+    </script>
+  </body>
+</html>
