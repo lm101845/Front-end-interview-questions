@@ -1,0 +1,52 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-02-18 10:33:52
+ * @LastEditTime: 2022-02-18 10:40:06
+ * @FilePath: \01-有关代码\07-label标签\01.html
+-->
+<!-- https://www.jianshu.com/p/59b63d07ab04 -->
+
+<!-- label 元素不会向用户呈现任何特殊效果。不过，它为鼠标用户改进了可用性。 -->
+<!-- 
+    <label>与其他元素关联的方式有两种
+        1、显式联系：显式联系通过<label>的 "for" 属性和目标标签的 ID 来完成
+        2、隐式联系：隐式联系可通过标签嵌套完成
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 显式 -->
+    <form>
+        <input type="radio" name="yes-no" id="yes">确定
+        <input type="radio" name="yes-no" id="no">取消
+    </form>
+    <br>
+
+    <label for="yes">点击这里也可选择 确定 选项</label> <br />
+    <label for="no">点击这里也可以选择 取消 选项</label> <br />
+
+    <!-- 隐式联系 -->
+    <!-- 由于隐式联系不需要用 标签的 ID 
+    所以我把第一个例子中的表单代码中的<input>标签的ID去掉 -->
+    <br><br>
+    <hr>
+    <form>
+        <label><input type="radio" name="yes-no">确定</label>
+        <label><input type="radio" name="yes-no">取消</label>
+    </form>
+    <!-- 从运行结果可以看到，我把鼠标移动到 "确定" 或 "取消" 上时，
+        鼠标并没有改变样式，是可点击的。当我点击 "确定" "取消" 时，
+        也可以把选项选上，这是因为我点击 "确定" "取消" 其实是点击了<label>，
+        由于我们把<input>与<label>隐式关联了。所以达到了点击文字确定选项的效果。
+。 -->
+</body>
+
+</html>

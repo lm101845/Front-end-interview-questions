@@ -1,0 +1,31 @@
+<!-- https://juejin.cn/post/6844903843193470983 -->
+<!-- 
+    这种方法比较适合文字的居中，其核心是设置行高（line-height）等于包裹他的盒子的高，
+    或者不设高度只设行高，这种适合文字居中且高度固定的场景，使用起来比较方便也比较有用。
+
+    值得注意的是如果是行内元素，因为其没有高度，需先把行内元素转换为行内块或者块元素。
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .middle {
+            /* height: 50px; */
+            /* 不设高度只设行高也行 */
+            line-height: 50px;
+            background: red;
+        }
+    </style>
+    <div class="middle">适合文字居中</div>
+</head>
+
+<body>
+
+</body>
+
+</html>

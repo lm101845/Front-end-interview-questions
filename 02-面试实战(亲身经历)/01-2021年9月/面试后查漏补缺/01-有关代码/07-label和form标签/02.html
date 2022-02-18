@@ -1,0 +1,46 @@
+<!--
+ * @Author: liming
+ * @Date: 2022-02-18 10:46:27
+ * @LastEditTime: 2022-02-18 10:50:24
+ * @FilePath: \01-有关代码\07-label和form标签\02.html
+-->
+<!-- form表单的target属性作用:target属性规定在何处打开 action URL -->
+<!-- https://blog.csdn.net/chengQunBin/article/details/78097581 -->
+
+<!-- 
+    在HTML中，**form标签被用于定义表单域，即创建一个表单，以实现用户信息的收集和传递，
+    form中的所有内容都会被提交给服务器**。创建表单的基本语法格式如下：
+    
+    <form action="url地址" method="提交方式" name="表单名称">
+        各种表单控件
+    </form>
+
+    常用属性：
+
+    * action：在表单收集到信息后，需要将信息传递给服务器进行处理，action属性用于**指定接收并处理表单数据的服务器程序的url地址**。
+
+    * method：用于设置表单数据的提交方式，**其取值为get或post**。
+
+    * name：用于指定**表单的名称**，以**区分同一个页面中的多个表单**。
+
+    注意：**每个表单都应该有自己表单域**。
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="form_action.asp" method="get" target="_blank">
+        <p>First name: <input type="text" name="fname" /></p>
+        <p>Last name: <input type="text" name="lname" /></p>
+        <input type="submit" value="Submit" />
+    </form>
+</body>
+
+</html>

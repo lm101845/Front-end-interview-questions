@@ -1,0 +1,46 @@
+<!-- 
+    vertical-align: middle
+    这种实现元素的居中需要配合父元素设有等于自身高度的行高，
+    且此元素是行内块元素。 只有三个条件都具备，才能实现垂直居中
+
+    需要注意的是这种方法需要一个固定的行高，且实现的居中其实是近似居中，并不是真正意义的居中。
+
+    `vertical-align`**不影响块级元素**中的内容对齐，
+    它只针对**行内元素或者行内块元素**，特别是**行内块元素**， 
+    **通常用来控制图片/表单与文字的对齐**。
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main {
+            width: 200px;
+            height: 300px;
+            line-height: 300px;
+            background: #dddddd;
+        }
+
+        .middle {
+            background: red;
+            width: 200px;
+            height: 50px;
+            display: inline-block;
+            /* 或者display: inline-table; */
+            vertical-align: middle;
+        }
+    </style>
+    <div class="main">
+        <div class="middle"></div>
+    </div>
+</head>
+
+<body>
+
+</body>
+
+</html>

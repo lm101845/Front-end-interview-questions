@@ -1,0 +1,42 @@
+<!-- 
+    这种方法核心在于先设置需要居中的元素为绝对定位，
+    在设置其top:50%; 加上 margin-top等于负的自身高度的一半来实现居中。
+    好处是实现起来比较方便，且父元素的高度可以为百分比，也不用设行高。代码如下：
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main {
+            width: 60px;
+            height: 100px;
+            background: pink;
+            position: relative;
+            /* //父元素设为相对定位 */
+        }
+
+        .middle {
+            position: absolute;
+            /* //设为绝对定位 */
+            top: 50%;
+            margin-top: -10px;
+            /* //设margin-top为元素高度的一半 */
+            width: 60px;
+            height: 20px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="middle"></div>
+    </div>
+</body>
+
+</html>

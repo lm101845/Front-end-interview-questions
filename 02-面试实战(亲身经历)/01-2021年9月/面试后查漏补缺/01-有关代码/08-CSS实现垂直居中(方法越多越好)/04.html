@@ -1,0 +1,44 @@
+<!-- 
+    绝对定位加margin:auto:
+    这种方法好处是不止可以实现垂直居中，还可以实现水平居中，
+    坏处是在网络或性能不好的情况下会有盒子不直接定到位的情况，造成用户体验不好。
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main {
+            width: 60px;
+            height: 100px;
+            background: #dddddd;
+            position: relative;
+        }
+
+        .middle {
+            width: 30%;
+            height: 50%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            /* //top、bottom设0即可， */
+            left: 0;
+            right: 0;
+            /* //如果left、right也设为0则可实现水平垂直都居中 */
+            margin: auto;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="middle"></div>
+    </div>
+</body>
+
+</html>
