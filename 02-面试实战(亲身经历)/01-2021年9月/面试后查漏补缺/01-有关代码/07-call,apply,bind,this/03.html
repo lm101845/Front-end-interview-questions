@@ -1,0 +1,36 @@
+<!--
+ * @Author: liming
+ * @Date: 2021-09-03 06:32:08
+ * @LastEditTime: 2021-09-03 06:34:01
+ * @FilePath: \01-2021年9月\面试后查漏补缺\01-有关代码\07-call,apply,bind,this\03.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+        /**
+         * 这里为什么会打印 undefined 呢？这是因为正如刚刚所描述的那样，调用 fn 的是 a 对象，也就是说 fn 的内部的 this 是对象 a，而对象 a 中并没有对 name 进行定义，所以 log 的 this.name 的值是 undefined。
+这个例子还是说明了：this 永远指向最后调用它的那个对象，因为最后调用 fn 的对象是 a，所以就算 a 中没有 name 这个属性，也不会继续向上一个对象寻找 this.name，而是直接输出 undefined。
+
+        作者：sunshine小小倩
+        链接：https://juejin.cn/post/6844903496253177863
+        来源：掘金
+        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+         */
+      var name = "windowsName";
+      var a = {
+        // name: "Cherry",
+        fn: function () {
+          console.log(this.name); // undefined
+        },
+      };
+      window.a.fn();
+    </script>
+  </body>
+</html>
