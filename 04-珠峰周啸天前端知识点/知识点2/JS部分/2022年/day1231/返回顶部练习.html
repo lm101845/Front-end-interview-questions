@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			body{
+				height:3000px;
+				background-image: linear-gradient(red,blue,green);
+			}
+			#box{
+				height:100px;
+				width:100px;
+				background-color: pink;
+				color:#fff;
+				line-height:100px;
+	            text-align: center;
+				position: fixed;
+				right:100px;
+				bottom:100px;
+				opacity: 0;
+				transition: opacity 1s;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			返回顶部
+		</div>
+		<script>
+			let html=document.documentElement||document.body;
+			var timer=null;
+			
+			box.onclick=function(){
+				let htop=html.scrollTop;
+				if(timer===null){
+					timer=setInterval(()=>{
+						htop-=50;
+						if(htop<=0){
+							clearInterval(timer);
+							timer=null;
+							// html.scrollTop=0;
+							// return;
+							htop=0;
+						}
+						html.scrollTop=htop;
+					},10)
+				}
+			}
+			
+			window.onscroll=function(){
+				if(html.scrollTop>100){
+					box.style.opacity=1;
+				}else{
+					box.style.opacity=0;
+				}
+			}
+		</script>
+	</body>
+</html>

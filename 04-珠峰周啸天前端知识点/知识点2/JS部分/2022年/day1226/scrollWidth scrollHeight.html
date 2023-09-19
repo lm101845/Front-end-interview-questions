@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			body{
+				height:2000px;
+			}
+			#box{
+				height:100px;
+				width:100px;
+				border:1px solid red;
+				overflow: scroll;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			111111111111111111
+		</div>
+		
+		<script>
+			 // scrollWidth : 滚动内容的宽度  
+				// 		  1.内容未超出范围---》 scrollWidth===clientWidth
+				// 		  1.内容超出范围---》 scrollWidth====实际内容的宽度
+			 // scrollHeight 
+			 
+			 // scrollTop : 滚动条垂直滚动，滚过去的距离（距离顶部）
+			 // scrollLeft : 滚动条横向滚动，滚过去的距离 （距离左侧）
+			 
+			 // console.log(box.clientWidth)
+			 // console.log(box.scrollWidth)
+			 
+			 let html=document.documentElement||document.body;
+			 
+			 //document.documentElement====》html
+			 // console.log(html.scrollHeight);
+			 
+			 console.log(html.scrollTop);
+			 
+			 //滚动事件 scroll
+			 
+			 //  box.onscroll=function(){
+				//  console.log("111");
+			 // }
+			 
+			 //特殊：整个文档滚动  document   window
+			 //不能用：document.documentElement||document.body
+			 window.onscroll=function(){
+			 	console.log("文档滚动");
+			 }
+			 
+		</script>
+	</body>
+</html>

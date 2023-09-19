@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>rem学习</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        html {
+            font-size: 100px;
+            /* 1REM=100PX「750的设计稿」 */
+        }
+
+        /* 750设计稿中测出来的尺寸：268*128 */
+        .box {
+            width: 2.68rem;
+            height: 1.28rem;
+            background: red;
+        }
+
+        /* 750设计稿中测出来的尺寸：95*113 */
+        .pic {
+            display: block;
+            width: .95rem;
+            height: 1.13rem;
+        }
+
+        html,
+        body {
+            background: #EEE;
+        }
+
+        #app {
+            margin: 0 auto;
+            max-width: 750px;
+            background: #FFF;
+        }
+    </style>
+    <script>
+        /* 计算REM换算比例 */
+        (function () {
+            const computed = function computed() {
+                let html = document.documentElement,
+                    deviceW = html.clientWidth,
+                    designW = 750,
+                    ratio = 100;
+                if (deviceW < designW) {
+                    ratio = deviceW * 100 / designW;
+                }
+                html.style.fontSize = ratio + 'px';
+            };
+            computed();
+            window.addEventListener('resize', computed);
+        })();
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="box"></div>
+        <img src="images/myDream.jpg" alt="" class="pic">
+    </div>
+</body>
+
+</html>

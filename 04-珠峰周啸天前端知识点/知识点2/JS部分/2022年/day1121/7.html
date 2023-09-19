@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//8.slice()
+			// slice(开始下标,结束的下标)   含头不含尾: 包含开始下标，不包含结束下标
+			// slice(开始下标)   从索引开始下标，截取到最后
+			
+			// 只有slice，下标有负数 (最后一位是-1，倒数第二位是-2，依此往前推)
+			// 负数下标截取的时候，只能从左往右 如：arr.slice(-4,-2)
+			
+			// 作用：获取子数组 
+			// 参数：可以有一个或者两个
+			// 返回值：返回的是截取的新数组
+			// 是否改变原数组：不改变
+			
+			// var arr=[10,20,30,40,50];
+			// var newarr=arr.slice(1,3);//1,2
+			// console.log(newarr);//[20,30]
+			// console.log(arr);
+			
+			// var arr=[10,20,30,40,50];
+			// var newarr=arr.slice(1);//从索引下标开始，截取到最后
+			// console.log(newarr);//[20,30,40,50]
+			// console.log(arr);
+			
+			
+			// var arr=[10,20,30,40,50];
+			// var newarr=arr.slice(-4,-2);
+			// console.log(newarr);//[20,30]
+			// console.log(arr);
+			
+		
+			//9.concat()
+			// 作用：实现多个数组或者值的拼接
+			// 参数：数组 或者 值
+			// 返回值：是拼接后的新数组
+			// 是否改变原数组：不改变
+			
+			// var arr=[1,2,3];
+			// var arr2=[10,20];
+			// var newarr=arr.concat(arr2,100,200,"hello",true);
+			// console.log(newarr);
+			// console.log(arr,arr2);
+			
+			//10.toString()  
+			 // 作用：可以把一个数组转换为字符串
+			 // 参数：无
+			 // 返回值：返回值是转换后的字符串（用 逗号 分隔）
+			 // 是否改变原数组：不改变
+			 
+			 // var arr=[1,2,3,{name:"lili"},null,undefined,[],4,5];
+			 // var str=arr.toString();
+			 // console.log(str);//1,2,3,[object Object],,,,4,5
+			 // console.log(arr);
+			 
+			 // 11.join()
+			 // 作用：把数组通过指定的连接符，转换为字符串
+			 // 参数：连接符   不写：默认 ,    写：写什么是什么
+			 // 返回值：返回值是转换后的字符串
+			 // 是否改变原数组：不改变
+			 
+			 // var arr=[1,2,3,4,5];
+			 // var str=arr.join("+");
+			 // console.log(str);//1+2+3+4+5
+			 // console.log(arr);
+			 
+			 
+			 //12.indexOf/ lastIndexOf 
+			 //从左往右找 
+			 // indexOf(某项具体的内容,开始查找的位置下标)
+			 // indexOf(某项具体的内容) 默认从“下标0”开始找
+			 
+			 //从右往左找 
+			 // lastIndexOf(某项具体的内容)  默认从“最后一个下标”往前找
+			 // lastIndexOf(某项具体的内容,开始查找的位置下标)
+			 
+			 // 作用：获取某项在数组中(首次出现/最后出现的) 索引（也可以用来是否包含某项）
+			 // 参数：2个
+			 // 返回值：索引(某项在数组里) 或 -1(某项不再数组里)
+			 // 是否改变原数组：不改变
+			 
+			 // var arr=[1,2,3,4,5];
+			 // var i=arr.indexOf("a");
+			 // console.log(i);//索引  -1
+			 // console.log(arr);//不变
+			 
+			 // var arr=[1,2,3,4,5];
+			 // var i=arr.indexOf(3);
+			 // console.log(i);//索引  2
+			 // console.log(arr);//不变
+			 
+			 // var arr=[1,2,3,4,5,3,6,7,8];
+			 // var i=arr.indexOf(3,3);
+			 // console.log(i);//索引  5   默认返回第一个找到索引下标
+			 // console.log(arr);//不变
+			 
+			 
+			 // var arr=[1,2,3,4,5,3,6,7,8];
+			 // var i=arr.lastIndexOf(3)
+			 // console.log(i);//索引  5   默认返回第一个找到索引下标
+			 // console.log(arr);//不变
+			 
+			 
+			 var arr=[1,2,3,4,5,3,6,7,8];
+			 var i=arr.lastIndexOf(3,4)
+			 console.log(i);//索引  5   默认返回第一个找到索引下标
+			 console.log(arr);//不变
+		</script>
+	</body>
+</html>

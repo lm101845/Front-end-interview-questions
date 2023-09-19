@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		修饰符
+		i: 不区分大小写
+		m: 多行匹配
+		g: 全局匹配
+		
+		<script>
+			// var str="Apple one Apple two";
+			// var reg=/apple/i;
+			// console.log(reg.test(str));
+			
+			
+			// var str="Apple one a\n Apple two";
+			// console.log(str);
+			// var reg=/a$/m;//可以识别换行符，当成多行来匹配
+			// console.log(reg.test(str));
+			
+			//捕获
+			//字符串 match() 将符合正则规则的内容抓取（数组）
+			//默认情况下，只能抓取第一个
+			var str="Apple one a Apple two APPLE apple";
+			var reg=/apple/ig;
+			console.log(str.match(reg));
+		</script>
+	</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#box{
+				height:100px;
+				width:100px;
+				background-color: springgreen;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">111</div>
+		<script>
+			//DOM2 1
+			//原理：基于事件池实现的---发布订阅设计模式
+			//可以绑定多个监听事件，但是要注意兼容
+			//addEventListener(事件句柄,回调函数,方向)  //FF
+			//removeEventListener(事件句柄,回调函数,方向) //FF
+			
+			//方向：true/false
+			//默认：false  冒泡阶段方向   由里向外
+			//      true  捕获阶段方向  由外向里
+			
+			//ele.attachEvent("on"+事件句柄,回调函数)  //IE
+			//ele.detachEvent("on"+事件句柄,回调函数)  //IE
+			//IE:只有一个方向 冒泡阶段 由里向外, 没有第三个参数
+			
+			box.addEventListener("click",function(){
+				console.log("1111");
+			})
+			
+			function showTwo(){
+				console.log("2222");
+			}
+			box.addEventListener("click",showTwo)
+
+			//ele.removeEventListener(事件句柄,回调函数)
+			//回调函数 必须同一个地址
+			box.removeEventListener("click",showTwo)
+			
+			
+			//IE  ele.attachEvent("on"+事件句柄,回调函数)
+			//IE  ele.detachEvent("on"+事件句柄,回调函数)
+			//box.attachEvent("onclick",showTwo)
+			//box.detachEvent("onclick",showTwo)
+			
+		</script>
+	</body>
+</html>

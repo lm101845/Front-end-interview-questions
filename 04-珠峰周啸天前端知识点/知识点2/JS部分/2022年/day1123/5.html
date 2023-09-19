@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		queryURLParams 问号参数处理
+		 var  str ="https://www.baidu.com?name=zhufeng&age=10&id=14";
+		        {
+		            name:"zhufeng",
+		            age:10,
+		            id:14
+		        }
+		<script>
+			var  str ="https://www.baidu.com?name=zhufeng&age=10&id=14";
+			var arr=str.split("?");//['https://www.baidu.com', 'name=zhufeng&age=10&id=14']
+			var rightstr=arr[1];//'name=zhufeng&age=10&id=14'
+			var arra=rightstr.split("&");//['name=zhufeng', 'age=10', 'id=14']
+			
+			// var arrn=arra[0].split("=");
+			// console.log(arrn);
+			// var arrm=arra[1].split("=");
+			// console.log(arrm);
+			// var arrq=arra[2].split("=");
+			// console.log(arrq);
+			var obj={};
+			
+			for(var i=0;i<arra.length;i++){
+			    var resarr=arra[i].split("=");
+				//['name', 'zhufeng']
+				//['age', '10']
+				//['id', '14']
+				//console.log(resarr[1]);
+				
+				//resarr[0]---》name    age  id
+				//resarr[1]---> zhufeng  10  14
+				obj[resarr[0]]=resarr[1];
+			}
+			
+			console.log(obj);
+		</script>
+	</body>
+</html>

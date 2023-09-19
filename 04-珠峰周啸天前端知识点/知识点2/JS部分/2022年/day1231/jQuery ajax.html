@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script src="jquery.min.js"></script>
+		<script>
+			//没有设置同步异步 true异步  false同步
+			//默认 true异步（工作中所有的ajax 都是异步）
+			//简写
+			$.get("data.json",function(data){
+				console.log(data);
+			})
+			
+			//全写
+			$.ajax({
+				method:"get",// type  method 请求方式  默认get
+				url:"data.json",// 请求网址
+				data:{},//发给服务器的参数
+				success:function(data){//成功回调函数
+					console.log(data);
+				},
+				error:function(err){//失败的回调函数
+					console.log(err);
+				},
+				dataType:"json",//返回的数据类型
+				async:false// 同步 异步 默认true 异步
+			})
+			
+			$.ajax({
+				url:"data.json",// 请求网址
+				success:function(data){//成功回调函数
+					console.log(data);
+				},
+				async:false// 同步 异步 
+			})
+
+
+			// $.post("data.json",function(data){
+			// 	console.log(data);
+			// })
+		</script>
+	</body>
+</html>

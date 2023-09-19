@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		hasOwnProperty：存在于 Object.prototype ，判断某个属性是不是该对象的私有
+		
+		私有：true  公有：false
+		
+		hasOwnProperty:私有和公有是相对的
+		
+		没有此属性返回的也是false
+		
+		【思考题】编写一个hasPubProperty方法，检测一个属性是不是公有的
+		 私有：false 公有：true
+		<script>
+			function Fn(name,age){
+				this.name=name;//私有
+				this.age=age;
+			}
+			Fn.prototype.show=function(){//公有
+				console.log("111");
+			}
+			Fn.num=100;//静态
+			var f1=new Fn("lisa",18)
+			
+			console.log(f1.hasOwnProperty("name"));//true
+			console.log(f1.hasOwnProperty("show"));//false
+			console.log(f1.hasOwnProperty("num"));//false
+			console.log(f1.hasOwnProperty("job"));//false
+			
+			console.log(Fn.prototype.hasOwnProperty("show"));//true
+		</script>
+		
+		<!-- <script>
+			var num=100;
+			var arr=[1,2,3];
+			console.dir(Array);//isArray 判断是不是数组  构造函数身上的静态方法
+            console.log(arr);//私有 公有 都没有 isArray
+			
+			console.log(Array.isArray(arr))//构造函数调用  true
+			console.log(Array.isArray(num))//构造函数调用  false
+			
+			//私有、公有 的属性和方法---实例
+			console.log(arr[0])//1
+			arr.push(100);
+			console.log(arr);
+		</script> -->
+	</body>
+</html>

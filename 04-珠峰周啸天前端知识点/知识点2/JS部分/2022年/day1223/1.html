@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		constructor 临时用来检测数据类型 可以细分对象（更加精准一些）
+		
+		可以随意修改(结果会变得更乱)
+		<!-- <script>
+			var arr=[1,2,3];
+			console.log(arr.constructor==Array);//true
+			console.log(arr.constructor==Object);//false
+		</script> -->
+		
+		<script>
+			function Fn(){
+				
+			}
+			Fn.prototype={};//{}没有constructor
+			var f=new Fn;
+			
+			console.log(f.constructor==Fn);//true
+			console.log(f.constructor==Object);//false
+		</script>
+	</body>
+</html>

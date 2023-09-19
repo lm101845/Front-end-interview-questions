@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			let x = 3,
+				obj = {
+					x: 5
+				};
+			obj.fn = (function() {
+				this.x *= ++x;
+				return function(y) {
+					this.x *= (++x) + y;
+					console.log(x);
+				}
+			})();
+
+			let fn = obj.fn;
+			obj.fn(6);
+			fn(4);
+			console.log(obj.x, x, window.x);
+		</script>
+		
+		<!-- <script>
+			window.x * = ++x;
+			window.x  =  window.x  * ++x
+			
+			sum + = i
+			
+			sum  =  sum + i
+		</script> -->
+	</body>
+</html>

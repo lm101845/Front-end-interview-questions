@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<button id="btn">1111</button>
+		<script>
+			// 工具类方法：函数节流处理 
+			const throttle = function throttle(func, wait) {
+				if (typeof func !== "function") throw new TypeError('func must be an function');
+				if (typeof wait !== "number") wait = 300;
+				let timer,
+					previous = 0;
+				return function proxy(...params) {
+					let now = +new Date(),
+						remaining = wait - (now - previous),
+						self = this,
+						result;
+					if (remaining <= 0) {
+						if (timer) {
+							clearTimeout(timer);
+							timer = null;
+						}
+						result = func.call(self, ...params);
+						previous = now;
+					} else if (!timer) {
+						timer = setTimeout(() => {
+							if (timer) {
+								clearTimeout(timer);
+								timer = null;
+							}
+							result = func.call(self, ...params);
+							previous = +new Date();
+						}, remaining);
+					}
+					return result;
+				};
+			};
+
+
+			function show() {
+				console.log("1111");
+			}
+            //btn.onclick = show;
+			
+			btn.onclick = throttle(show, 1000);
+		</script>
+	</body>
+</html>

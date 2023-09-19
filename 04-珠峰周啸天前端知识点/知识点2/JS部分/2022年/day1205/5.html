@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		instanceof:判断 某个实例是不是属于那个类
+		是： true    不是: false
+		<!-- <script>
+			var arr=new Array(1,2,3);
+			console.log(arr);
+			
+			console.log(arr instanceof Array);//true
+			console.log(arr instanceof Date);//false
+			
+			console.log(arr instanceof Object);//true
+		</script> -->
+		
+		
+		<script>
+			function Fn(){
+				this.name="lili";
+				this.age=18;
+			}
+			
+			var f1=new Fn();//自己构造类
+			console.log(f1);
+			
+			console.log(f1 instanceof Fn);//true
+			console.log(f1 instanceof Object);//true
+			
+			//Object 是所有类的 基类，万物皆对象
+		</script>
+	</body>
+</html>

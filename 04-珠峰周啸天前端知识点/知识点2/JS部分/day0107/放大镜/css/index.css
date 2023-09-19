@@ -1,0 +1,41 @@
+.box{
+    width:700px;
+    margin:50px auto;
+    display: flex;
+}
+.leftbox{
+    height:300px;
+    width:300px;
+    position: relative;
+}
+.leftbox img{
+    height:300px;
+    width:300px;
+}
+.mark{
+    height:100px;
+    width:100px;
+    background-color: red;
+    opacity: 0.5;
+    position: absolute;
+    left:0;
+    top:0;
+    display: none;
+    /* padding:30px;
+    border:10px solid red;
+    box-sizing: border-box; */
+}
+.rightbox{
+    height:400px;
+    width:400px;
+    overflow: hidden;
+    position: relative;
+    display: none;
+}
+.rightbox img{
+    /* height:1200px;
+    width:1200px; */
+    position: absolute;
+    left:0;
+    top:0;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		in 检测某个属性，是不是属于这个对象，
+		不论私有还是公有，只要是就是 true， 不是就是 false
+		<!-- <script>
+			function Fn(name,age){
+				this.name=name;//私有属性和方法
+				this.age=age;
+			}
+			Fn.prototype.show=function(){//公有属性和方法
+				console.log("111");
+			}
+			var f1=new Fn("lili",18)
+			
+			console.log(f1);
+			
+			console.log("name" in f1);//true
+			console.log("show" in f1);//true
+			console.log("job" in f1);//false
+			console.log("toString" in f1);//true
+			console.log("toString" in Object.prototype);//true
+			
+			console.dir(Fn);//静态的属性和方法---键值对
+			console.log("job" in Fn);//false
+			console.log("length" in Fn);//true
+		</script> -->
+		
+		
+		<script>
+			function Fn(name,age){
+				this.name=name;//私有属性和方法---可以通过实例
+				this.age=age;
+				this.job="CEO";
+			}
+			Fn.prototype.show=function(){//公有属性和方法---可以通过实例
+				console.log("111");
+			}
+			Fn.prototype.showa=function(){//公有属性和方法
+				console.log("222");
+			}
+			
+			Fn.num=100;//添加静态的属性--只能同通过类
+			Fn.showf=function(){
+				console.log("我是静态方法")
+			}
+			
+			var f1=new Fn("lili",18)
+			
+			console.log(f1);
+			
+			console.log("constructor" in Fn.prototype);
+
+			console.dir(Fn);
+		</script>
+	</body>
+</html>

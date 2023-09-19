@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		【思考题】编写一个hasPubProperty方法，检测一个属性是不是公有的
+		 私有：false 公有：true
+		 
+		 <script>
+			 //Object的原型上添加一个方法  hasPubProperty
+			 // 1.这个属性一定要是该对象的属性，不论公有还是私有
+			 // 2.一定不是私有属性
+			 // 初级版
+			Object.prototype.hasPubProperty=function hasPubProperty(attr){
+				//1.this --> f1     2.参数 attr---》"name"
+				if(attr in this){//true 是该对象的属性
+				    //if(!this.hasOwnProperty(attr)){}//该属性不是私有，就是公有
+					if(this.hasOwnProperty(attr)===false){//该属性不是私有，就是公有
+						return true;
+					}
+				}
+				return false;
+			}
+			 
+		 	function Fn(name,age){
+		 		this.name=name;//私有
+		 		this.age=age;
+		 	}
+		 	Fn.prototype.show=function(){//公有
+		 		console.log("111");
+		 	}
+		 	Fn.num=100;//静态
+		 	var f1=new Fn("lisa",18)
+			
+			console.log(f1);
+		 	
+			console.log(f1.hasPubProperty("name"));//false
+			console.log(f1.hasPubProperty("show"));//true
+			console.log(f1.hasPubProperty("num"));//false
+			console.log(f1.hasPubProperty("job"));//false
+		 	
+		 </script>
+	</body>
+</html>

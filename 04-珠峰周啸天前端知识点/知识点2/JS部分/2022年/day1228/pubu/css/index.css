@@ -1,0 +1,45 @@
+body{
+	background-color: #EEEEEE;
+}
+.box{
+	width:800px;
+	margin:0 auto;
+	display: flex;
+	justify-content: space-between;
+	/* 一定要注意每列的高度  根据内容实现顶端对齐，不能拉伸*/
+	align-items: flex-start;
+}
+.cloumn{
+	width:240px;
+}
+.item{
+	width:230px;
+	background-color: #fff;
+	padding:5px;
+	margin-bottom:10px;
+}
+.item img{
+	width:230px;
+	/* 高度用js写 */
+}
+.item .imgbox{
+	/* background-color: #EEEEEE; */
+	background:#eee url(../images/default.gif) no-repeat center;
+	width:230px;
+	/* 高度用js写 */
+}
+.item p{
+	color:#000;
+}
+.imgbox img[src=""]{
+	display: none;
+}
+#loadmorebox{
+	height:50px;
+	line-height:50px;
+	font-size:35px;
+	text-align: center;
+	background-color: red;
+	width:800px;
+	margin:0 auto;
+}

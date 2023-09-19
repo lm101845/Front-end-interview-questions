@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			function show(m){//形参 随意命名
+				var a=10;
+				var b=20;
+				m+=100;//跟外面的m,不是一个，单独副本（值类型）
+				console.log("函数",m)
+				
+				return a+b+m;//结果   return 没有--》undefined
+			}
+			
+			var  m=100;
+			var  res=show(m)//实参（值类型）  show(100)----show(m)
+			console.log(m);
+			
+			console.log(res);
+		</script>
+	</body>
+</html>

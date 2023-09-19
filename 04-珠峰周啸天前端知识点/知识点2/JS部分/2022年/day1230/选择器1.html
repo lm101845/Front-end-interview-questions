@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			[class*="o"]{
+				color:blue;
+			}
+		</style>
+	</head>
+	<body>
+		jquery 选择器  4类  9种
+		
+		<p class="one">000</p>
+		<div>111</div>
+		<p class="two">2222</p>
+		<span>333</span>
+		<p>444</p>
+		
+		<ul>
+			<li>00</li>
+			<li>110</li>
+			<li class="two">22</li>
+			<li>330</li>
+			<li>
+				44
+				<span class="aaa">qqq</span>
+			</li>
+			<li></li>
+		</ul>
+		
+		<script src="jquery.min.js"></script>
+		<script>
+			console.log($("[class='two']"))
+			
+			//console.log($("li:visible"))
+			
+			//内容
+			//console.log($("li:contains(0)"));//内容中含有具体某些文本
+			//console.log($("li:empty"))//没有内容
+			//console.log($("li:parent"))//必须有内容
+			//console.log($("li:has(.aaa)"));//内容中含有具体某些属性
+			
+			
+			// console.log($("li:first"));
+			// console.log($("li:last"));
+			// console.log($("li:eq(3)"));//eq(index)  找下标等于 index（索引 0）
+			// console.log($("li:lt(3)"));//lt(index)  找索引下标小于 index
+			// console.log($("li:gt(3)"));//lt(index)  找索引下标大于 index
+			// console.log($("li:even"));//偶数 （索引 0）
+			// console.log($("li:odd"));//奇数
+			// console.log($("li:not(.two)"));//除了什么之外
+			
+			//兄弟选择器--》下面的兄弟  +紧邻  ~不紧临
+			// console.log($("div+p"));
+			// console.log($("div~p"));
+		</script>
+	</body>
+</html>

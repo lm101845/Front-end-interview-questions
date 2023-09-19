@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch
+    ruanyifeng.com/blog/2020/12/fetch-tutorial.html
+
+    fetch  es6新增的 核心不是XMLHttpRequest
+
+    fetch(url[,config]) //默认get  返回Promise
+    url：请求地址
+    config：可有可无 对象
+       method: 'POST' 请求方式 大写
+       cache: 'no-cache' 是否缓存  no-cache不缓存
+       credentials: 'same-origin', 是否允许携带跨域资源凭证 cookie
+       // include（允许）, *same-origin(同源允许), omit（不允许）
+       同源：域名，协议，端口号一致
+       headers: {设置请求头
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+       },
+       body:JSON.stringify(data) post类请求传递参数  字符串、对象
+
+        response.text()：得到文本字符串。
+        response.json()：得到 JSON 对象。
+        response.blob()：得到二进制 Blob 对象。
+        response.formData()：得到 FormData 表单对象。
+        response.arrayBuffer()：得到二进制 ArrayBuffer 对象。
+
+    <script src="./md5.min.js"></script>
+    <script src="./qs.js"></script>
+    <script>
+
+        fetch("http://localhost:8888/api/articleList?date=2021-05-21",{
+            cache: 'no-cache', 
+            credentials: 'omit' 
+        }).then(response=>{
+           return response.json();//Promise
+        }).then(val=>{
+           console.log(val);
+        }).catch(err=>{
+            console.log(err);
+        })
+         
+        let data={
+            account:"18310612838",
+            password:md5("1234567890")
+        }
+
+        fetch("http://127.0.0.1:9999/user/login",{
+            method: 'POST',
+            cache: 'no-cache',
+            headers:{
+               'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body:Qs.stringify(data)
+        }).then(response=>{
+            //只能执行一次
+            return response.json();//Promise实例
+        }).then(val=>{
+            console.log(val);
+        }).catch(err=>{
+            console.log(err);
+        })
+    </script>
+</body>
+</html>

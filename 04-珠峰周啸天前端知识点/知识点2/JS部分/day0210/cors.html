@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    客户端：http://127.0.0.1:5500/2022_06/JS%E9%83%A8%E5%88%86/day0210/1.html
+    服务器：http://127.0.0.1:1001/list
+
+    <script src="./axios.min.js"></script>
+    <script>
+         axios.get("http://127.0.0.1:1001/list")
+         .then(response=>{
+            return response.data
+         }).then(val=>{
+            console.log(val)
+         }).catch((error)=>{
+            console.log(error)
+         })
+    </script>
+</body>
+</html>

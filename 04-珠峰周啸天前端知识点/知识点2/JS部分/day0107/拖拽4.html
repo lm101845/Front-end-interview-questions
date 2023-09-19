@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            height:100px;
+            width:100px;
+            background-color: pink;
+            position: fixed;
+            left:0;
+            top:0;
+        }
+        #boxtwo{
+            height:200px;
+            width:200px;
+            background-color:aqua;
+            position: fixed;
+            left:0;
+            top:200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <div id="boxtwo"></div>
+    <script>
+        let html=document.documentElement||document.body;
+       //每个盒子都有自己的起始坐标，结束坐标，范围值...
+       //给每个盒子添加 私有的属性值
+       function down(e){
+          this.startX=e.offsetX;
+          this.startY=e.offsetY;
+
+         //修改this指向 call apply bind
+          this._move=move.bind(this);
+          this._up=up.bind(this);
+
+          window.addEventListener("mousemove",this._move)
+          window.addEventListener("mouseup",this._up)
+       }
+
+        function move(e){
+           //console.log(this);//window
+           //console.log(e.target);
+           this.endX=e.clientX;
+           this.endY=e.clientY;
+
+           this.resultX=this.endX-this.startX;
+           this.resultY=this.endY-this.startY;
+          
+           this.maxW=html.clientWidth-this.offsetWidth;
+           this.maxH=html.clientHeight-this.offsetHeight;
+           
+           this.resultX= this.resultX>=this.maxW?this.maxW:(this.resultX<=0?0:this.resultX);
+           this.resultY= this.resultY>=this.maxH?this.maxH:(this.resultY<=0?0:this.resultY);
+
+           this.style.left=this.resultX+"px";
+           this.style.top=this.resultY+"px";
+        }
+
+        function up(){
+          window.removeEventListener("mousemove",this._move)
+          window.removeEventListener("mouseup",this._up)
+        }
+
+
+        box.addEventListener("mousedown",down);
+        boxtwo.addEventListener("mousedown",down);
+
+
+    </script>
+</body>
+</html>

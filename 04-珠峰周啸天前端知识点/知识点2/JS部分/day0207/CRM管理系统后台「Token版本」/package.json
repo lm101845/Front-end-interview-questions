@@ -1,0 +1,38 @@
+{
+  "name": "crm-admin",
+  "version": "2.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "body-parser": "^1.19.0",
+    "qs": "^6.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "multiparty": "^4.2.2",
+    "request": "^2.88.2",
+    "blueimp-md5": "^2.18.0"
+  },
+  "config": {
+    "server": 9999,
+    "token": {
+      "secret": "ZFPX",
+      "maxAge": "7d"
+    },
+    "cros": {
+      "open": true,
+      "safeList": [
+        "http://127.0.0.1:5500",
+        "http://127.0.0.1:5501",
+        "http://127.0.0.1:5502",
+        "http://127.0.0.1:8080",
+        "http://127.0.0.1:3000",
+		"http://127.0.0.1:8848"
+      ]
+    }
+  }
+}

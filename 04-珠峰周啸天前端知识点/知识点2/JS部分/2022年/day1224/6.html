@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//2.验证一个字符串中哪个字母出现的次数最多，多少次
+			let str = "zhufengpeixunzhoulaoshi";
+			//aaabbcccc
+			//1.将相同的字符放到一起
+			//2. 排序放到一块  sort() 字符串无法用sort ,数组可以
+			//将字符串---》数组----》排序  数组---》字符串（join("")）
+			let newStr=str.split("").sort().join("");
+			
+			//console.log(newStr);//aeefghhhiilnnoopsuuuxzz
+		 //   {
+			// e:2,
+			// h:3,
+			// i:2
+		 //   }
+		    //将连着的字母取出来，放到对象里，并且标记个数
+			let reg=/([a-z])\1+/ig;
+			let obj={};
+			let maxCount=2;//假设出现最多对的次数是2
+		
+			newStr.replace(reg,(value,$1)=>{
+				//value: ee    $1:e
+				//value: hhh   $1:h
+				let len=value.length;
+				if(len>maxCount){
+					maxCount=len;
+				}
+				obj[$1]=len;
+			})
+			
+			for(let key in obj){
+				if(obj[key]==maxCount){
+					console.log(`${key}出现最多，出现${maxCount}次`);
+				}
+			}
+		</script>
+		
+		<script>
+			//字母 或者 中文汉字 
+			//要用 sort((a, b) => a.localeCompare(b))
+			//不能用 sort((a, b) => a-b)  ===>数值
+			
+			//字母排序,也可以直接不写回调函数 sort()
+		</script>
+	</body>
+</html>

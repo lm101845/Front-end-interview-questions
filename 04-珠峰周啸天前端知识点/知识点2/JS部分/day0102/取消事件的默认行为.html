@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#box{
+				height:200px;
+				width:200px;
+				background-color: deeppink;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">111</div>
+		<a href="http://www.baidu.com" id="abox">baidu</a>
+		<script>
+			// 取消事件的默认行为
+			// e.preventDefault();//FF(IE浏览器之外的其他浏览器)
+			// e.returnValue=false;//IE
+			
+			//a标签默认行为---》跳转页面
+			abox.onclick=function(e){
+				e.preventDefault();//不跳转页面
+				console.log("222");
+			}
+			
+			
+			//右键单击 默认出菜单栏
+			box.oncontextmenu=function(e){//e 形参   e ===>event事件对象
+				//e.preventDefault();//FF  取消事件默认行为
+				
+				//preventDefault方法 找不到默认就是 undefiend
+				// typeof undefined==="undefined"
+				if(typeof e.preventDefault!=="undefined"){
+					e.preventDefault();
+				}else{
+					e.returnValue=false;
+				}
+				console.log("111");
+			}
+		</script>
+	</body>
+</html>

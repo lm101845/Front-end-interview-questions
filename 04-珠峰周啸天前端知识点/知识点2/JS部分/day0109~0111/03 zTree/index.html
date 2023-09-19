@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>珠峰培训</title>
+    <!-- IMPORT CSS -->
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        #container {
+            width: 200px;
+            height: 200px;
+            background: lightblue;
+        }
+
+        #container>div {
+            display: inline-block;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: lightpink;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background: lightcoral;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div id="container">
+        <div id="box"></div>
+    </div> -->
+
+    <!-- <div id="container">
+        <button index="0">按钮1</button>
+        <button index="1">按钮2</button>
+        <button index="2">按钮3</button>
+        <button index="3">按钮4</button>
+        <button index="4">按钮5</button>
+    </div> -->
+
+    <div id="container">
+        <div>1</div>
+        <div>2</div>
+    </div>
+
+    <!-- IMPORT JS -->
+    <script>
+        const container = document.querySelector('#container');
+        // 基于事件委托实现事件绑定 
+        container.onclick = function (ev) {
+            let target = ev.target;
+            if (target.tagName === "DIV") {
+                console.log(target.innerHTML);
+            }
+        };
+        // 间隔2秒后，动态创建7个
+        setTimeout(() => {
+            // 优先使用函数式编程
+            let n = 2;
+            new Array(7).fill(null).forEach(() => {
+                let div = document.createElement('div');
+                div.innerHTML = ++n;
+                container.appendChild(div);
+            });
+        }, 2000);
+    </script>
+
+    <script>
+        /* const container = document.querySelector('#container');
+        container.onclick = function (ev) {
+            let target = ev.target;
+            if (target.tagName === 'BUTTON') { //tagName:获取大小的标签名
+                console.log(target.getAttribute('index'));
+            }
+        }; */
+
+        /* // 传统的循环绑定事件，虽然可以实现相关的效果，但是内存消耗比较大
+        const container = document.querySelector('#container'),
+            buttonList = Array.from(container.querySelectorAll('button'));
+        buttonList.forEach((item, index) => {
+            item.onclick = function () {
+                console.log(index);
+            };
+        });  */
+    </script>
+
+    <script>
+        /* const html = document.documentElement,
+            body = document.body,
+            container = document.querySelector('#container'),
+            box = document.querySelector('#box');
+
+        // 捕获阶段
+        window.addEventListener('click', () => {
+            console.log('window capture');
+        }, true);
+        document.addEventListener('click', () => {
+            console.log('document capture');
+        }, true);
+        html.addEventListener('click', () => {
+            console.log('html capture');
+        }, true);
+        body.addEventListener('click', () => {
+            console.log('body capture');
+        }, true);
+        container.addEventListener('click', () => {
+            console.log('container capture');
+        }, true);
+
+        // 目标阶段
+        box.addEventListener('click', (ev) => {
+            console.log('box capture', ev);
+        }, true);
+        box.addEventListener('click', () => {
+            console.log('box bubbling');
+        }, false);
+
+        // 冒泡阶段
+        container.addEventListener('click', () => {
+            console.log('container bubbling');
+        }, false);
+        body.addEventListener('click', () => {
+            console.log('body bubbling');
+        }, false);
+        html.addEventListener('click', () => {
+            console.log('html bubbling');
+        }, false);
+        document.addEventListener('click', () => {
+            console.log('document bubbling');
+        }, false);
+        window.addEventListener('click', () => {
+            console.log('window bubbling');
+        }, false); */
+    </script>
+
+    <script>
+        // const container = document.querySelector('#container'),
+        //     box = document.querySelector('#box');
+
+        /* container.addEventListener('click', function (ev) {
+            console.log('container capture');
+            ev.stopPropagation(); //不仅仅是阻止冒泡传播，它是阻止事件传播，在任何位置遇到stopPropagation，整个事件传播机制都会被中断！！
+        }, true);
+        box.addEventListener('click', function () {
+            console.log('box capture');
+        }, true);
+        box.addEventListener('click', function () {
+            console.log('box bubbling');
+        }, false);
+        container.addEventListener('click', function () {
+            console.log('container bubbling');
+        }, false); */
+
+        /* box.addEventListener('click', function (ev) {
+            console.log('box bubbling 1');
+            // ev.stopPropagation(); //阻止冒泡传播：当前事件源其所有祖先元素的click行为都不再被触发
+            ev.stopImmediatePropagation(); //也是阻止冒泡传播，只不过相对于stopPropagation来讲，stopImmediatePropagation不仅阻止了事件的传播，而且当前元素绑定的其他方法，也被阻止执行了
+        });
+        box.addEventListener('click', function () {
+            console.log('box bubbling 2');
+        });
+        container.addEventListener('click', function () {
+            console.log('container bubbling');
+        }); */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			let n = 10;
+			//形参赋值默认值: num = 0 ，如果没有传递参数，参数
+			//如果有传递参数，参数就是传递的参数
+			Number.prototype.plus = function (num = 0) { 
+				//1.this--->n 10   2.参数 num--->10
+				return this+num;//20
+			};
+			Number.prototype.minus = function (num = 0) {
+				//1.this-->n.plus(10)  20    2.参数 num--->5
+				return this-num;//15
+			};
+
+			let m = n.plus(10).minus(5);
+			// 10.plus(10)---->10+10  加法  20 结果一定是数值类型，返回值（return）数值类型 
+			// 20.minus(5)---->20-5   减法  15 通过查看最终结果，返回值（return）数值类型 
+			//链式操作：上一步计算的结果，一定是Number类型
+			console.log(m); //=>15（10+10-5）
+		</script>
+	</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//如果传的实参中包含字符串，就变成数字，如果是非有效数字，就直接略过
+			
+			function fn(n){
+				console.log(n);
+			   console.log(arguments);//接所有形参 类数组集合---》像数组一样，有索引和下标
+			   
+			   var sum=0;
+			   for(var i=0;i<arguments.length;i++){
+				   var num=Number(arguments[i]);
+				   //isNaN(num)---》true 不是数字
+				   //isNaN(num)---》false 是数字
+				   //!isNaN(num)-->!true---》false
+				   
+				   // if(!isNaN(num)){ //isNaN(1)-->false   !isNaN(1)--->true
+					  //  sum+=num;
+				   // }
+				   
+				   if(isNaN(num)===false){ 
+				   		sum+=num;
+				   }
+				   
+				   //三目运算
+				   //true 不是数字  返回null
+				   //false 是数字  累加
+				   //isNaN(num)?null:sum+=num
+			   }
+			   return sum;
+			}
+			
+			
+			//1+2+3+3===》9
+			//“3”--》3
+			//“3px”==》NaN
+			var res=fn(1,2,3,"3","3px");
+			console.log(res);
+		</script>
+	</body>
+</html>

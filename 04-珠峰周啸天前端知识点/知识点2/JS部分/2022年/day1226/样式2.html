@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			#box{
+				height:100px;
+				width:100px;
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box" style="color:blue;">返回顶部</div>
+		<script>
+			//批量设置样式
+			// box.style.color="#fff";
+			// box.style.borderRadius="10px";
+			// box.style.fontSize="30px";
+			
+			
+			//for in 循环能不用则不用，不光循环私有，公有(可枚举)循环一遍
+			function setCss(ele,StyleObj){
+				for(let key in StyleObj){
+					//私有属性 才会 做操作
+					if(StyleObj.hasOwnProperty(key)){
+						//所有的封装，获取取对象属性，用中括号，更加严谨,可以识别变量
+						ele.style[key]=StyleObj[key];
+					}
+				}
+			}
+			
+			let obj={
+				"color":"#fff",
+				"borderRadius":"10px",
+				"fontSize":"30px"
+			}
+			
+		  
+			Object.prototype.height="300px";
+			
+			// console.log(obj.color);
+			// console.log(obj["color"]);//严谨
+			
+			setCss(box,obj)
+		</script>
+		
+		<!-- <script>
+			//https://blog.csdn.net/weixin_47148731/article/details/123852461
+			
+			let arr=[11,22,33]
+			//for of 可以遍历数组，不能遍历对象
+			// i---》内容
+			for(var i of arr){
+				console.log(i);
+			}
+			
+			//for in 即可以遍历数组，也可以遍历对象
+			// i===>下标 key
+			for(var i in arr){
+				console.log(i);
+			}
+		</script> -->
+	</body>
+</html>

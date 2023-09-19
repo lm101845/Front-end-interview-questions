@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<!-- <script>
+			function Fn(name,age){
+				this.name=name;
+				this.age=age;
+			}
+			
+			//prototype 原型
+			Fn.prototype.getName=function(){
+				console.log(this.name);
+			}
+			
+			var f1=new Fn("lili",18);
+		</script> -->
+		
+		<script>
+			function Fn() {
+			    this.x = 100;
+			    this.y = 200;
+			    this.getX = function () {
+			        console.log(this.x);
+			    }
+			}
+			Fn.prototype.getX = function () {
+			    console.log(this.x);
+			};
+			Fn.prototype.getY = function () {
+			    console.log(this.y);
+			};
+			let f1 = new Fn;
+		    let f2 = new Fn;
+			
+			// console.log(f1);
+			// console.log(f2);
+			// console.dir(Fn);
+			
+			console.log(f1.getX === f2.getX);//false
+			console.log(f1.getY === f2.getY);//true
+			console.log(f1.__proto__.getY === Fn.prototype.getY);//true 
+			console.log(f1.__proto__.getX === f2.getX); //false
+			console.log(f1.getX === Fn.prototype.getX); //false
+			console.log(f1.constructor);//Fn构造函数 
+			console.log(Fn.prototype.__proto__.constructor);//Object 内置类 
+		</script>
+		
+		
+		<!-- <script>
+			var obj={
+				showa:function(){//有
+					
+				}
+				//es6简写 没有
+				show(){
+					
+				}
+			}
+		</script> -->
+		
+		<!-- <script>
+			var arr=[1,2,3];
+			console.log(arr);
+		</script> -->
+	</body>
+</html>

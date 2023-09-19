@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		1.全局  this===>window  严格模式 this--->window
+		2.普通函数（无点）  this===>window  严格模式 this--->undefined
+		3.回调函数（一个函数当做另一个函数的参数）this===>window  严格模式 this--->undefined
+		4.***定时器(回调函数)  this===>window  严格模式 this--->window
+		5.函数前面有没有 有点   点前面是谁，this就是谁
+		6.箭头函数  没有this  this指向上级上下文中的this
+		7.构造函数  this--->实例对象（后面详细讲）
+		8.事件绑定  this--->绑定事件的元素
+		9.自执行函数  this===>window  严格模式 this--->undefind
+		<button id="btn">点击</button>
+		<script>
+			// "use strict"
+			// btn.onclick=function(){
+			// 	console.log(this);
+			// }
+			
+			// function myshow(){
+			// 	console.log("1111");
+			// 	console.log(this);
+			// }
+			
+			// btn.onclick=myshow;//将整个函数，给btn.onclick赋值
+			// //函数名()---函数执行，把结果给btn.onclick赋值
+			
+			// console.log(this);
+			
+			// function show(){
+			// 	console.log(this);
+			// }
+			// show()
+			
+			// let arr=[10,20,30];
+			// arr.map(function(){
+			// 	console.log(this);
+			// })
+			
+			// setTimeout(function(){
+			// 	console.log(this);
+			// },1000)
+			
+			//Array.prototype.show()//this--->Array.prototype
+			// var name="Tom";
+			// var obj={
+			// 	name:"lili",
+			// 	show(){
+			// 		console.log(this);//obj
+			// 		console.log(this.name);//lili
+			// 	}
+			// }
+			
+			// obj.show();
+			
+			
+			// var name="Tom";
+			// var obj={
+			// 	name:"lili",
+			// 	show:()=>{
+			// 		console.log(this);//全局 window
+			// 		console.log(this.name);//window.name  Tom
+			// 	}
+			// }
+			
+			// obj.show();
+			
+			"use strict";
+			(function(){
+				console.log(this);
+			})()
+		</script>
+	</body>
+</html>

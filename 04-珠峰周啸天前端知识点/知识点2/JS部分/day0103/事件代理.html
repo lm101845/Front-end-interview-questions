@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<ul id="ulbox">
+			<li><u>1111</u></li>
+			<li>2222</li>
+			<li>3333</li>
+		</ul>
+		<script>
+			// 事件委托: 事件代理,
+			// ‘事件代理’就是把原本需要绑定的事件委托给父元素(祖先)，
+			//让父元素(祖先)负责事件监听
+			// 原理: 冒泡
+			
+			// 优点: 减少事件的绑定,来优化性能
+			//      新创建的元素一定能绑定事件  
+			
+			
+			 let lis=document.querySelectorAll("li");
+			// for(var i=0;i<lis.length;i++){
+			// 	lis[i].onclick=function(){
+			// 		console.log("111");
+			// 	}
+			// }
+			
+			ulbox.onclick=function(e){
+				if(e.target.tagName==="LI"){
+					console.log("1111222");
+				}
+			}
+			
+            // 新创建的元素不一定能绑定事件
+			var newli=document.createElement("li");
+			newli.innerHTML="4444";
+			ulbox.appendChild(newli);
+
+			// console.log(lis[0].innerHTML)//<u>1111</u>
+			// console.log(lis[0].innerText)//1111
+		</script>
+	</body>
+</html>

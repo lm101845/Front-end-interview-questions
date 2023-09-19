@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>珠峰培训-QQ音乐播放器</title>
+    <!-- IMPORT CSS -->
+    <link rel="stylesheet" href="css/reset.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/prefixfree.min.js" async></script>
+    <script>
+        /* 动态计算REM换算比例 */
+        (function () {
+            const computed = function computed() {
+                let html = document.documentElement,
+                    deviceW = html.clientWidth,
+                    ratio = 100;
+                if (deviceW < 750) ratio = deviceW * ratio / 750;
+                html.style.fontSize = `${ratio}px`;
+            };
+            computed();
+            window.addEventListener('resize', computed);
+        })();
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 头部 -->
+        <header class="header-box">
+            <div class="base-info">
+                <img src="images/myDream.jpg" alt="" class="portrait">
+                <div class="info">
+                    <h2 class="title">《我的梦》- 华为手机主题曲</h2>
+                    <h3 class="author">张靓颖</h3>
+                </div>
+            </div>
+            <a href="javascript:;" class="play-btn"></a>
+        </header>
+
+        <!-- 歌词 -->
+        <main class="lyric-box">
+            <div class="container">
+                <div class="wrapper">
+                    <!-- <p class="active">我的梦 (华为手机主题曲) - 张靓颖</p>
+                    <p>词：王海涛/张靓颖</p> -->
+                </div>
+            </div>
+        </main>
+
+        <!-- 尾部 -->
+        <footer class="footer-box">
+            <div class="progress">
+                <span class="current">00:00</span>
+                <div class="back-bar">
+                    <div class="already"></div>
+                </div>
+                <span class="duration">00:00</span>
+            </div>
+            <a href="##" class="download-btn">下载这首音乐</a>
+        </footer>
+
+        <!-- 其他 -->
+        <div class="back-img-box"></div>
+        <div class="back-mark-box"></div>
+        <audio src="images/myDream.m4a" preload="metadata" id="audioBox" />
+    </div>
+
+    <!-- IMPORT JS -->
+    <script src="js/fastclick.js" defer></script>
+    <script src="js/subscribe.js" defer></script>
+    <script src="js/index.js" defer></script>
+</body>
+
+</html>

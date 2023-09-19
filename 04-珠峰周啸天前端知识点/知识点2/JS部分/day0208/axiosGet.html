@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    axios  ajax(XMLHttpRequest)+Promise 封装
+    http://www.axios-js.com/zh-cn/docs/
+
+    get类
+    post类
+    
+    <script src="axios.min.js"></script>
+    <script>
+        // axios.get(url[,config]) 返回值是一个Promise实例
+        // 1.url 请求地址
+        // 2.config 配置项 对象 可有可无
+        //    baseURL:基础路径
+        //    params：传递的参数（专门给get类）  对象
+        //    timeout：超时时间
+        //    withCredentials:false是否允许携带跨域资源凭证（cookie)
+        //    responseType:'json' 接收服务器返回的类型  
+        //    可以是'arraybuffer', 'blob', 'document', 'json', 'text', 'stream'
+        //    onUploadProgress：监控文件的上传进度
+        //    onDownloadProgress：监控文件的下载进度
+        //    设置状态码的范围
+        //    validateStatus: function (status) {
+        //         return status >= 200 && status < 300; // default
+        //     }
+
+
+       axios.get("/api/articleList",{
+            baseURL:"http://localhost:8888",
+            params:{
+                date:"2021-05-21"
+            },
+            timeout:1000,
+            responseType:'json',
+            validateStatus:function(status){
+                return status >= 200 && status < 400;
+            }
+        }).then(val=>{
+            console.log(val.data)
+        }).catch(err=>{
+            cosnole.log(err);
+        })
+
+
+        axios.get("http://localhost:8888/api/articleList",{
+            params:{
+                date:"2021-05-21"
+            }
+        }).then(response=>{
+            return response.data
+        }).then(val=>{
+            console.log(val)
+        }).catch(err=>{
+            cosnole.log(err);
+        })
+
+
+        //axios(config)
+        //config 配置项
+        //url:请求网址
+        //method: 'get' 请求方式 默认get
+        axios({
+            url:"/api/articleList",
+            method:"get",
+            baseURL:"http://localhost:8888",
+            params:{
+                date:"2021-05-21"
+            }
+        }).then(response=>{
+            return response.data
+        }).then(val=>{
+            console.log(val)
+        }).catch(err=>{
+            cosnole.log(err);
+        })
+    </script>
+</body>
+</html>

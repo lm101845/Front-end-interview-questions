@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			let ModelA=(function(){
+				
+				function show(){
+					console.log("111");
+				}
+				function showa(){
+					console.log("111222");
+				}
+				//...
+				
+				//返回对象
+				return {
+				   show,
+				   showa
+				}
+			})()//自执行函数执行，返回的结果，给了ModelA
+			
+			console.log(ModelA);//{ show：f }
+			
+			ModelA.show();
+			
+		</script>
+		
+		<!-- <script>
+			(function(){
+				
+				function show(){
+					console.log("222");
+				}
+				
+				function showa(){
+					console.log("333");
+				}
+				
+				function showb(){
+					console.log("333");
+				}
+				
+				//不写return，让show再外面使用
+				window.obj={
+					show,
+					showa,
+					showb
+				}
+				
+			})()
+			
+			console.log(window);//window--》obj---》{show:f}
+			
+			obj.show();//window.obj.show();  window可以省略
+		</script> -->
+		
+		<script>
+			(function(){
+				
+				function showa(){
+					console.log("333");
+				}
+				
+				function showb(){
+					console.log("444");
+				}
+				
+				//要求：不写return，让show再外面使用
+				let obj={
+					showa,
+					showb
+				}
+				
+				//如果有window,就挂载到 window 身上
+				// 这方式导出
+				if(window !== undefined){//浏览器 有window
+					window.obj=obj;
+				}
+				
+				//nodejs(后面) 没有window     有 module.exports(学)  了解
+				//webpack      
+				// 这方式导出
+				if(typeof module==="object"&& typeof module.exports==="object"){
+					module.exports=obj;
+				}
+			})()
+			
+			console.log(window);//window--》obj---》{showa:f}
+			
+			obj.showa();//window.obj.showa();  window可以省略
+		</script>
+	</body>
+</html>

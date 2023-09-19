@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div title="haha"><span>111</span></div>
+		<input type="text" value="hello">
+		
+		<p>性别：</p>
+		<input type="radio" id="man" name="sex">
+		<label for="man">男</label>
+		<input type="radio" id="woman" name="sex" checked>
+		<label for="woman">女</label>
+		
+		<script src="jquery.min.js"></script>
+		<script>
+			//表单选中设置的时候 ,一般不用attr  用prop
+			console.log($("#woman").prop("checked"))//true false
+			$("#woman").prop("checked",false)
+			
+			
+			//html()  innerHTML
+			//console.log($("div").html());
+			//$("div").html("<i>222</i>")
+			
+			//text()  textContent||innerText
+			// console.log($("div").text());
+			// $("div").text("<i>222</i>")
+			
+			//表单的value  val()
+			// console.log($("input").val())
+			// $("input").val("abc")
+			
+			//attr()  getAttribute/setAttribute
+			// console.log($("input").attr("type"))
+			// $("input").attr("type","password")
+			
+			//removeAttr()  removeAttribute
+			//$("div").removeAttr("title")
+		</script>
+	</body>
+</html>

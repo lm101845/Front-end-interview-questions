@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./axios.min.js"></script>
+    <script src="./md5.min.js"></script>
+    <script src="./qs.js"></script>
+   <script>
+      // 伪代码
+        axios.get("/api/swiper",{
+            baseURL:"http://127.0.0.1:6666",
+            params:{
+                name:"lili",
+                age:18
+            },
+            timeout:1000,
+            withGredentials:true,
+            responseType:'json',
+            validateStatus:function(status){
+                return status >= 200 && status < 400;
+            }
+        }).then(response=>{
+         return response.data
+       }).then(val=>{
+            console.log(val.data)
+        }).catch(err=>{
+            cosnole.log(err);
+        })
+
+
+        axios.post("/user/login",{
+            account:"18310612838",
+            password:md5("1234567890")
+       },{
+          baseURL:"http://127.0.0.1:6666",
+          transformRequest:function(data){
+            return Qs.stringify(data)
+          },
+          timeout:1000,
+           withGredentials:true,
+           responseType:'XML',
+           validateStatus:function(status){
+                return status >= 200 && status < 400;
+            }
+       }).then(response=>{
+         return response.data
+       }).then(val=>{
+         console.log(val)
+       }).catch(err=>{
+         console.log(err)
+       })
+   </script> 
+</body>
+</html>

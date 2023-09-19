@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		原型继承
+		子类.prototype=new 父类
+		
+		<script>
+			//父类：一种类型(可以自己随意选择)  Array类  Date类
+			function Parent(namea,age){
+				this.namea=namea;
+				this.age=age;
+			}
+			Parent.prototype.show=function(){
+				console.log("父类11111");
+			}
+			var p=new Parent("李飒",38);
+			console.log(p);
+			
+			
+			//子类: 一种类型(可以自己定义)
+			function Child(job){
+				this.job=job;
+			}
+			
+			//原型继承---》原型重定向的一种
+			Child.prototype=new Parent;
+			
+			Child.prototype.showJob=function(){
+				console.log("父类11111");
+			}
+			var c=new Child("学生");
+			console.log(c);
+			c.show();//c实例，调用了Parent 身上的方法
+		</script>
+	</body>
+</html>

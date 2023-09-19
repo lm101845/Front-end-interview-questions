@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		1. 打开dos命令窗口的几种方法：
+			1) window+ r 或者在搜索里面 输入cmd (dos)
+			2）在资源管理器的当前路径上直接输入cmd (dos)
+			3) 鼠标右键 git bash here (专门操作linux)
+			
+		2.常用的dos命令
+		  cd ..       返回上级目录
+		  cd 文件夹名   打开对应的文件夹
+		  cd 拖拽文件夹目录  打开当前文件夹
+		  cd + tab键  查看当前目录下的文件夹
+		  ctrl+Z 中断命令
+		  创建一个文件夹：mkdir + 文件名
+		  返回到根目录：cd + /
+		  创建一个文件:
+		    copy con 4.txt(文件名)  回车---》输入内容---》回车----》ctrl+Z ---》回车
+		  重命名一个文件或者文件夹：rename a(旧) aa(新)
+		  删除一个文件夹：rd + 文件夹名 （只能删除空的文件夹）
+		  删除一个文件夹：rd + /s + 文件夹名 （硬删除，即使里面有内容也能删除）
+		  删除一个 文件： del + 文件
+		  清空命令行：cls
+		  切换磁盘命令：D: /F:/C: 切换到相应的盘符
+		  
+		  linux
+		 ● 打开对应的文件夹：cd  文件夹    （确定当前目录下有改文件夹） 比如：C:\Users\Administrator\Desktop\test>cd a.txt
+		 ● 回退到上一级： cd ..
+		 ● 查看当前目录下的文件和文件夹: ls
+		 ● 返回到根目录：cd + /
+		 ● 创建一个文件夹：mkdir + 文件名
+		 ● 创建一个文件：  touch 文件名.txt 
+		 ● 重命名一个文件： mv a b
+		 ● 删除文件、文件夹：rm -rf xxx
+		 ● 清空命令行：clear
+		 ● 查看文件内容：cat 文件名  
+		 ● 进入文件，vim 文件名 输入i  (insert 开始编辑)esc退出
+		 :q 退出
+		 :w 保存
+		 :wq 保存并退出
+		 :q! 不保存退出
+		  
+	git 版本控制系统 
+		  
+		 3.git的全局配置(全局：命令只需要写一次，在任何路径下都可以，默认找电脑配置位，配置)
+          git config --global --list          查看全局配置信息
+          git config --global user.name 'xxx'  配置全局用户名（英文）
+          git config --global user.email 'xxx@xx'  配置全局邮箱
+		 
+		 4.创建本地仓库，完成版本控制
+		    1. 创建本地仓库
+		    git init(会默认生成一个.git文件夹，这里是存放你本地git仓库的信息的，不能删除)
+			
+			2、在工作区编写代码完成后，提交到暂存区
+			    git add 文件名(把指定文件提交到暂存区)
+			    git add -A(把工作区所有文件提交到暂存区)
+			    ***git add . (把工作区所有修改的和新增的文件提交到暂存区，不包括删除的)
+			    git status(查看当前文件提交状态)【红色代表在工作区；绿色代表在暂存区；
+				           没有文件，并显示clean之类的单词，说明文件已经提交到历史区或者没有任何更改】
+			    clear:清屏
+			3、把文件提交到历史区
+			    ***git commit -m '描述' (把文件提交到历史区，并生成此次提交的历史版本)
+			    git log(查看提交的历史版本信息，不包括回滚)
+			    git reflog(查看所有的历史版本信息,包括回滚信息)
+				
+			4、回滚指定历史版本的代码
+			    git reset --hard 七位历史版本号
+				
+		5.与远程仓库关联
+		  1.gitee 创建一个远程仓库
+		  2. git remote -v(查看本地和远程仓库的连接状态)
+		  3. git remote add origin 远程仓库地址(和远程仓库的某个新项目建立连接，origin这个名可以改，但是大家都统一叫这个)
+		     git remote add origin https://gitee.com/zfyk/a2021_06demoa.git
+		  4. git push -u origin "master"/git push origin "master" (第一次【要输入用户名和密码 username  password】)
+		     git push(以后)  推送本地的代码到远程仓库
+		  5. git pull origin master (第一次，拉取远程仓库的代码到本地)
+		  
+          6.git clone git网址（第一回，文件夹里什么也没有）
+		  https://gitee.com/zfyk/a2021_06demoa.git
+	
+		  git clone 远程仓库地址 仓库的名字(如果不写默认原仓库名)
+		          + 其真正的开发中，大家都使用这个
+		          + 你们的项目老大把项目骨架搭建好之后你们每一个项目小组成员都去把远程的代码拉取到你们的本地去开发
+		          + git clone
+	    
+		任何人，只要知道了仓库网址，就可以将资料克隆（复制，开源）下来，
+		如果在此基础上进行修改，是无法提交的（没有权限），需要对方给你开通权限
+		
+		
+		6. git分支
+		
+		   1. 查看分支 git branch
+		   
+		   2. 创建分支  git branch dev(分支名)
+		   3. 切换分支  git checkout dev(分支名)---->写内容，提交(git push origin dev)
+		      3.1 创建分支，并进行切换到新分支： git checkout -b dev
+			  
+		   4. (自己)合并分支  git merge dev (注意：先切换到主分支，合并，推送) 合并的是分支内容（分支还存在）
+		   5. 删除本地分支 git branch -d dev（可以用命令删除本地分支）
+		 
+		7.相互配合
+		   1. 老大创建仓库，提交公共配置代码
+		   2. 你在你自己的电脑上新建文件夹， git clone xxx--->到.git目录---》创建文件提交(创建分支)
+		      过几天又要开发了 先拉  git pull(以后)---（如果有冲突，打开文件手动解决）--解决完成后，再提交（git add .）---》
+		   
+	</body>
+</html>

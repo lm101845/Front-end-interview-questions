@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			 Function.prototype.mycall = function mycall(obj, ...params) {
+			      typeof obj !== 'object' || obj !== 'function' ? obj = window : null;
+			      obj['show'] = show
+			      var result = obj.show(...params)
+			      delete obj['show']
+			      return result
+			    }
+			
+			    let obj = {
+			      name: 'lili'
+			    }
+			    let num = 3
+			    function show() {
+			      console.log(this, ...arguments)
+			    }
+			    show.mycall("aaa", 10, 20,)
+		</script>
+	</body>
+</html>

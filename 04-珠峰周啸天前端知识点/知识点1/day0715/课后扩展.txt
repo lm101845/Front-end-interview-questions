@@ -1,0 +1,8 @@
+/*
+ Semantic Versioning是一个前端通用的版本定义规范。格式为“{MAJOR}.{MINOR}.{PATCH}-{alpha|beta|rc}.{number)"，要求实现compare(a,b)方法，比较ab两个版本大小。
+   + 当a>b是返回1;
+   + 当a=b是返回0;
+   + 当a<b是返回-1;
+   其中：rc>beta>alpha，major>minor>patch;
+   例子：1.2.3<1.2.4<1.3.0-alpha.1<1.3.0-alpha.2<1.3.0-beta.1<1.3.0-rc.1<1.3.0
+ */

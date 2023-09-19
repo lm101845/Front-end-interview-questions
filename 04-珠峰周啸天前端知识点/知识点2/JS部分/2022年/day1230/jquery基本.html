@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="box">
+			1111
+		</div>
+		<!-- jQuery 主要封装了js的DOM , 简化了 DOM 操作 -->
+		<script src="jquery.min.js"></script>
+		<script>
+			// let box=document.querySelector(".box");
+			// console.log(box);
+			// box.innerHTML="2222";
+			
+			//jq获取元素: $(选择器)   放到一个集合里
+			//console.log($(".box"))
+			//$(".box").html("3333");
+			
+			//jquery和DOM不能混用
+			// let box=document.querySelector(".box");
+			// box.html("222");
+			
+			//DOM对象---》jq对象   $(DOM对象)
+			// let box=document.querySelector(".box");//DOM对象
+			// $(box).html("222");
+			
+			//jq对象---》DOM 对象  
+			// jq对象[index]
+			// jq对象.get(index)
+			//$(".box")[0].innerHTML="333";
+			$(".box").get(0).innerHTML="5555";
+			
+		</script>
+	</body>
+</html>

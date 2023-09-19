@@ -1,0 +1,80 @@
+html,
+body,
+.setBox {
+  height: 100%;
+  width: 100%;
+}
+.setBox {
+  background-color: #ccc;
+  font-size: 0.16rem;
+}
+.setBox .header {
+  display: flex;
+  height: 0.55rem;
+  background-color: #fff;
+  padding: 0 0.1rem;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.2rem;
+  font-weight: 800;
+}
+.setBox .header #hide {
+  opacity: 0;
+}
+.setBox .list {
+  margin-top: 0.1rem;
+}
+.setBox .list .item {
+  padding: 0.16rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  position: relative;
+}
+.setBox .list .item input {
+  display: none;
+}
+.setBox .list .item label::before {
+  content: "";
+  position: absolute;
+  right: 0.1rem;
+  top: 0.2rem;
+  height: 0.12rem;
+  width: 0.3rem;
+  background-color: #ccc;
+  border-radius: 0.12rem;
+  transition: all 0.3s;
+}
+.setBox .list .item label::after {
+  content: "";
+  position: absolute;
+  right: 0.25rem;
+  top: 0.15rem;
+  height: 0.2rem;
+  width: 0.2rem;
+  background-color: #999;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+.setBox .list .item input:checked + label::before {
+  background-color: aqua;
+}
+.setBox .list .item input:checked + label::after {
+  background-color: #00ff4c;
+  transform: translate(0.2rem);
+}
+.setBox .list .item:nth-child(2),
+.setBox .list .item:nth-child(3),
+.setBox .list .item:nth-child(5) {
+  margin-bottom: 0.1rem;
+}
+.setBox .list h2 {
+  text-align: center;
+  margin-top: 0.3rem;
+  font-weight: normal;
+  font-size: 0.12rem;
+}
+.dark {
+  background-color: pink;
+}

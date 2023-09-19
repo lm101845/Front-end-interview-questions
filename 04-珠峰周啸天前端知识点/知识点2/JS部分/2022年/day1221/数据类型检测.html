@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		数据类型检测
+		******1. typeof  但是不能细分对象
+		"number" "string"  "boolean"  
+		"function"  "object" "undefined"
+		"BigInt" "Symbol"
+		
+		引用类型(除了 Function) + null====> "object"
+		
+		计算机底层存储的二进制进行检测的
+		
+		对象
+		000
+		
+		null
+		000000
+		
+		连续多个 typeof 最终是 "string"
+		<!-- <script>
+			var num=10;
+			console.log(typeof num);//"number"
+			console.log(typeof true);//"boolean"  
+			console.log(typeof null);//"object"
+			
+			var obj={};
+			var arr=[1,2,3];
+			console.log(typeof obj);//"object"
+			console.log(typeof arr);//"object"
+			console.log(typeof undefined);//"undefined"
+			
+			
+			console.log(typeof typeof 10);//"string"
+			//typeof typeof 10 ==== typeof "number" ===="string"
+		</script> -->
+		
+		<script>
+			console.log(typeof a);//报错
+			//let a=10;//暂存性死区
+		</script>
+	</body>
+</html>

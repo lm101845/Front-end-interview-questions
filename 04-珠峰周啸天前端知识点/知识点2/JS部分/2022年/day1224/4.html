@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		分组的特殊用法
+		\1: 第一个小括号(分组)里的内容一致
+		\2: 第二个小括号(分组)里的内容一致
+		
+		?: 只匹配不捕获
+		<script>
+			// var str="aBBa cDDc aEEa";
+			// var reg=/([a-z])([A-Z])\2\1/g;
+			// console.log(str.match(reg));
+			
+			var str = '372901200103235943';
+			// 前六位 省市县
+			// 中间 八位 年月日
+			// 倒数第二位  奇数 男   偶数 女
+			
+			// $1: 省市县  $2:年  $3:月  $4:日  $5:奇偶
+			
+			//   $1:年  $2:月  $3:日  $4:奇偶
+			var reg=/(?:\d{6})(\d{4})(\d{2})(\d{2})\d{2}(\d)[0-9Xx]/;
+			console.log(reg.exec(str));
+		</script>
+	</body>
+</html>

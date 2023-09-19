@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//13.includes()
+			// 作用：检测数组中是否包含某一项
+			// 参数：具体项
+			// 返回值：布尔值 true/false
+			// 是否修改原数组：否
+			
+			// var arr=[1,2,3,4];
+			// var bol=arr.includes("a");
+			// console.log(bol);
+			// console.log(arr);
+			
+			
+			//14. forEach()  
+			// 作用: 循环数组
+			// 参数：函数 ---》 三个参数（至少写1个） 
+			//         item: 数组具体的每项内容  
+			//         index:索引下标
+			//         arr:循环的数组
+			//       function(item,index,arr){
+			//	        //不使用return,写了没用
+			//       }
+			// 返回值：undefined
+			// 是否修改原数组：否
+			
+			// var arr=[10,20,30];
+			// var n=arr.forEach(function(item,index,ary){
+			// 	console.log(item,index,ary);
+			// })
+			// console.log(n);
+			// console.log(arr);
+			
+			// var arr=[10,20,30];
+			// var newarr=[];
+			// var n=arr.forEach(function(item,index,ary){
+			// 	//console.log(item,index,ary);
+			// 	newarr.push(item+200);
+			// })
+			// // console.log(n);
+			// // console.log(arr);
+			// console.log(newarr);
+			
+			
+			//14. map()
+			// 作用: 循环数组
+			// 参数：函数 ---》 三个参数（至少写1个） 
+			//         item: 数组具体的每项内容  
+			//         index:索引下标
+			//         arr:循环的数组
+			//       function(item,index,arr){
+			//	        使用return，作用很重要
+			//       }
+			// 返回值：新数组(通过map循环处理后的数组(函数的return))
+			// 是否修改原数组：否
+			
+			// var arr=[10,20,30];
+			// var newarr=arr.map(function(item,index,ary){
+			// 	//console.log(item,index,ary);
+			// 	return item+100;
+			// })
+			// console.log(newarr);
+			// console.log(arr);
+			
+		</script>
+	</body>
+</html>

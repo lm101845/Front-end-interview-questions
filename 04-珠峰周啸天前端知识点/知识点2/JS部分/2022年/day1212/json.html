@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		JSON 格式：后台使用的一种数据格式
+		
+		JSON 常用的两种格式
+		
+		数组：
+		  值:字符串，数值，数组，对象， null，布尔
+		
+		对象 ： 键值对  key:value   
+		key必须加 ""(必须双引),否则报错
+		value:字符串，数值，数组，对象， null，布尔
+		
+		XXX.json 文件
+		
+		
+		json格式的数据----》本质 "字符串"(数组样式的字符串，对象样子的字符串)
+		
+		json 字符串----》对象   JSON.parse()
+		
+		对象----》json 字符串  JSON.stringify()
+		<script>
+			var str=`[
+						{
+							"name":"li",
+							"age":18
+						},
+						{
+							"name":"sun",
+							"age":19
+						},
+						{
+							"name":"qian",
+							"age":21
+						}
+					]`
+					
+			var arrobj=JSON.parse(str);
+			
+			console.log(arrobj);//循环使用
+			
+			console.log(JSON.stringify(arrobj));
+		</script>
+	</body>
+</html>

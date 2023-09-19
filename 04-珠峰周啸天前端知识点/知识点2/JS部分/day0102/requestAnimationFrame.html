@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script>
+			// requestAnimationFrame --- setTimeout( 代替一次性定时器 )
+			
+			// 缺点兼容：低版本浏览器不支持
+			
+			// 优点:
+			// 1.setTimeout setInterval如果切换后台,假如这个app使用了定时器(轮播图),还在继续切换
+			//   如果是 requestAnimationFrame切换后台,使用了定时器(轮播图),停止切换;
+			//   当切换回来的时候,在停的位置接着动画,性能消耗小
+			// 2.setTimeout setInterval具有第二个参数,自己设置时间间隔,
+			// requestAnimationFrame没有第二个参数,时间间隔是根据浏览器刷新频率确定的,
+			// 出现一个状况 丢帧或者卡帧 (动画效果不流畅)
+			
+			
+			var timer=null;
+			
+			//启动
+			timer=requestAnimationFrame(()=>{
+				console.log("1111");
+				
+				//清除
+				cancelAnimationFrame(timer);
+				timer=null;
+			})
+			
+			console.log(timer);//1
+		</script>
+	</body>
+</html>

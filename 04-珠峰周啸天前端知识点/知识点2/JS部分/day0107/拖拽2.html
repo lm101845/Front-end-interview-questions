@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            height:100px;
+            width:100px;
+            background-color: rgb(5, 140, 95);
+            position: relative;
+            left:0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        let startX,startY,endX,endY;
+        box.onmousedown=function(e){
+           startX=e.clientX-box.offsetLeft;
+           startY=e.clientY-box.offsetTop;
+
+           window.addEventListener("mouseup",up);
+        }
+        function up(e){
+           endX=e.clientX;
+           endY=e.clientY;
+
+           box.style.left=(endX-startX)+"px";
+           box.style.top=(endY-startY)+"px";
+
+           window.removeEventListener("mouseup",up);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		周期性
+		一次性
+		
+		<button id="btn">111</button>
+		<script>
+			var timer=null;
+			btn.onclick=function(){
+				if(timer===null){
+					timer=setTimeout(function(){
+						console.log(1);
+						//个别情况，写反清空不了
+						clearTimeout(timer);
+						timer=null;
+					},1000)
+				}
+			}
+			
+			
+			var timer=null;
+			let count=0;
+			var timer=setInterval(()=>{
+				count++;
+				console.log(count);
+				if(count>5){
+					clearInterval(timer);
+					timer=null;
+					//打开了新窗口
+					//_blank 默认   "_self" 替换
+					window.open("http://www.baidu.com","_self");
+					//覆盖地址栏
+					//location.href="http://www.baidu.com";
+					return;
+				}
+				console.log("1");
+			},1000)
+			
+			console.log(location);//网址信息对象 BOM
+			console.log(navigator)//浏览器版本信息 BOM
+			//.... 7
+		</script>
+	</body>
+</html>

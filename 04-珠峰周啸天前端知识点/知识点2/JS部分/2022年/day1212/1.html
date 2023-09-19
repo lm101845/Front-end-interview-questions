@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	
+		<script>
+			function show(n,m){
+				console.log(this,n,m)
+			}
+			
+			var obj={
+				name:"Tom"
+			}
+			
+			//给obj 添加 show 方法
+			obj["show"]=show;
+			
+			//show()//普通函数执行---》this==window
+			
+			obj.show()//对象调用show函数执行   this===>obj
+		</script>
+	</body>
+</html>

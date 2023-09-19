@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<i>1111</i>
+		<p>aaa</p>
+		<div id="box">bbb</div>
+		<span>ccc</span>
+		<h1>
+			000
+			<p>222</p>
+			<p>333</p>
+			<span>aaa</span>
+		</h1>
+		
+		<ul>
+			<li class="one">111</li>
+			<li>222</li>
+			<li>
+				333
+				<span class="one">000</span>
+			</li>
+		</ul>
+		
+		<script src="jquery.min.js"></script>
+		<script>
+			//find() 满足条件的后代
+			console.log($("ul").find(".one"));
+			
+			//filter() 过滤  同级筛选
+			console.log($("li").filter(".one"))
+			
+			//children() 找子元素  children(ele)  具体的元素
+			//console.log($("h1").children("p"));
+			//找父节点
+			//console.log($("h1").parent());
+			
+			//下面紧邻的兄弟 next()  下面所有的兄弟 nextAll()
+			//next(ele)  nextAll(ele)
+			// console.log($("#box").next())
+			// console.log($("#box").nextAll("h1"))
+			
+			//上面紧邻的兄弟 prev()  上面所有的兄弟 prevAll()
+			//prev(ele)  prevAll(ele)
+			// console.log($("#box").prev())
+			// console.log($("#box").prevAll())
+			
+			//siblings()所有的兄弟  siblings(ele)
+			//console.log($("#box").siblings())
+		</script>
+	</body>
+</html>

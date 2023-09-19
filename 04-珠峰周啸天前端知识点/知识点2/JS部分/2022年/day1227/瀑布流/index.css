@@ -1,0 +1,48 @@
+html,
+body {
+    min-height: 100%;
+    background: #D6D7DB;
+    overflow-x: hidden;
+}
+
+.container {
+    box-sizing: border-box;
+    margin: 20px auto;
+    width: 760px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.container .column {
+    width: 240px;
+}
+
+.container .column .item {
+    margin-bottom: 10px;
+    padding: 5px;
+    background: #FFF;
+    box-shadow: 3px 3px 10px 0 #222;
+}
+
+.container .column .item a {
+    display: block;
+}
+
+.container .column .item .pic-box {
+    /* height: ; 盒子的高度是由图片高度决定的，而且在最开始没有加载真实图片的时候，盒子的高度也要是最后真实渲染图片的高度「动态处理」 */
+    background: #F4F4F4;
+}
+
+.container .column .item .pic-box img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.container .column .item .desc-box {
+    margin-top: 5px;
+    color: #000;
+    font-size: 12px;
+    line-height: 20px;
+}

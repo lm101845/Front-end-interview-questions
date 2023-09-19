@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//递归：“函数”自己调用自己
+			
+			// function fn(){
+			// 	console.log("111");
+			// 	fn();//进入死循环---》一定要停止（return）
+			// }
+			// fn();
+			
+			// for(var i=1;i<=10;i++){
+			// 	console.log(i);
+			// }
+			
+			//用递归打印1到10
+			// function fun(num){
+			// 	if(num>5){//6>5
+			// 		return;//函数中断用 return
+			// 	}
+			// 	console.log(num);//1,2,3,4,5
+			// 	fun(num+1);//fun(2) fun(3) fun(4) fun(5) fun(6)
+			// }
+			// fun(1)
+			
+			//求一个1到100的所有数之和？
+			// var sum=0;
+			// for(var i=1;i<=100;i++){
+			// 	sum+=i;
+			// }
+			// console.log(sum);
+			
+			//递归
+			// function fn(n){
+			// 	if(n>5){//6>5
+			// 		return 0;//这个值一定要是0 ： 中断的同时，还要返回0
+			// 	}
+			// 	return n + fn(n+1);
+			// 	// 1+（fn(2)---》2+fn(3)）
+			// 	// 1+fn(2)
+			// 	// 1+2+fn(3)
+			// 	// 1+2+3+fn(4)
+			// 	// 1+2+3+4+fn(5)
+			// 	// 1+2+3+4+5+fn(6)
+			// 	// 1+2+3+4+5+0==》15
+			// }
+			// console.log(fn(1));
+			
+			
+			//求1到100中同时能被2整除又能被3整除的所有数之和
+			// var sum=0;
+			// for(var i=1;i<=100;i++){
+			// 	if(i%2==0&&i%3==0){
+			// 		sum+=i;
+			// 	}
+			// }
+			// console.log(sum);
+			
+			// //递归
+			// function fn(n){
+			// 	if(n>100){
+			// 		return 0;
+			// 	}
+			// 	if(n%2==0&&n%3==0){
+			// 		return n + fn(n+1);
+			// 		//6+fn(7)
+			// 		//6+12+fn(13)
+			// 	}
+			// 	return fn(n+1);
+			// 	//n=1  fn(2)
+			// 	//n=2  fn(3)
+			// 	//n=3  fn(4)
+			// 	//....
+			// 	//n=5  fn(6)
+			// 	//  7  fn(8)
+			// 	//...  fn(12)
+			// }
+			// console.log(fn(1));
+		</script>
+		
+		<!-- <script>
+			function fn(n){
+				if(n==1){
+					return 1;
+				}
+				if(n==2){
+					return 2;
+				}
+				if(n==3){
+					return 3;
+				}
+			}
+		</script> -->
+	</body>
+</html>

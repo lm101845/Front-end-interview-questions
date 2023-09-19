@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#box{
+				height:100px;
+				width:100px;
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		事件句柄
+		1.鼠标事件
+		  click 点击
+		  dblclick 双击
+		  mouseover移入  mouseout移出   有冒泡
+		  mouseenter移入  mouseleave移出  没有冒泡
+		  mousemove移动 反复触发
+		  mousedown移入按下   mouseup移入抬起
+		  contextmenu  右键单击(默认出个菜单栏)
+		  
+		2.键盘事件
+		3.表单事件
+		4.系统事件
+		5.移动端事件
+		
+		<div id="box">111</div>
+		<script>
+			box.oncontextmenu=function(e){//e--->event事件对象（BOM对象之一）
+			    console.log(e);
+				console.log("右键单击");
+			}
+			
+			// box.ondblclick=function(e){
+			// 	console.log("111");
+			// }
+			
+			// box.onmouseover=function(e){
+			// 	console.log("移入");
+			// }
+			
+			// box.onmouseout=function(){
+			// 	console.log("移出");
+			// }
+			
+			// box.onmouseenter=function(){
+			// 	console.log("移入");
+			// }
+			
+			// box.onmouseleave=function(){
+			// 	console.log("移出");
+			// }
+			
+			// box.onmousemove=function(){
+			// 	console.log("移动");
+			// }
+			
+			// box.onmousedown=function(){
+			// 	console.log("移入按下");
+			// }
+			
+			// box.onmouseup=function(){
+			// 	console.log("移入抬起");
+			// }
+		</script>
+	</body>
+</html>

@@ -1,0 +1,117 @@
+工程化项目开发中，我们相关命令的处理：npm
+1. 什么是npm？
+  node package manager ：Node包(或模块)管理器
+  项目中需要用到的一些模块(含：框架、类库、插件、组件等)，都可以基于npm进行管理（含：安装、卸载、运行等）
+
+2. 如何安装npm？
+  只要我们安装了Node，自带npm！
+  https://nodejs.org/en/ 「安装LTS稳定版本」
+  检查Node和Npm是否安装成功：
+  $ node -v
+  $ npm -v
+
+3. npm的基础操作
+  安装/卸载模块
+   + 全局安装
+     $ npm i xxx -g(全程--global)
+     $ npm uni xxx -g
+     但是MAC电脑需要在前面加sudo
+     $ sudo npm i xxx -g
+     接下来输入电脑的密码
+     ----
+     $ npm root -g  查看全局安装目录
+     一般安装在全局的模块，是可以直接使用命令操作的！！
+
+   + 本项目中安装/卸载
+     $ npm install 模块1 模块2 ...  -> 简写 $ npm i xxx
+     $ npm uninstall xxx
+     ----
+     这样处理，正常情况下，我们都是安装此模块的“最新稳定版”
+     $ npm view xxx versions  查看此模块的所有版本
+     $ npm i xxx@1 安装模块主版本号是1的最后一个版本
+     $ npm i xxx@1.11.3  安装指定模块的指定版本
+     $ npm i xxx 等价于 npm i xxx@latest 安装最新稳定版
+     $ npm i xxx@next 安装最新版
+     ----
+     安装来源 https://www.npmjs.com/
+
+4. npm安装比较慢，该如何解决？
+  慢的原因：
+    + 从国外源下载
+    + 单线程安装{串行安装}
+  方案1：改变安装源
+    可以基于nrm去查看以及改变安装源
+      $ npm i nrm -g
+      $ nrm ls  查看可用的源
+      $ nrm use xxx  使用某一个源
+      后期还是基于npm进行模块的管理，但是安装源已经变为我们自己切换的源了！！
+    还可以使用cnpm：原理就是修改了源
+      $ npm i cnpm -g
+      $ cnpm i xxx
+      $ cnpm uni xxx
+      把npm的操作全部改为cnpm操作！！「但是向全局安装模块，建议还是使用npm」
+  方案2：在改变安装源的同时，使用可并行下载的工具，例如：yarn/pnpm...都是「推荐」
+    $ npm i yarn pnpm -g  「向全局安装模块，依然推荐使用npm」
+    YARN的使用「语法和npm区别较大」
+      $ yarn add xxx 「后面一样可以指定版本」
+      $ yarn remove xxx
+    PNPM的使用「和npm的区别不大」
+      $ pnpm add xxx
+      $ pnpm remove xxx
+    
+5. 关于npm的实践和进阶
+  在一个新项目，安装模块之前，我们往往需要先创建一个package.json的文件
+    + 记录了项目所需模块的清单：开发环境 & 生产环境
+      开发环境 development：只需要在开发的时候用到，部署到服务器不需要
+      生产环境 production：生产环境指的是部署到服务器的环境，一般开发和部署到服务器都需要的模块，安装在生产环境下！！
+    + 配置可执行的脚本命令
+    + 记录一些项目需要的额外配置
+    + ...
+  创建一个package.json
+    $ npm init -y  或者 $ yarn init -y  或者 $pnpm init
+    注意事项：项目的文件名不能出现 中文、特殊符号、大写字母等，需要符合标准的模块包命名规范「使用数字、小写字母、_ 命名」
+
+  模块清单
+    我们以后安装需要的模块，不仅仅是安装，还需要把此模块的信息（含：模块名、版本号等）记录到package.json中！！
+      $ npm i xxx --save(简写:-S)  把模块安装在生产依赖中（不指定，默认就是生产依赖）
+      $ npm i xxx --save-dev(简写:-D) 安装在开发依赖中
+    为啥要记录依赖清单？
+      因为node_modules太大了，每一次git提交的时候，我们是忽略这个文件的（.gitignore设置）, 此时我们需要把自己安装的模块信息，写入到package.json中；这样当我的同事，获取最新的代码后，首先需要按照package中记录的依赖清单，重新安装一遍，这样才能把依赖的模块都安装全！！ -> 我们把此操作称之为“跑环境”
+        $ npm i  把开发依赖和生产依赖全部安装一遍「$ yarn 」
+        $ npm i --production 只安装生产依赖
+
+    配置可执行的脚本命令
+      安装在全局的模块，一般是可以“直接”使用命令来进行操作的，例如：
+        $ npm i webpack webpack-cli -g
+        $ webpack --version
+      但是安装在本地项目中的模块，默认是不能使用命令的
+        $ npm i webpack webpack-cli
+        $ webpack --version   提示 command not found: webpack
+      如果我们就是想用命令，则可以基于package.json中的scripts进行配置！
+        前提：本地安装的模块，能不能使用命令，需要看node_modules/.bin的目录下，有没有可执行的命令，如果有，我们基于scripts进行配置是可以使用的，如果这里都没有，神仙来了都用不了！！
+           "scripts": {
+                AAA是我们自己设置的脚本名，后面的值是需要执行的命令
+                "AAA": "webpack --version"
+           }
+           $ npm run AAA 或者 $ yarn AAA
+
+
+扫盲：一个模块的版本
+  开发 -> alpha版本(内测版) -> beta版本(公测版) -> rc预发版本 -> 正式发布:stable稳定版
+  1.11.0-rc1「主版本号.副版本号.补丁包 - 阶段」
+
+扫盲：如何打开终端命令窗口（或DOS命令窗口）
+  windows
+    @1 win+R -> 运行框（输入cmd）-> 打开了命令窗口
+    @2 在指定的目录中，地址栏中输入cmd，这样就可以在此目录下打开命令窗口
+       或者有的电脑，直接 shift+右键，会出现”在此处打开命令窗口“
+    @3 搜索 “命令提示符”，右键以管理员身份打开「这样让命令窗口以最高权限打开」
+      进入指定的目录，此时需要DOS的一些命令，例如：想进入D盘的某个文件目录
+        $ D:  进入指定的磁盘
+        $ cd 路径地址  进入指定的文件目录
+  mac电脑
+    @1 直接找到终端打开即可
+    @2 在指定的目录下打开
+       $ cd 把需要进入的目录拖拽到终端此命令后即可
+  在vscode中，左侧是我们当前的工程目录，我们想在此目录下执行一些命令，可以直接使用vscode自带的Terminal处理
+    快捷键：ctrl + 撇(TAB键上面的那个)

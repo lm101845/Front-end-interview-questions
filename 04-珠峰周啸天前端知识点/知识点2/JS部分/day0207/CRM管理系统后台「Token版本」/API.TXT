@@ -1,0 +1,433 @@
+开发前必读
+  @1 本后台基于 Node + Express 开发，需要保证 Node 的版本大于(或等于) V14
+  @2 启动服务前，首先安装项目所需依赖
+     $ npm i  或者  $ yarn install
+  @3 修改package.json中的配置项「注意：此部分信息中出现的各字段，不可以删除」
+     "config": {
+    	"server": 9999, //启动后台服务所占用的端口号
+    	"token": {  //Token创建所需的秘钥和有效期限
+      		"secret": "ZFPX",
+      		"maxAge": "7d"
+    	},
+    	"cros": {  //CROS跨域相关配置
+      		"open": true,  //是否支持CROS跨域
+      		"safeList": [  //允许客户端访问源的白名单
+				"http://127.0.0.1:5500",
+				"http://127.0.0.1:5501",
+				"http://127.0.0.1:5502",
+				"http://127.0.0.1:8080",
+				"http://127.0.0.1:3000",
+				"http://127.0.0.1:8848"
+			]
+  	  	}
+ 	 }
+  @4 启动后台服务
+    $ node server.js  「启动后窗口不能关闭」
+	或者基于pm2管理
+	$ npm i pm2 -g
+	$ pm2 start server.js --name CRM  //启动服务「窗口关闭，服务也会正常运行」
+	$ pm2 stop CRM  //暂定服务
+	$ pm2 restart CRM  //重启服务
+	$ pm2 delete CRM  //删除服务
+
+需要知道的一些细节问题：
+	@1 服务器返回的数据中
+	  {
+		code:0,  //0成功  1失败
+		codeText:'OK',  //具体描述信息
+		...
+	  }
+	@2 POST请求下，基于请求主体发送给服务器的数据：
+	  + 要求是 urlencoded 格式
+	  + 需要设置 Content-Type:application/x-www-form-urlencoded 请求头信息
+	@3 除登录接口外，其余接口的访问皆需要在登录状态下才可访问
+	  + 登录成功：服务器会返回token
+	  + 后续所有接口请求都需要在请求头中，基于 authorzation=token值 ，把token传递给服务器进行校验
+	@4 获取全部客户列表时，如果当前登录者不具备全部人员查看的权限，默认只返回自己的客户列表
+    @5 测试账号和密码
+	   account:"18310612838"  password:md5("1234567890")  最高管理员权限
+	   或者
+       account:"13041086186"  password:md5("1234567890")  销售经理权限
+
+    @6 baseUrl: http://127.0.0.1:9999
+    完整路径： http://127.0.0.1:9999/user/login
+
+==========USER用户管理==========
+用户登录
+URL：/user/login    请求的接口
+METHOD：POST        请求的方式
+PARAMS：account=xxx&password=xxx   传递的参数
+RESULT：{      请求成功返回的结果
+	code:0,
+	codeText:'OK',
+	token:'...', //Token信息
+	info:{ //登录用户基本信息「后面接口返回的员工信息都是这些内容」
+		id,
+        name,
+        sex,
+        email,
+        phone,
+        departmentId,
+        department,
+        jobId,
+        job,
+        desc,
+        power
+	}
+}
+----
+检测是否登录
+URL：/user/login
+METHOD：GET
+PARAMS：null
+RESULT：{
+	code:0,  
+	codeText:'OK',
+	info:{
+		id,
+        name,
+		...,
+		power
+	}
+}
+----
+获取用户通讯录
+URL：/user/list
+METHOD：GET
+PARAMS：departmentId=0&search=''
+
+departmentId=0//下拉列表
+search=''//搜索框
+
+RESULT：{
+	code:0  
+	codeText:'OK',
+	data:[{
+		id,
+        name,
+        sex,
+        email,
+        phone,
+        departmentId,
+        department,
+        jobId,
+        job,
+        desc,
+        power
+	},...]
+}
+----
+获取用户详细信息
+URL：/user/info
+METHOD：GET
+PARAMS：userId=1  不传是获取登录者信息
+RESULT：{
+	code:0  
+	codeText:'OK',
+	info:{
+		id,
+        name,
+		...,
+		power
+	}
+}
+----
+增加用户信息
+URL：/user/add
+METHOD：POST
+PARAMS：name=xxx&sex=0&email=xxx&phone=xxx&departmentId=1&jobId=1&desc=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+修改用户信息
+URL：/user/update
+METHOD：POST
+PARAMS：userId=1&name=xxx&sex=0&email=xxx&phone=xxx&departmentId=1&jobId=1&desc=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+删除用户信息
+URL：/user/delete
+METHOD：GET
+PARAMS：userId=1
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+修改（重置）用户密码
+URL：/user/resetpassword
+METHOD：POST
+PARAMS：
+	userId=1  重置某个用户密码
+	password=xxx 修改登录者密码
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+修改自己的密码：不需要传递userId，需要把新的密码传递给服务器(MD5)
+重置他人的密码：不需要传递password，只需要传递userId，服务器会帮助我们重置
+
+==========DEPARTMENT部门管理==========
+获取部门信息
+URL：/department/list
+METHOD：GET
+PARAMS：null
+RESULT：{
+	code:0  
+	codeText:'OK',
+	data:[{
+		id,
+		name,
+		desc
+	},...]
+}
+----
+获取部门详细信息
+URL：/department/info
+METHOD：GET
+PARAMS：departmentId=1
+RESULT：{
+	code:0  
+	codeText:'OK',
+	info:{
+		id,
+		name,
+		desc
+	}
+}
+----
+增加部门信息
+URL：/department/add
+METHOD：POST
+PARAMS：name=xxx&desc=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+修改部门信息
+URL：/department/update
+METHOD：POST
+PARAMS：departmentId=1&name=xxx&desc=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+删除部门信息
+URL：/department/delete
+METHOD：GET
+PARAMS：departmentId=1
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+
+==========JOB职务管理==========
+获取职务信息
+URL：/job/list
+METHOD：GET
+PARAMS：null
+RESULT：{
+	code:0  
+	codeText:'OK',
+	data:[{
+		id,
+		name,
+		desc,
+		power
+	},...]
+}
+----
+获取职务详细信息
+URL：/job/info
+METHOD：GET
+PARAMS：jobId=1
+RESULT：{
+	code:0  
+	codeText:'OK',
+	info:{
+		id,
+		name,
+		desc,
+		power
+	}
+}
+----
+增加职务信息
+URL：/job/add
+METHOD：POST
+PARAMS：name=xxx&desc=xxx&power=xxx|xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+修改职务信息
+URL：/job/update
+METHOD：POST
+PARAMS：jobId=1&name=xxx&desc=xxx&power=xxx|xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+删除职务信息
+URL：/job/delete
+METHOD：GET
+PARAMS：jobId=1
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+
+==========CUSTOMER客户管理==========
+增加客户信息
+URL：/customer/add
+METHOD：POST
+PARAMS：name=xxx&sex=xxx&email=xxx&phone=xxx&QQ=xxx&weixin=xxx&type=xxx&address=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+修改客户信息
+URL：/customer/update
+METHOD：POST
+PARAMS：customerId=xxx&name=xxx&sex=xxx&email=xxx&phone=xxx&QQ=xxx&weixin=xxx&type=xxx&address=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+删除客户信息
+URL：/customer/delete
+METHOD：GET
+PARAMS：customerId=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+获取客户详细信息
+URL：/customer/info
+METHOD：GET
+PARAMS：customerId=1
+RESULT：{
+	code:0  
+	codeText:'OK',
+	info:{
+		id,
+		name,
+		sex,
+		email,
+		phone,
+		QQ,
+		weixin,
+		type,
+		address,
+		userId,
+		userName,
+		departmentId,
+		department
+	}
+}
+----
+获取客户列表  
+URL：/customer/list
+METHOD：GET
+PARAMS：lx=my&type=''&search=''&limit=10&page=1
+   lx=my获取我的客户(默认)
+   lx=all获取全部客户
+   type='' 下拉列表的值
+   search='' input搜索框的值
+   limit=10 每页10条数据
+   page=1 默认显示第一页
+RESULT：{
+	code:0  
+	codeText:'OK',
+	page:0,//当前页
+	limit:0,//每页显示几条
+	total:0,// 总共有多少条数据
+	totalPage:0,//总页码 
+	data:[{//表格数据--每页10条
+		id,
+		name,
+		sex, 0是男 1是女
+		email,
+		phone,
+		QQ,
+		weixin,
+		type,
+		address,
+		userId,
+		userName,
+		departmentId,
+		department
+	},...]
+}
+
+==========VISIT回访记录管理==========
+获取回访记录信息
+URL：/visit/list
+METHOD：GET
+PARAMS：customerId=xxx
+RESULT：{
+	code:0  
+	codeText:'OK',
+	data:[{
+		id,
+		customerId,
+		customerName,
+		visitText,
+		visitTime
+	},...]
+}
+----
+获取回访详细信息
+URL：/visit/info
+METHOD：GET
+PARAMS：visitId=1
+RESULT：{
+	code:0  
+	codeText:'OK',
+	info:{
+		id,
+		customerId,
+		customerName,
+		visitText,
+		visitTime
+	}
+}
+----
+增加回访信息
+URL：/visit/add
+METHOD：POST
+PARAMS：customerId=xxx&visitText=xxx&visitTime=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+修改回访信息
+URL：/visit/update
+METHOD：POST
+PARAMS：visitId=1&customerId=xxx&visitText=xxx&visitTime=xxx
+RESULT：{
+	code:0  
+	codeText:'OK'
+}
+----
+删除回访信息
+URL：/visit/delete
+METHOD：GET
+PARAMS：visitId=1
+RESULT：{
+	code:0  
+	codeText:'OK'
+}

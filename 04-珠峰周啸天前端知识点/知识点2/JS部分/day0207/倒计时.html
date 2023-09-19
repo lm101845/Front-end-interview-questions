@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h1></h1>
+		<script>
+			let h1=document.querySelector("h1");
+			let timer=null;
+			let nowTime;
+			
+			//补零函数
+			function addZero(n){
+				return n>=10?n:"0"+n;
+			}
+			
+			function getTime(){//先获取时间成功，在做倒计时
+				return new Promise((resolve,reject)=>{
+					let xhr=new XMLHttpRequest;
+					xhr.open("head","/");//2. 发送head请求，获取响应头信息
+					xhr.onreadystatechange=function(){//尽快拿到时间 
+					  //1. xhr.readyState===2, 时间在响应头里，
+					  //   响应头返回就立刻获取时间
+						if(xhr.readyState===2){
+							if(xhr.status>=200&&xhr.status<400){
+								let time=xhr.getResponseHeader("Date");//格林尼治时间
+								let newTime=new Date(time);
+								resolve(newTime);
+							}
+						}
+					}
+					xhr.send(null)
+				})
+				
+			}
+			
+			// getTime().then(value=>{
+			// 	console.log(value)
+			// }).catch(err=>{
+			// 	console.log(err);
+			// })
+			
+			function computed(){
+				//let nowTime=new Date();//现在的时间----服务器那边的
+				nowTime+=1000;
+				let endTime=new Date(2023,1,17,12,0,0);//结束的时间
+				
+				let diff=endTime-nowTime;//毫秒数 时间差值
+				
+				let day=parseInt(diff/(24*60*60*1000));//天数
+				let hour=parseInt(diff/(60*60*1000)%24);//小时
+				let mins=parseInt(diff/(60*1000)%60);//分钟
+				let sec=parseInt(diff/1000%60);//秒
+				
+				h1.innerHTML=`距离结束时间：${day}天，
+				${addZero(hour)}:${addZero(mins)}:${addZero(sec)}`;
+			}
+			
+			async function init(){//1.获取服务器时间，2.开始倒计时
+			   //获取服务器时间，转换时间戳
+			   //获取了1次
+			   nowTime = + await getTime();
+			   timer=setInterval(computed,1000)	
+			}
+			init()//倒计时开始
+		</script>
+	</body>
+</html>

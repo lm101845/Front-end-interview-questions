@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//数组原型上拓展方法
+			//要求 mypush 要跟 push 方法 一样
+			// Array.prototype.mypush=function mypush(n){
+			// 	//1.this---》arr  2.参数 n---》100
+			// 	this[this.length]=n;
+			// 	return this.length;
+			// }
+
+			// var arr=[1,2,3];
+			// var len=arr.mypush(100);
+			// console.log(len);//4  返回值，是新数组的长度
+			// console.log(arr);//[1,2,3,100]
+
+
+
+			//数组原型上拓展方法
+			//要求 mypush 要跟 push 方法 一样
+			Array.prototype.mypush=function mypush(...args){
+				//1.this---》arr  2.参数 args==>[100,200,300] (数组)--》Array.prototype
+				//console.log(arguments);//类数组 arguments---》Object.prototype
+				//for in 遍历私有和公有属性都遍历
+				// for(var i in arguments){
+				// 	console.log(arguments[i]);
+				// }
+				
+				for(var i=0;i<args.length;i++){
+					//[1,2,3,100]
+					//给数组的最后1位赋值
+					this[this.length]=args[i];
+				}
+				return this.length;
+			}
+
+			var arr=[1,2,3];
+			var len=arr.mypush(100,200,300);
+			console.log(len);//6  返回值，是新数组的长度
+			console.log(arr);//[1,2,3,100,200,300]
+
+
+			// //日期原型上拓展方法
+			// Date.prototype.mygetTime=function mygetTime(){
+
+			// }
+			// //函数原型上拓展方法
+			// Function.prototype.show=function(){
+
+			// }
+		</script>
+
+	</body>
+</html>

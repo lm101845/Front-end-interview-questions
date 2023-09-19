@@ -1,0 +1,27 @@
+const fn1 = function () {
+  console.log('fn1')
+}
+const fn2 = function () {
+  console.log('fn2')
+}
+console.log(fn1.call(fn2))
+console.log(fn1.call.call.call(fn2))
+console.log(Function.prototype.call(fn2))
+console.log(Function.prototype.call.call.call(fn2)) 
+
+====================
+class Fn {
+  constructor(x, y) {
+    this.total = x + y
+  }
+  name = 'Fn'
+  say = () => {
+    console.log('我的名字是：' + this.say)
+  }
+  say() {
+    console.log('我的名字是：' + this.say + ' 我的求和是：' + this.total)
+  }
+  static z = 100
+  static tool() { }
+}
+把其改为ES5的写法，要去和ES6内置的一些细节保持一致！！

@@ -1,0 +1,212 @@
+/* 通用样式 */
+@com-green: #31C27C;
+@com-gray: rgba(255, 255, 255, .5);
+
+.text-clip {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* 基本骨架 */
+html {
+    // 750设计稿中 1REM=100PX
+    font-size: 100px;
+}
+
+html,
+body,
+#app {
+    height: 100%;
+    overflow: hidden;
+}
+
+#app {
+    position: relative;
+    margin: 0 auto;
+    max-width: 750px;
+}
+
+.back-img-box {
+    position: absolute;
+    z-index: -2;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background: url('../images/myDream.jpg') no-repeat;
+    background-size: cover;
+    // 设置模糊度
+    filter: blur(6px);
+}
+
+.back-mark-box {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+}
+
+.header-box,
+.footer-box {
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.header-box {
+    top: 0;
+    height: 2rem;
+}
+
+.footer-box {
+    bottom: 0;
+    height: 2rem;
+}
+
+.lyric-box {
+    box-sizing: border-box;
+    padding: 2rem 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* 头部区域 */
+.header-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .3rem;
+
+    .play-btn {
+        margin-left: .1rem;
+        width: .7rem;
+        height: .7rem;
+        background: url('../images/music.svg') no-repeat;
+        background-size: 100% 100%;
+
+        &.move {
+            animation: manjianghong 1s linear 0s infinite both;
+        }
+    }
+
+    .base-info {
+        flex-grow: 1; //把剩余空间全部占用
+        display: flex;
+
+        .portrait {
+            width: 1.4rem;
+            height: 1.4rem;
+        }
+
+        .info {
+            flex-grow: 1;
+            margin-left: .1rem;
+            max-width: 4.6rem;
+        }
+
+        .title,
+        .author {
+            line-height: .7rem;
+            color: #fff;
+            font-size: .34rem;
+            .text-clip;
+        }
+
+        .author {
+            font-size: .3rem;
+        }
+    }
+}
+
+@keyframes manjianghong {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* 歌词区域 */
+.lyric-box {
+    .container {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .wrapper {
+        transform: translateY(0);
+        transition: transform .3s;
+
+        p {
+            height: 1rem;
+            line-height: 1rem;
+            text-align: center;
+            font-size: .3rem;
+            color: @com-gray;
+
+            &.active {
+                color: @com-green;
+                transition: color .3s;
+            }
+        }
+    }
+}
+
+/* 尾部区域 */
+.footer-box {
+    padding: 0 .2rem;
+
+    .progress {
+        display: flex;
+        align-items: center;
+
+        .current,
+        .duration {
+            width: .8rem;
+            line-height: .92rem;
+            text-align: center;
+            font-size: .24rem;
+            color: @com-gray;
+        }
+
+        .back-bar {
+            position: relative;
+            flex-grow: 1;
+            height: .04rem;
+            background: @com-gray;
+
+            .already {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 0;
+                height: 100%;
+                background: @com-green;
+            }
+        }
+    }
+
+    .download-btn {
+        display: block;
+        margin: 0 auto;
+        border-radius: .5rem;
+        width: 4.26rem;
+        height: 1rem;
+        line-height: 1rem;
+        text-align: center;
+        font-size: .36rem;
+        color: #fff;
+        text-indent: .4rem;
+        background: url('../images/sprite_play.png') no-repeat @com-green;
+        background-size: .8rem 7rem;
+        background-position: .2rem -5.83rem;
+    }
+}

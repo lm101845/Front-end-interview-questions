@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//原来直接调用  show()  this---》window
+			//改变show的调用方式 obj.show()  this---》obj
+			
+			//show函数执行 this--->window  
+			//怎么调用 show 方法，让 this 变成 obj
+			function show(){
+				console.log(this,arguments);
+			}
+			
+			// var obj={
+			// 	name:"lili"
+			// }
+			
+			//var str="aaa";//字符串是值类型的  无法挂在 show 方法
+			var str=new String("aaa");//将 类型转换为 引用类型 ==》就可挂载方法
+			
+			//将值类型转化为引用类型  
+			//1. new就可以，但是 BigInt Symbol就无法new
+			//2. Object(XXX)   
+			
+			str["show"]=show;//给obj添加一个show方法
+			
+			//obj.show(10,20);//直接这样调用会报错--》因为 obj 没有 show函数
+			str["show"](10,20);
+			
+			
+			// //var num=100;//字符串是值类型的  无法挂在 show 方法
+			// var num=new Number(100);//将 类型转换为 引用类型
+			
+			// num["show"]=show;//给obj添加一个show方法
+			
+			// //obj.show(10,20);//直接这样调用会报错--》因为 obj 没有 show函数
+			// num["show"](10,20);
+			
+			
+		</script>
+	</body>
+</html>

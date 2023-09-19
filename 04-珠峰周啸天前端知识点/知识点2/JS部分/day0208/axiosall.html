@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./axios.min.js"></script>
+    <script src="./md5.min.js"></script>
+    <script src="./qs.js"></script>
+    <!-- axios二次封装 -->
+    <script src="http.js"></script>
+    <script>
+        axios.get("/api/articleList",{
+            params:{
+                date:"2021-05-21"
+            }
+        }).then(val=>{
+           console.log(val);
+        }).catch(err=>{
+            console.log(err);
+        })
+
+        // axios.get("/api/article",{
+        //     params:{
+        //         id:9736137
+        //     }
+        // }).then(val=>{
+        //    console.log(val);
+        // }).catch(err=>{
+        //     console.log(err);
+        // })
+
+        // axios.post("/user/login",{
+        //     account:"18310612838",
+        //     password:md5("1234567890") 
+        // },{
+        //     baseURL:"http://127.0.0.1:9999"//自己写会比公共的优先级高
+        // }).then(val=>{
+        //    console.log(val);
+        // }).catch(err=>{
+        //     console.log(err);
+        // })
+    </script>
+</body>
+</html>

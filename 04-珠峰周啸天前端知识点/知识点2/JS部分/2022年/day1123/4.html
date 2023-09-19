@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		【时间字符串处理】把下面的字符串变成 "2019年08月18日 12时32分18秒"
+		<script>
+			//补零函数
+			function addZero(n){
+				//0-9的数值，前面自动补0   9---》09
+				return n>9 ? n : "0"+n
+			}
+			
+			var str="2019-8-6 12:9:8";
+			var arr=str.split(" ");//["2019-8-18","12:32:18"]
+			var leftstr=arr[0];//左边 2019-8-18
+			var rightstr=arr[1];//右边 12:32:18
+			
+			var leftarr=leftstr.split("-");//['2019', '8', '18']
+			console.log(leftarr);
+			
+			var rightarr=rightstr.split(":");//['12', '32', '18']
+			console.log(rightarr);
+			
+			var resstr= leftarr[0]+"年"+addZero(leftarr[1])+"月"+addZero(leftarr[2])+"日 "
+			          +addZero(rightarr[0])+"时"+addZero(rightarr[1])+"分"+addZero(rightarr[2])+"秒";
+					  
+		    console.log(resstr);
+		</script>
+		
+		<!-- <script>
+			function addZero(n){
+				//0-9的数值，前面自动补0   9---》09
+				return n>9 ? n : "0"+n
+			}
+			console.log(addZero(1));
+		</script> -->
+	</body>
+</html>

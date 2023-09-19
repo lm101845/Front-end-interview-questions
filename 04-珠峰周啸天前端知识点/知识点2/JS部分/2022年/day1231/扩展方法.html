@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div>1111</div>
+		<div>22222</div>
+		<div>3333</div>
+		<script src="jquery.min.js"></script>
+		<script>
+			//jQuery 本身上扩展   $.extend
+			//$--->jQuery（静态方法）
+			$.extend({
+				min(x,y){
+					return x>y?y:x;
+				}
+			})
+			console.log($.min(2,3))
+			
+			//$.extend  jQuery 原型上扩展
+			$.fn.extend({
+				setBgColor(color){
+					//1.this--》$("div")  2.参数 color-->red
+					this.css("background-color",color);
+				}
+			})
+			$("div").setBgColor("red")
+			
+		</script>
+	</body>
+</html>

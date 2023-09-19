@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let xhr=new XMLHttpRequest;
+        console.log(xhr);
+
+        //xhr.open("get","http://localhost:9999/user/info?userId=1&name=10&age=11")
+
+        xhr.open("get","http://localhost:8888/api/articleList?date=2021-05-21&name=lili")
+   
+        xhr.timeout=1000;//1000毫秒
+        //xhr.withCredentials=true;
+
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState===4){
+                if(xhr.status>=200&&xhr.status<400){
+                    console.log(xhr.response);
+                }
+            }
+        }
+        xhr.ontimeout=function(){
+            console.log("请求超时")
+        }
+        xhr.send();
+ 
+
+    </script>
+
+</body>
+
+</html>

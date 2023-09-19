@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		^: 如果在[]里面，就是 除了xxx之外 的含义
+		   如果不是在[]里面，必须以XXX开头
+		$: 必须以XXX结尾
+		
+		?=xxx 正向预查  必须紧跟XXX
+		?!xxx 负向预查  不能紧跟XXX
+		?: 只匹配不捕获(以后讲)
+		
+	    \b: 匹配单词边界
+		\B: 匹配非单词边界
+		
+		单词边界：单词与符号的边界
+		单词：英文单词 数字 下划线
+		符号：中英文符号 中文汉字
+		<script>
+			
+			var str="_one_";
+			var reg=/\Bone\B/;
+			console.log(reg.test(str));
+			
+			
+			// var str="one";
+			// //左右两边都不写，也是单词边界
+			// var reg=/\bone\b/;
+			// console.log(reg.test(str));
+			
+			
+			// var str="我one你";
+			// var reg=/\bone\b/;
+			// console.log(reg.test(str));
+			
+			
+			// var str="one1two";
+			// var reg=/\B1\B/;
+			// console.log(reg.test(str));
+			
+			
+			// var str="appleoneapple";
+			// var reg=/\Bone\B/;
+			// console.log(reg.test(str));
+			
+			
+			
+			// var str=";one;";
+			// var reg=/\bone\b/;
+			// console.log(reg.test(str));
+			
+			
+			
+			// var str="do not";
+			// //do 的后面不能紧跟 not
+			// var reg=/do(?!not)/;
+			// console.log(reg.test(str));
+			
+			
+			// var str="donot";
+			// //do 的后面必须紧跟 not
+			// var reg=/do(?=not)/;
+			// console.log(reg.test(str));
+		</script>
+	</body>
+</html>

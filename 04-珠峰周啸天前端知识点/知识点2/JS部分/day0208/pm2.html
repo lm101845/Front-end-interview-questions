@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    npm i pm2 -g  全局下载pm2
+
+    pm2 start server.js --name CRM(项目名称) 启动项目
+    pm2 restart CRM(项目名称) 重新启动项目
+    pm2 stop CRM(项目名称)  关闭项目/pm2 stop all关闭所有
+    pm2 list 查看启动的项目
+    pm2 delete CRM(项目名称) 删除项目
+
+    pm2 start all启动所有项目
+    pm2 log 查看日志
+
+</body>
+</html>

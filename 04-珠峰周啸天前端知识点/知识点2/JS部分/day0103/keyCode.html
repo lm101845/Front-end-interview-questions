@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" id="inp">
+		<script>
+			// e.key键盘按键的内容=>a--->a
+			// e.code是英文键盘字符a--->keyA
+			// e.keyCode是键盘数字a--->65
+			
+			inp.onkeydown=function(e){
+				console.log(e.keyCode);
+				console.log(e.key);
+				console.log(e.code);
+			}
+		</script>
+	</body>
+</html>

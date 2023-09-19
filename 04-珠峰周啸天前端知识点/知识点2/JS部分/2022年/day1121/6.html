@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//思考一：删除数组最后一项，你有几种方法？
+			 var arr=[11,22,33,44,55];
+			 
+			 arr.pop();//方法一
+			 console.log(arr);
+			 
+			 //arr.length 总是比 最后一个索引 大 1
+			 //最后一个索引：arr.length-1
+			 arr.splice(arr.length-1,1);//方法二
+			 console.log(arr);
+			 
+			 arr.length--;//方法三
+			 console.log(arr);
+			 
+			 
+			// 思考二：在数组末尾追加新内容，你有几种方法？
+			
+			var arr=[11,22,33,44,55];
+			
+			arr.push(66);
+			console.log(arr);
+			
+			arr.splice(arr.length,0,"aa");
+			console.log(arr);
+			
+			arr[arr.length]="bb";
+			console.log(arr);
+			
+		</script>
+	</body>
+</html>

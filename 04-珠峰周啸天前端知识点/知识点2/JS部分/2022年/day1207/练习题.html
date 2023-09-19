@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//练习一
+			// function C1(name) {
+			// 	//name---》undefined
+			//     if (name) {// if(undefined)---false
+			//         this.name = name;
+			//     }
+			// 	//私有 没有name
+			// }
+			// function C2(name) {
+			// 	//name---》undefined
+			// 	//this.name=undefined;  //私有有name,值为 undefined
+			//     this.name = name;
+			// }
+			// function C3(name) {
+			// 	////name---》undefined
+			// 	//this.name= undefined || "join";
+			// 	//this.name= "join";  //私有有name,值为 "join"
+			//     this.name = name || 'join';
+			// }
+			// C1.prototype.name = 'Tom';//公有 有name
+			// C2.prototype.name = 'Tom';
+			// C3.prototype.name = 'Tom';
+
+			// alert((new C1().name) + (new C2().name) + (new C3().name));
+			//  //       "Tom"            undefined       "join"
+			// //  "Tomundefinedjoin"
+			
+			//练习2
+			// function Fn(num) {
+			//     this.x = this.y = num;
+			// }
+			// Fn.prototype = {
+			//     x: 20,
+			//     sum: function () {
+			//         console.log(this.x + this.y);
+			//     }
+			// };
+			// let f = new Fn(10);
+			// console.log(f.sum === Fn.prototype.sum);
+			// f.sum();
+			// Fn.prototype.sum();
+			// console.log(f.constructor);
+			
+			
+			//练习3
+			// function Fn() {
+			//     let a = 1;
+			//     this.a = a;
+			// }
+			// Fn.prototype.say = function () {
+			//     this.a = 2;
+			// }
+			// Fn.prototype = new Fn;
+			// let f1=new Fn;
+			// Fn.prototype.b = function () {
+			//     this.a = 3;
+			// }
+			// console.log(f1.a);
+			// console.log(f1.prototype);
+			// console.log(f1.b);
+			// console.log(f1.hasOwnProperty('b'));
+			// console.log('b' in f1);
+			// console.log(f1.constructor == Fn);
+			
+			//练习4
+			// function fun() {
+			//     this.a = 0;
+			//     this.b = function () {
+			//         alert(this.a);
+			//     }
+			// }
+			// fun.prototype = {
+			// 	//constructor:fun,
+			//     b: function () {
+			//         this.a = 20;
+			//         alert(this.a);
+			//     },
+			//     c: function () {
+			//         this.a = 30;
+			//         alert(this.a)
+			//     }
+			// }
+			// var my_fun = new fun();
+			// my_fun.b();
+			// my_fun.c();
+			
+			//练习5
+			let n = 10;
+			Number.prototype.plus = function (num = 0) { 
+				//console.log(this);//n-->10
+				return this+num;
+			};
+			Number.prototype.minus = function (num = 0) {
+				//补充代码
+				//console.log(this);//this--->n.plus(10)--->20
+				return this-num;
+			};
+			
+			// let m = n.plus(10)
+			// console.log(m);
+			
+			let m = n.plus(10).minus(5);
+			console.log(m); //=>15（10+10-5）
+
+		</script>
+		
+	</body>
+</html>

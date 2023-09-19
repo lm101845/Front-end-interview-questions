@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		元字符：
+		  字符集
+		  \d： 0-9之间的任意一个数字
+		  \D:  [^0-9] 非0-9之间的任意一个数字
+		  \w:  字母，数字，下划线，任意抽取1个
+		  \W:  不能 字母，数字，下划线，任意抽取1个
+		  \s:  匹配空格
+		  \S:  匹配非空格
+		  . :  除了回车（\r）和换行（\n），匹配任意内容
+		<script>
+			//元字符中 具有特殊含义内容，有的时候不能直接使用
+			//元字符中 + 具有特殊含义，不能直接使用
+			// 将特殊含义( + ) ----》普通含义( \+ )
+			
+			// var str="+";
+			// var reg=/^\+$/;
+			// console.log(reg.test(str))
+	       
+		   // var str=".";
+		   // var reg=/^\.$/;
+		   // console.log(reg.test(str))
+			
+			// var str="";
+			// var reg=/^.$/;
+			// console.log(reg.test(str))
+			
+			
+			// var str="1";
+			// var reg=/^\S$/;
+			// console.log(reg.test(str))
+			
+			
+			// var str="a";
+			// var reg=/^\W$/;
+			// console.log(reg.test(str))
+			
+			// var str="1";
+			// var reg=/^\w$/;
+			// console.log(reg.test(str))
+			
+			
+			// var str="a";
+			// var reg=/^\D$/;
+			// console.log(reg.test(str))
+			
+			
+			// var str="2";
+			// var reg=/^\d$/;
+			// console.log(reg.test(str))
+		</script>
+	</body>
+</html>

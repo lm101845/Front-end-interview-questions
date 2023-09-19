@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			body{
+				height:2000px;
+				background-image: linear-gradient(red,blue,green);
+			}
+			#box{
+				height:100px;
+				width:100px;
+				background-color: red;
+				color:#fff;
+				text-align: center;
+				line-height:100px;
+				position: fixed;
+				right:100px;
+				bottom:100px;
+				/* display: none;
+				transition: display 3s; */ 
+				z-index:-10;
+				opacity: 0;
+				transition: opacity 3s;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">返回顶部</div>
+		<script>
+			let html=document.documentElement||document.body;
+			box.onclick=function(){
+				html.scrollTop=0;
+			}
+			
+			window.onscroll=function(){
+				if(html.scrollTop>100){//滚动距离大于100，就显示
+					box.style.opacity=1;
+					box.style.zIndex=999;
+				}else{
+					box.style.opacity=0;
+					box.style.zIndex=-10;
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    客户端---请求头+请求体(Request)--|--》服务器
+    服务器---响应头+响应体(Response)--|--》客户端
+    <script>
+        let xhr=new XMLHttpRequest;//xhr实例
+        console.log(xhr);
+        xhr.open("get","")
+        //请求方式
+        // 1.get类  head:获取响应头数据 delete:删除数据 get:一般用于获取数据 options:请求查询
+        // 2.post类 post:一般用于提交数据 put:更新数据 patch:对修改的数据进行更新
+        // 请求路径 baseURL+url 完整的路径
+        // 是否同步异步  默认true异步
+        xhr.setRequestHeader("Content-Type","XXXX")
+
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState===4&&xhr.status===200){
+                //console.log(xhr.getAllResponseHeaders());
+                //console.log(xhr.getResponseHeader(XXX));
+                //console.log(xhr.responseText)
+            }
+        }
+        //状态值
+        //readyState
+        //0-4
+        //0 创建xhr实例
+        //1 建立连接
+        //2 成功返回响应头
+        //3 还未返回响应体，进一步处理
+        //4 成功返回响应体
+
+        //status 状态码
+        //1XX 信息响应类, 接收请求在处理中
+        //2XX 成功响应类，成功的返回数据
+        //3XX 重定向响应类，基本已将成功了，只需进一步
+        //4XX 客户端错误
+        //5XX 服务器错误
+
+        //getAllResponseHeaders() 获取响应头信息
+        //getResponseHeader(XXX) 指定响应头里面的信息
+
+        //response 获取响应体（服务器默认什么格式--》什么格式） 字符串
+        //responseText 获取响应体---字符串
+        //responseXML 获取响应体---XML
+
+        xhr.send();
+        //1.get类 直接用？拼接到url的后面  ?name=xxx&age=XXX    字符串
+
+        //2.post类 可以在send里面传递参数（格式要根据接口文档）
+        // 空和null  不发送
+        // 普通字符串 "xxxx"  
+
+        //除以上两种都需要配置 Content-Type
+        //xhr.setRequestHeader("Content-Type","XXXX")  放到open的后面
+
+
+        // urlencoded  "name=XXX&age=18"
+        // FromData
+        // raw字符串格式
+        // binary进制数据文件「buffer/二进制...」
+        // GraphQL（新增的，类似于查询语句）
+
+    </script>
+</body>
+</html>

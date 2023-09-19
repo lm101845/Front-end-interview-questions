@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			const fn1 = function fn1() {
+				console.log(11,this);
+			};
+			const fn2 = function fn2() {
+				console.log(22,this,arguments);
+			};
+	
+			fn1.call.call.call.call.call.call(fn2,10,20);
+			//  fn1.call.call.call.call.call 函数执行
+			//  this==》fn2
+			//  参数===》10,20
+			
+			//  =====> fn2.call(10,20)
+			
+		
+          //"call方法".call(fn2,10,20)
+		  // fn2.call(10,20)
+		  // fn2函数执行 【fn2()】     this==>10  参数：20
+		</script>
+	</body>
+</html>

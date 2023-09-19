@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	    <script>
+			//正常情况下，获取不到，代码由上往下执行
+			//整个html都加载完毕后最后执行里面的代码
+			//只能存在一个，后面会把前面覆盖
+			window.onload=function(){
+				console.log(box);
+			}
+		</script>
+		<style>
+			#imgbox{
+				height:500px;
+				width:300px;
+				background:#ccc url(./img/default.gif) no-repeat center;
+			}
+			#imgbox img{
+				height:500px;
+				width:300px;
+			}
+		    /* 专门去掉小列图的样式写法 */
+			img[src=""]{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>111</h1>
+		<div id="box">222</div>
+		<div id="imgbox">
+			<img src="" data-src="img/1.jpg" alt="">
+		</div>
+		
+		<h3>333</h3>
+	    <script>
+			//初级版
+			
+			//src 如果有值就会立刻请求
+			//首先 data-src 先存储正确的 src 路径，当满足条件的时候，给src赋值
+			//整个html都加载完毕后最后加载图片---->window.onload
+			//先准备一个框架站位(背景颜色,背景图)
+			
+			let img=document.querySelector("#imgbox img")
+			window.onload=function(){
+				let dataSrc=img.getAttribute("data-src");
+				img.src=dataSrc; //HTML DOM  写法简单，兼容IE
+				//img.setAttribute("src",dataSrc);//核心 DOM  写法复杂 无兼容
+				img.removeAttribute("data-src");
+			}
+		</script> 
+	</body>
+</html>

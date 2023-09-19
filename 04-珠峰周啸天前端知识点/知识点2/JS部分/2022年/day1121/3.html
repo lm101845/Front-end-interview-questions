@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// var arr=[100,200,300];
+			// arr[9]=9009;
+			// console.log(arr);
+			
+			// //遍历 写的所有索引(数值)
+			// for(var i=0;i<arr.length;i++){//0,1,2,3,4,5,6,7,8,9
+			// 	console.log(arr[i]);
+			// }
+			
+			// //随意自己写范围
+			// for(var i=1;i<3;i++){//1,2
+			// 	console.log(arr[i]);
+			// }
+			
+			// //自动遍历 数组的每个内容（能看到的0，1，2，9）
+			// //只能从头到尾（能看到的）
+			// for(var i in arr){
+			// 	console.log(arr[i]);
+			// }
+			
+			 var arr=[100,200,300];
+			// //索引下标为 数值 的为非关联数组
+			// //索引下标为 特殊内容 的是 关联数组 （for in）  了解
+			arr["aaa"]="hello";
+			console.log(arr);
+			
+			for(var i in arr){
+				console.log(arr[i]);
+			}
+			
+			//遍历对象
+			let obj={
+				name:"lili",
+				age:18
+			}
+			
+			for(var key in obj){
+				console.log(obj[key]);
+			}
+		</script>
+	</body>
+</html>

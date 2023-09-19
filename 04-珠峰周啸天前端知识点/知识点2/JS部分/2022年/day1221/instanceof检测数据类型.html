@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		instanceof ：临时用来检测数据类型，可以细分对象（Object的很难区分）
+		
+		instanceof：检测某个实例是不是属于哪个类
+		
+		检测原理：首先看的这个类属性的值Symbol.hasInstance 返回值 true/false（可修改）
+		         再看沿着原型链，如果原型链上有，就属于这个类型（可修改）
+		
+		弊端：Object的很难区分(Object标准普通对象 Array标准特殊对象)
+		     不能检测值类型
+			 原型链是可以修改的,检测的类型就会变不准确
+		<script>
+			 var arr=[1,2,3];//标准特殊对象
+			// var date=new Date();//标准特殊对象
+			// var obj={}//标准普通对象
+			// console.log(arr instanceof Array);//true
+			// console.log(date instanceof Array);//false
+			// console.log(arr instanceof Object);//true
+			
+			// var n=10;//值类型没有原型链，检测不出来
+			// console.log(n instanceof Object);//false
+			// console.log(n instanceof Number);//false
+			
+			console.dir(Array);//内置类 Symbol.hasInstance
+			
+			//console.log(arr);
+		</script>
+		
+		<!-- <script>
+			function Fn(){
+				
+			}
+			//Fn.prototype=Array.prototype;
+			var f=new Fn;
+			var arr=[1,2];
+			
+			console.log(f instanceof Fn);//true
+			console.log(arr instanceof Fn);//true
+			
+			console.dir(Fn);
+			
+			console.log(Fn[Symbol.hasInstance](f))
+		</script> -->
+		
+		
+		<!-- <script>
+			function Fn(){
+				
+			}
+			//重写 Symbol.hasInstance 属性---不管用(es6重写管用)
+			Fn[Symbol.hasInstance]=function(){
+				return false;
+			}
+			var f=new Fn;
+			console.log(f instanceof Fn);//false
+	
+		    //硬写成false  修改 Symbol.hasInstance 的值
+			console.log(Fn[Symbol.hasInstance](f));
+		</script> -->
+		
+		<script>
+		    class Fn{
+				//es6 重写
+				static [Symbol.hasInstance]=function(){
+					return false;
+				}
+			}
+			var f=new Fn;
+			console.log(f instanceof Fn);//false
+			
+		    //硬写成false  修改 Symbol.hasInstance 的值
+			console.log(Fn[Symbol.hasInstance](f));
+		</script>
+	</body>
+</html>

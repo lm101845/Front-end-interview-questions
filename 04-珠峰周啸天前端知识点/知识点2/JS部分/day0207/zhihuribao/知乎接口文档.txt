@@ -1,0 +1,11 @@
+http://localhost:8888/api/articleList?date=2021-05-21   首页列表接口文档
+
+http://localhost:8888/api/swiper   轮播图接口
+
+http://localhost:8888/api/article?id=9736137  详情列表页面的接口
+
+全是get
+
+
+get方式----》浏览器，就能看到数据
+post方式---》就能看不到数据

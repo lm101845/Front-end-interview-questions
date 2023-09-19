@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#imgbox{
+				height:500px;
+				width:300px;
+				background:#ccc url(./img/default.gif) no-repeat center;
+			}
+			#imgbox img{
+				height:500px;
+				width:300px;
+			}
+		    /* 专门去掉小列图的样式写法 */
+			img[src=""]{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="imgbox">
+			<img src="" data-src="img/1.jpg" alt="">
+		</div>
+		
+	    <script>
+			//升级版1
+			
+			//如果图片路出问题，不会做操作了
+			//图片元素.onload=function(){}    必须src有值才会执行
+			//执行，
+			//如果能执行后面的函数，就说明图片路径是对的
+			//执行不了就是错的
+			// let img=document.querySelector("#imgbox img")
+			// img.onload=function(){
+			// 	console.log("图片路径正确")
+			// }
+			
+			//直接用img,图片懒加载就没有意义了
+			//不用img,创建一个新的img来测试（先兵）
+			
+			
+			let img=document.querySelector("#imgbox img")
+			window.onload=function(){
+				let dataSrc=img.getAttribute("data-src");
+				
+				//let newimg=document.createElement("img");
+				let newimg=new Image;
+				newimg.src=dataSrc;
+				newimg.onload=function(){
+					img.src=dataSrc;
+					img.removeAttribute("data-src");
+					newimg=null;
+				}
+			}
+		</script> 
+	</body>
+</html>

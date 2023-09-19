@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		Object.prototype.toString.call([value]) 
+		这是JS中唯一一个检测数据类型最完美的
+		
+		this[value] 是谁，检测的就是谁的数据类型，结果 包含构造函数的信息
+		
+		一般情况下，检测的结果是 实例构造函数的信息，
+		但是 如果有 Symbol.toStringTag 属性，以这个属性为准
+		
+		大多数内置类都没有Symbol.toStringTag,  Math 有
+		
+		可以细分对象，
+		不能修改结果
+		值类型和引用类型都能检测
+		
+		toString()  转为字符串（大部分 对象 原型的身上的 toString 就是转字符串的）
+		
+		Object.prototype身上的toString 是专门用来检测数据类型的
+		<script>
+			var arr=[1,2,3];
+			console.log(arr.toString());
+			console.log(arr);
+			
+			var num=100;
+			console.log(num.toString())
+			
+			
+			console.log(Object.prototype.toString.call(arr));//[object Array]
+			console.log(Object.prototype.toString.call(num));//[object Number]
+		</script>
+
+		<script>
+			//自己构造的只能检测出 [object Object]
+			//想检测出来  [object Fn]
+			function Fn(){
+				this[Symbol.toStringTag]="Fn";
+			}
+			
+			//Fn.prototype[Symbol.toStringTag]="Fn";
+			
+			var f=new Fn;
+			
+			console.log(Object.prototype.toString.call(f));//[object Object]
+		</script>
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+
+		<script>
+			//直接去”公有区“找，能找到就是公有的
+			//如果这个属性，即属于私有，又属于公有，以前的方法就判断不准了
+			Object.prototype.hasPubProperty = function hasPubProperty(attr) {
+				//1.this---》f1     2.参数--->"name"
+				//公有区  Fn.prototype   Object.prototype
+				let proto=this.__proto__;//Fn.prototype
+				//proto-->Fn.prototype  只要有内容 while(true)
+				//proto-->Object.prototype  只要有内容 while(true)
+				//proto-->null   while(false)  循环停止
+				while(proto){
+					if(proto.hasOwnProperty(attr)===true){
+						return true;//中断---》不循环了  函数也不走了
+					}
+					proto=proto.__proto__;//Object.prototype   null
+				}
+				return false;
+			}
+
+			function Fn(name, age) {
+				this.name = name; //私有
+				this.age = age;
+			}
+			Fn.prototype.show = function() { //公有
+				console.log("111");
+			}
+			Object.prototype.name = "Tom"; //公有
+
+			var f1 = new Fn("lisa", 18)
+
+			 console.log(f1);
+
+			console.log(f1.hasPubProperty("name")); //true
+			console.log(f1.hasPubProperty("show")); //true
+		</script>
+	</body>
+</html>

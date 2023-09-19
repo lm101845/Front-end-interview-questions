@@ -1,0 +1,11 @@
+{
+  "name": "day0719",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.7.0",
+    "lodash": "^4.17.21",
+    "underscore": "^1.13.6"
+  }
+}

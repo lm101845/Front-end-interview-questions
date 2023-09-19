@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    客户端：
+    通过 Open with live server 打开页面，客户端端口号一定5500
+    http://127.0.0.1:5500/2022_06/JS%E9%83%A8%E5%88%86/day0210/proxy.html
+
+    现在要将5500---》1001，要通过 代理服务器 打开
+    1.将HTML文件先放到代理服务器里面
+    2.开启代理服务器 node server-proxy.js
+    3.通过代理服务器网址访问  http://127.0.0.1:1001/proxy.html
+           
+    代理服务器：http://127.0.0.1:1001/aaa(nodejs)
+    服务器：https://www.jianshu.com/asimov/subscriptions/recommended_collections
+
+    <script src="./axios.min.js"></script>
+    <script>
+        //代理服务器地址
+        axios.get("http://127.0.0.1:1001/aaa")
+        .then(response=>{
+            return response.data
+        }).then(val=>{
+            console.log(val)
+        }).catch(err=>{
+            console.log(err);
+        })
+
+    </script>
+</body>
+</html>

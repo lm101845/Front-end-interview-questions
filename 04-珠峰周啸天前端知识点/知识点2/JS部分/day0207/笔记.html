@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    ajax: async javascript and xml(数据格式)
+
+    xml: 服务器端（很久）
+
+    json:(目前大多数)
+
+    客户端渲染
+    服务端渲染
+
+    ajax: 异步获取数据，局部更新页面
+
+    同步：上件没完成，下件事不能做等着
+    异步：可以同时进行多件事情
+
+    方法：
+    open()  建立连接
+    getAllResponseHeaders() 获取全部响应头信息
+    getResponseHeader("XXX")  获取响应头指定信息
+    send() 发送数据（post类）
+    setRequestHeader() 设置请求头信息--open后面
+
+    事件：
+    onreadystatechange 注册监听
+    ontimeout 请求超时会触发该事件
+    onerror 请求错误时调用
+    onabort 请求中断时调用
+    onprogress 监控文件上传进度
+
+    属性：
+    status 状态码
+    statusText 状态码的信息描述
+    readyState  状态值
+    response 返回的数据（响应体） 服务器是什么格式就跟返回什么格式  字符串(特殊)
+    responseText 以字符串格式获取
+    responseXML 以XML格式获取
+    responseType 存储服务器返回数据的格式  
+    空字符串{默认}、“arraybuffer”、“blob”、“document”、“json”、“text” 
+    这些格式就是服务器支持的返回给客户端的数据格式
+    timeout:请求超时时间（毫秒）
+    0:默认，不设置请求超时时间
+    withCredentials：是否允许携带跨域资源凭证(cookie)
+    false:默认 不允许
+
+
+
+    <script>
+        //创建一个XMLHttpRequest核心对象
+        let xhr=new XMLHttpRequest;
+        console.log(xhr);
+        
+        // xhr.open("post","http://127.0.0.1:9999/user/login")
+        xhr.open("get","one.xml")
+        // 请求方式 method/type:
+        // get类：get:一般情况下，用来获取数据/delete：用来删除数据
+        //        head：获取响应头数据/options：预检测请求
+        // post类：post:一般用于提交数据（表单提交）/put：更新数据/patch:对修改过的数据更新
+
+        //请求网址：baseUrl+url (接口文档)
+        //http://127.0.0.1:9999/user/login
+    
+        // 是否同步 异步
+        // 异步 true (省略)   同步 false
+
+        xhr.onreadystatechange=function(){
+        //    if(xhr.readyState===4&&xhr.status===200){
+        //       //console.log(xhr.getAllResponseHeaders())
+        //       //格林尼治时间
+        //     //   let t=xhr.getResponseHeader("date");
+        //     //   let newt=new Date(t);//北京时间
+        //     //   console.log(newt);
+
+        //      console.log(xhr.responseXML);
+        //    }
+          
+            if(xhr.readyState===4){
+                //>=200  <400 以2开头和3开头
+                if(xhr.status>=200&&xhr.status<400){
+                    console.log(xhr.responseXML);
+                }
+            }
+        }
+        //readyState  状态值
+        // 0 创建xhr的实例
+        // 1 成功建立连接
+        // 2 成功返回 响应头
+        // 3 请求还在进一步处理中
+        // 4 成功返回 响应体
+
+        //status 状态码
+        //1XX 信息响应类 成功接收请求并在处理
+        //2XX 成功响应类 服务端成功返回数据，客户端成功接收
+        //  200 ok
+        //3XX 重定向响应类 进本已经完成，需要进一步处理
+        //  304 缓存
+        //4XX 客户端错误
+        //  404 找不到页面
+        //5XX 服务器错误
+
+        xhr.send();
+        //post类 用 send()发送的数据都是  携带在请求体里发给服务器
+        //配合 Content-Type: text/plain;charset=UTF-8 (默认)
+
+        //1. 空、null 都是不发送数据 不需要修改Content-Type
+        //2. 普通字符串 不需要修改Content-Type
+
+        //3. urlencoded格式字符串  name=lili&age=18
+        //  必须修改 Content-Type
+        //  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        //4. form-data
+        //xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+        // let fd = new FormData;
+        // fd.append('lx', 0);
+        // fd.append('name', 'xxx');
+        // xhr.send(fd);
+        //5. raw字符串格式
+        //6. binary进制数据文件「buffer/二进制...」
+        //7. GraphQL（新增的，类似于查询语句）
+
+        // 5.raw字符串格式
+        // 普通字符串  -> text/plain
+        // JSON字符串 -> application/json  => JSON.stringify/parse  「常用」
+        // XML格式字符串 -> application/xml
+        // ......
+        // 6.binary进制数据文件「buffer/二进制...」
+        // https://www.cnblogs.com/ryzz/p/13853633.html
+
+        // 一般也应用于文件上传
+        // 图片 -> image/jpeg
+        // EXCEL -> application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+        // https://blog.csdn.net/u013749540/article/details/78195266
+
+        // 5.GraphQL（新增的，类似于查询语句）
+        // "application/graphql"
+        // https://blog.csdn.net/weixin_29419599/article/details/119503438
+
+
+
+        //get类的请求发送的数据，都放在url的后面，用query的形式 
+        //query ?XXX=xxx&XX=xx  携带在请求头里发给服务器
+
+    </script>
+
+面试题：get 和 post 的区别？
+1. get 一般用于获取数据；post 一般用于提交数据
+2. get 通过问号传递参数，必须跟在url的后面，携带在请求头里发给服务器，
+   url 会有长度限制，多出内容会被裁掉，服务器接收数据不完整
+
+   post 通过 send 传递参数，携带在请求体里发给服务器，
+   没有长度限制，但是内容越多，速度越慢，手动限制
+
+3. post安全性更高,互联网是没有安全的
+
+4. get请求，两次请求同 同一个网址，就不会向服务器发送请求了，就去缓存中获取（浏览器的特性）
+xhr.open('GET', './1.json?lx=1&name=xxx&_'+Math.random())清除缓存
+
+
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// Math.prototype.max=function max(n,m,x){
+			// 	//1.this--->Math   2.参数-->1,12,3   [1,20,3,102,345,6]
+				
+			// 	//解题方案： 将 数组   变   单个数值
+			// 	//其实这个题本质与 this 无关
+			// 	//... 内置代码
+			// }
+			
+			//console.log(Math.max(1,12,3));//获取最大值
+			
+			var arr=[1,20,3,102,345,6];
+			// //用这个方法 Math.max(1,12,3)
+			
+			//方法一：
+			console.log(Math.max.apply(Math,arr)); 
+			// Math.max 函数执行 
+			// this-->Math   参数: 变成单个数值
+			
+			//console.log(Math.max.apply(null,arr)); 
+			
+			//方法二：... 扩展运算 
+			console.log(Math.max(...arr)); //[1,20,3,102,345,6]-->1,20,3,102,345,6
+		</script>
+		
+		<script>
+			//...  es6
+			//作用一 ：剩余运算   将单个值合成数组  1,2,3-->[1,2,3]
+			//作用二 ：扩展运算   将数组变成单个值  [1,2,3]-->1,2,3
+			function show(...args){
+				console.log(args);
+			}
+			
+			show(1,2,3);
+			
+			
+			var arr=[1,2,3]
+			console.log(...arr);
+		</script>
+		
+		
+	</body>
+</html>

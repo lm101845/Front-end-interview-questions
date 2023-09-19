@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#box{
+				height:100px;
+				width:100px;
+				background-color: pink;
+				color:#fff;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">111</div>
+		<script src="utils.js"></script>
+		<script>
+			//获取样式  兼容IE
+			// function getCss(ele,mystyle){
+			// 	if('getComputedStyle' in window){
+			// 		return window.getComputedStyle(ele)[mystyle];
+			// 	}else{
+			// 		return ele.currentStyle[mystyle];
+			// 	}
+			// }
+			
+			
+			// function getCss(ele,mystyle){
+			// 	return window.getComputedStyle(ele)[mystyle]
+			// }
+			
+			console.log(utils.getCss(box,"color"))
+			console.log(utils.getCss(box,"height"))
+			console.log(utils.getCss(box,"backgroundColor"))
+		</script>
+	</body>
+</html>

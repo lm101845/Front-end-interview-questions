@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">111</div>
+		<script>
+		   //获取目标对象:执行方法的元素
+		   // e.target  //FF
+		   // e.srcElement  //IE
+		   
+		   // box.onclick=function(e){
+			  //  console.log(this);
+			  //  console.log(e.target);
+		   // }
+		   
+		   
+		   box.onclick=(e)=>{
+		   		console.log(this);//window
+		   		console.log(e.target||e.srcElement);//目标元素
+		   }
+		</script>
+	</body>
+</html>

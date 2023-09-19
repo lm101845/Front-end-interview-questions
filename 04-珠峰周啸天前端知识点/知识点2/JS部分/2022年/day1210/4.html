@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			class Fn{
+				constructor(name,age) {//构造函数
+				   this.name=name;//私有
+				   this.age=age;
+				   //this.num=100;
+				}
+				
+				show(){//公有---直接写方法，就是公有方法
+					console.log("show");
+				}
+				//num=100//注意：直接写属性，就是私有属性（给constructor写this.num=100;）
+				
+				static str="hello" //静态---前面加 static 关键词就是静态属性
+				static showa(){
+					console.log("我是静态方法");
+				}
+				
+			}
+			Fn.prototype.num=100;//只能用老写法，添加公有属性 
+			
+			var f=new Fn("lili",18);
+			console.log(f);
+		</script>
+	</body>
+</html>

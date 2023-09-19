@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//字符串的方法
+			//1. charAt()  通过下标取值
+			// var str="hello";
+			// console.log(str[1]);//e
+			// console.log(str.charAt(1));//e
+			
+			// console.log(str[8]);//undefined
+			// console.log(str.charAt(8));//空 什么也没有
+			
+			//2.charCodeAt()   通过下标取 值--->ASCII（对应的ASCII值）
+			//https://wenku.baidu.com/view/7413ad4a5bfafab069dc5022aaea998fcc224060.html?_wkts_=1669171209755&bdQuery=ascii%E7%A0%81%E5%AF%B9%E7%85%A7%E8%A1%A8
+		    
+			// var str="hello";
+			// console.log(str.charCodeAt(4));//o===>111
+			// console.log(str.charCodeAt(8));//没有 NaN  
+			
+			//3.indexOf/lastIndexOf  跟数组一样   数组,字符串都能用
+			//  查找内容 ，有：下标   没有：-1
+			
+			// var str="hello hello";
+			// console.log(str.indexOf("e",5));//7
+			// console.log(str.indexOf("a"));//-1
+			
+			// console.log(str.lastIndexOf("e"));//7
+		 //    console.log(str.lastIndexOf("e",5));//1  5-->0
+		 
+		 //4. toUpperCase()  将小写转换为大写
+		 // var str="hello";
+		 // console.log(str.toUpperCase());
+		 
+		 //5. toLowerCase()  将大写转为小写
+		 // var str="hello APPLE";
+		 // console.log(str.toLowerCase());
+		 
+		</script>  
+	</body>
+</html>

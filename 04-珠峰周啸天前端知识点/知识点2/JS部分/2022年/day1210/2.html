@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		4.解构赋值
+		等号左右两边，数据类型相等（大多数）
+		
+		对象解构 ***
+		数组解构
+		2
+		6. 字符串模板 ``(键盘最左侧，由上往下数，第二个键) ***
+		`` + ${XXX}-->XXX 可做一些简单的js计算   
+		<script>
+			var name="Tom";
+			var age=28;
+			
+			//var str="我叫"+name+",今年"+age+"岁了";
+			
+			var str=`我叫${name},今年${age}岁了,${age>18?"成年":"未成年"}`;
+			
+			console.log(str);
+		</script>
+		
+		<!-- <script>
+			
+			let arr=[null,200,300,400];
+			//数组解构  解构名称随意起
+			//只有值是 undefined , 才会取默认值
+			let [n1="apple",n2,n3,n4,n5=500]=arr;
+			
+			console.log(n1);
+		</script>
+		
+		<script>
+			let obj={
+				namenamename:"lili",
+				age:18
+			}
+			
+			//对象解构，解构名称名称是对应的，可以起别名
+			//起别名 namenamename:name
+			//解构没有的值，默认是 undefined  可以设置默认值  job='ceo'
+			let {namenamename:name,age,job='ceo'}=obj;
+			
+			console.log(name,age,job);
+		</script> -->
+	</body>
+</html>

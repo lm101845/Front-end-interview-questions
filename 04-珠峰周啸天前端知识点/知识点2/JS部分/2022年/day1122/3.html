@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//数组去重，方法3
+			var arr=[1,1,1,2,3,2,4];
+			
+			//对象：重复的key,会重新赋值，但不是重新添加key，对象中的key,不能重复
+			//var obj={1:1,2:2,3:3,4:4}
+			var obj={}
+			for(var i=0;i<arr.length;i++){
+				var item=arr[i];//item=1
+				obj[item]=item;//obj[1]=1   {1:1}
+			}
+			//obj对象中的value值，放到一个数组里
+			var newarr=Object.values(obj);
+			
+			console.log(newarr);//去重后的数组
+		</script>
+		
+		<script>
+			//数组去重，方法3
+			var arr=[1,1,1,2,3,2,4];
+			//对象：重复的key,会重新赋值，但不是重新添加key，对象中的key,不能重复
+			//var obj={1:1,2:2,3:3,4:4}
+			var obj={}
+			
+			for(var i=0;i<arr.length;i++){
+				var item=arr[i];
+				//1: 先看看 obj 有没有 1:1 , 没有  obj[1]=1  
+				//2: 先看看 obj 有没有 1:1 ,  有   arr里面的的二项的1，给删除
+				//3：先看看 obj 有没有 1:1 ， 有   arr里面的的三项的1，给删除
+				//4：先看看 obj 有没有 2:2 ， 没有  obj[2]=2 
+				//5: 先看看 obj 有没有 3:3，  没有  obj[3]=3 
+				if(typeof obj[item] !=="undefined"){
+					arr.splice(i,1);
+					i--;
+					continue;//跳出本次循环，继续下一轮
+				}
+				
+				//1：没有就做这个操作
+				obj[item]=item;  //obj={1:1}   {1:1,2:2}   {1:1，2：2，3：3}
+			}
+			
+			console.log(arr);
+		</script>
+		
+		
+		
+	</body>
+</html>

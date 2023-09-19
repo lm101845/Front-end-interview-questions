@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			Array.prototype.myMap = function (fn) {
+			    //1.this-->arr   2.参数===》fn
+				let newarr=[];
+				//循环
+				for(let i=0;i<this.length;i++){
+					//新数组的值是函数执行后的结果 fn()
+					//函数里参数，代入
+					newarr.push(fn(this[i],i,this))
+				}
+				return newarr;//返回新数组
+			};
+			
+			var arr=[1,2,3];
+			var newarr=arr.myMap((item,index,arr)=>{
+				return item+10;
+			})
+			console.log(newarr);
+			//[11,12,13]
+		</script>
+	</body>
+</html>

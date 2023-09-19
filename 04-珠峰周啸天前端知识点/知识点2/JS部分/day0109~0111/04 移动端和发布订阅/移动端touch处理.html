@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>touch处理</title>
+    <!-- IMPORT CSS -->
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background: lightcoral;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+
+    <!-- IMPORT JS -->
+    <script src="js/fastclick.js"></script>
+    <script src="js/zepto.min.js"></script>
+    <script>
+        /* 
+         需求：在“点击”box盒子的时候，处理一些事情
+         */
+        // const box = document.querySelector('#box');
+
+        // 方案3：对于复杂的移动端交互处理，我们一般不会自己基于touch/gesture等事件去处理，都会使用成熟的移动端事件库来完成需求！！
+        //   + hammerjs：http://hammerjs.github.io/
+        //   + zeptojs：类似于JQ库(语法几乎一样)，但是相比较于JQ，它更懂移动端「支持CSS3动画的处理、提供了一套移动端专属的事件操作、体积更小(没有考虑IE兼容,只实现了JQ中最常用的方法)...」
+        // Zepto中提供的移动端事件专属操作方法：tap点击、singleTap单击、doubleTap双击、longTap长按、swipe滑动、swipeLeft/Right/Down/Up指定方向的滑动、pinch缩放、pinchIn缩小、pinchOut放大...
+        let $box = $('#box');
+        // $box.on('touchstart', function () { }); //JQ中支持、Zepto中也支持
+        $box.tap(function () {
+            // tap方法是Zepto基于touchstart/touchmove/touchend模拟出来的点击操作方法；但是JQ中没有这样的方法，需要自己基于三大事件去模拟！！
+            console.log('操作：点击');
+        });
+        $box.singleTap(function () {
+            console.log('操作：单击');
+        });
+        $box.doubleTap(function () {
+            console.log('操作：双击');
+        });
+        $box.longTap(function () {
+            console.log('操作：长按');
+        });
+        /* $box.swipe(function () {
+            console.log('操作：滑动');
+        });
+        $box.swipeDown(function () {
+            console.log('操作：向下滑动');
+        }); */
+
+        /* // 方案2：自己去实现点击的处理
+        box.ontouchstart = function (ev) {
+            /!*
+             手指触摸到box盒子时候，需要记录起始手指的坐标位置 
+               ev->TouchEvent对象
+                 changedTouches/targetTouches/touches：都是TouchList集合，记录每一根手指的坐标，只不过在touchend事件触发的时候，targetTouches和touches信息会消失，所以我们平时用的都是changedTouches
+                   0:Touch对象
+                     clientX/clientY
+                     pageX/pageY
+                     ...
+                 target/srcElement：事件源
+                 type：事件类型
+                 stopPropagation/stopImmediatePropagation：阻止事件传播
+                 preventDefault：阻止默认行为
+                 ...
+             *!/
+            let pointer = ev.changedTouches[0];
+            this.startX = pointer.clientX;
+            this.startY = pointer.clientY;
+            this.isMove = false;
+        };
+        box.ontouchmove = function (ev) {
+            /!* 获取手指最新的坐标位置，减去起始位置，算出偏移值「给予点击操作误差移动值 10px」 *!/
+            let pointer = ev.changedTouches[0];
+            let changeX = pointer.clientX - this.startX,
+                changeY = pointer.clientY - this.startY;
+            if (Math.abs(changeX) > 10 || Math.abs(changeY) > 10) {
+                // 发生了移动
+                this.isMove = true;
+                this.changeX = changeX;
+                this.changeY = changeY;
+            }
+        };
+        box.ontouchend = function (ev) {
+            if (!this.isMove) {
+                // 当前是点击操作
+                console.log('操作行为：点击');
+                return;
+            }
+            // 当前是滑动操作
+            console.log('操作行为：滑动');
+        }; */
+
+        /* // 方案1：
+        // 如果基于click处理，会存在300ms延迟「移动端click是单击而不是点击」
+        // 但是我们可以基于 fastclick.js 来处理延迟问题
+        FastClick.attach(document.body);
+        box.onclick = function () {
+            // ...
+            console.log('OK');
+        }; */
+    </script>
+</body>
+
+</html>

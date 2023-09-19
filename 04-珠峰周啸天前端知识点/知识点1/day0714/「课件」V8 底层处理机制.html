@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <title>JS/浏览器底层渲染机制 - V8 底层处理机制</title>
+        <meta charset='utf-8'>
+        <link href='https://cdn.maxiang.io/res-min/themes/marxico.css' rel='stylesheet'>
+        <style>
+                #preview-contents {
+                        margin-top: -20px;
+                        width: 900px;
+                }
+        </style>
+</head>
+
+<body>
+        <div id='preview-contents' class='note-content'>
+                <h4 id="js浏览器底层渲染机制-v8-底层处理机制">JS/浏览器底层渲染机制 - V8 底层处理机制</h4>
+                <p><strong>1. 下面代码输出结果？</strong></p>
+                <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">let</span> obj={
+</div><div class="hljs-line">    <span class="hljs-attr">x</span>:<span class="hljs-number">1</span>,
+</div><div class="hljs-line">    <span class="hljs-attr">y</span>:[<span class="hljs-number">10</span>,<span class="hljs-number">20</span>]
+</div><div class="hljs-line">};
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> obj2=obj;
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> obj3={
+</div><div class="hljs-line">   ...obj2
+</div><div class="hljs-line">};
+</div><div class="hljs-line">obj2.x=<span class="hljs-number">100</span>;
+</div><div class="hljs-line">obj2.y[<span class="hljs-number">1</span>]=<span class="hljs-number">30</span>;
+</div><div class="hljs-line">obj3.x=<span class="hljs-number">200</span>;
+</div><div class="hljs-line">obj3.y[<span class="hljs-number">2</span>]=<span class="hljs-number">40</span>;
+</div><div class="hljs-line">obj=obj3.y={
+</div><div class="hljs-line">   <span class="hljs-attr">x</span>:<span class="hljs-number">0</span>,
+</div><div class="hljs-line">   <span class="hljs-attr">y</span>:[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]
+</div><div class="hljs-line">};
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(obj,obj2,obj3);
+</div></code></pre>
+
+                <p><strong>2. 下面代码输出结果？</strong></p>
+                <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">let</span> x = <span class="hljs-number">5</span>;
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params">x</span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">y</span>) </span>{
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(y + (++x));
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> f = fn(<span class="hljs-number">6</span>);
+</div><div class="hljs-line">f(<span class="hljs-number">7</span>);
+</div><div class="hljs-line">fn(<span class="hljs-number">8</span>)(<span class="hljs-number">9</span>);
+</div><div class="hljs-line">f(<span class="hljs-number">10</span>);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(x);
+</div></code></pre>
+                <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">let</span> a=<span class="hljs-number">0</span>,
+</div><div class="hljs-line">    b=<span class="hljs-number">0</span>;
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">A</span>(<span class="hljs-params">a</span>)</span>{
+</div><div class="hljs-line">    A=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">b</span>)</span>{
+</div><div class="hljs-line">        alert(a+b++);
+</div><div class="hljs-line">    };
+</div><div class="hljs-line">    alert(a++);
+</div><div class="hljs-line">}
+</div><div class="hljs-line">A(<span class="hljs-number">1</span>);
+</div><div class="hljs-line">A(<span class="hljs-number">2</span>);
+</div></code></pre>
+
+                <p><strong>3. 下⾯代码是否可以，每隔1000MS依次输出 0 1 2 3 4 ?如果不可以，说明为啥？以及如何解决？</strong></p>
+                <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
+</div><div class="hljs-line">    setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(i);
+</div><div class="hljs-line">    }, (i + <span class="hljs-number">1</span>) * <span class="hljs-number">1000</span>);
+</div><div class="hljs-line">}
+</div></code></pre>
+
+                <p><strong>4. 按照需求，实现相应的代码</strong></p>
+                <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment">/* </span>
+</div><div class="hljs-line"><span class="hljs-comment">    在函数式编程当中有一个很重要的概念就是函数组合， 实际上就是把处理数据的函数像管道一样连接起来， 然后让数据穿过管道得到最终的结果。 例如：</span>
+</div><div class="hljs-line"><span class="hljs-comment">    const add1 = (x) =&gt; x + 1;</span>
+</div><div class="hljs-line"><span class="hljs-comment">    const mul3 = (x) =&gt; x * 3;</span>
+</div><div class="hljs-line"><span class="hljs-comment">    const div2 = (x) =&gt; x / 2;</span>
+</div><div class="hljs-line"><span class="hljs-comment">    div2(mul3(add1(add1(0)))); //=&gt;3</span>
+</div><div class="hljs-line"><span class="hljs-comment">​</span>
+</div><div class="hljs-line"><span class="hljs-comment">    而这样的写法可读性明显太差了，我们可以构建一个compose函数，它接受任意多个函数作为参数（这些函数都只接受一个参数），然后compose返回的也是一个函数，达到以下的效果：</span>
+</div><div class="hljs-line"><span class="hljs-comment">    const operate = compose(div2, mul3, add1, add1)</span>
+</div><div class="hljs-line"><span class="hljs-comment">    operate(0) //=&gt;相当于div2(mul3(add1(add1(0)))) </span>
+</div><div class="hljs-line"><span class="hljs-comment">    operate(2) //=&gt;相当于div2(mul3(add1(add1(2))))</span>
+</div><div class="hljs-line"><span class="hljs-comment">​</span>
+</div><div class="hljs-line"><span class="hljs-comment">    简而言之：compose可以把类似于f(g(h(x)))这种写法简化成compose(f, g, h)(x)，请你完成 compose函数的编写 </span>
+</div><div class="hljs-line"><span class="hljs-comment">*/</span>
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> add1 = <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x + <span class="hljs-number">1</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> mul3 = <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x * <span class="hljs-number">3</span>;
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> div2 = <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x / <span class="hljs-number">2</span>;
+</div></code></pre>
+
+                <p><strong>5. 按照需求，实现相应的代码</strong></p>
+                <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">const</span> fn = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line">   ...
+</div><div class="hljs-line">};
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> res = fn(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)(<span class="hljs-number">3</span>);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">//=&gt;6  1+2+3  </span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">const</span> curring = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">curring</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">  ...
+</div><div class="hljs-line">};
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> add = curring();
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> res = add(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">//-&gt;6</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">add = curring();
+</div><div class="hljs-line">res = add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)(<span class="hljs-number">4</span>);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">//-&gt;10</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">add = curring();
+</div><div class="hljs-line">res = add(<span class="hljs-number">1</span>)(<span class="hljs-number">2</span>)(<span class="hljs-number">3</span>)(<span class="hljs-number">4</span>)(<span class="hljs-number">5</span>);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">//-&gt;15 </span>
+</div></code></pre>
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一像素边框问题</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        html {
+            font-size: 100px;
+        }
+
+        .box {
+            box-sizing: border-box;
+            border: 1px solid red;
+            width: 400px;
+            height: 400px;
+            transform-origin: top left;
+        }
+
+        .box span {
+            display: block;
+            font-size: 36px;
+        }
+
+        .box button {
+            display: block;
+            width: 200px;
+            height: 60px;
+            font-size: 26px;
+        }
+
+        /* .box {
+            box-sizing: border-box;
+            border: .01rem solid red;
+            width: 4rem;
+            height: 4rem;
+        }
+
+        .box span {
+            display: block;
+            font-size: .36rem;
+        }
+
+        .box button {
+            display: block;
+            width: 2rem;
+            height: .6rem;
+            font-size: .26rem;
+        } */
+    </style>
+    <script>
+        /* 动态计算REM换算比例 */
+        (function () {
+            const computed = function computed() {
+                let html = document.documentElement,
+                    deviceW = html.clientWidth,
+                    ratio = 100;
+                if (deviceW < 750) ratio = deviceW * ratio / 750;
+                html.style.fontSize = `${ratio}px`;
+            };
+            computed();
+            window.addEventListener('resize', computed);
+        })();
+    </script>
+</head>
+
+<body>
+    <div class="box">
+        <span>哈哈哈</span>
+        <button>哇咔咔</button>
+    </div>
+
+    <script>
+        let box = document.querySelector('.box'),
+            deviceW = document.documentElement.clientWidth;
+        box.style.transform = `scale(${deviceW / 750})`;
+    </script>
+</body>
+
+</html>

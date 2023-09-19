@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>珠峰培训</title>
+    <!-- IMPORT CSS -->
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #iframeBox {
+            width: 100%;
+            height: 90%;
+            border: none;
+        }
+
+        .box {
+            height: 10%;
+            background: lightblue;
+        }
+
+        .box a {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+	<div class="box">
+		<a href="https://www.tmall.com/" target="iframeBox">天猫</a>
+		<a href="https://www.taobao.com/" target="iframeBox">淘宝</a>
+		<a href="https://www.mi.com/?masid=2701.0313" target="iframeBox">小米</a>
+	</div>
+	<iframe src="https://www.tmall.com/" frameborder="0" name="iframeBox" id="iframeBox"></iframe>
+	
+    <!-- <div class="box"> -->
+        <!-- target存放的是iframe的name属性值，这样点击A，控制iframe中的src等于A中的href -->
+        <!-- <a href="https://www.tmall.com/" target="iframeBox">天猫</a>
+        <a href="https://www.taobao.com/" target="iframeBox">淘宝</a>
+        <a href="https://www.baidu.com/" target="iframeBox">百度</a>
+    </div>
+    <iframe src="https://www.tmall.com/" name="iframeBox" id="iframeBox"></iframe> -->
+</body>
+
+</html>

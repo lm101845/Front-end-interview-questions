@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		RegExp 正则 (11个引用类型之一)
+		
+		专门对 字符串 进行处理的
+		
+		作用：
+		1. 匹配  验证 用户名，密码，手机号，身份证号 格式是否正确（登录，注册)
+		2. 捕获  可以通过身份证号，获取年 月 日 
+		
+		<script>
+			//创建正则
+			//1.构造函数法  new RegExp(元字符[,修饰符]) 
+			//2.字面量   /元字符/修饰符   //定界符
+			//   元字符必须有 修饰符可有可无
+			
+			// 区别：
+			// 1. 如果遇到变量，只能用构造函数法，字面量不行（识别不了变量）
+			// 2. 字符串，有个别字符需要转义   "--->\"
+			//    构造函数法---》元字符（字符串）
+			//    字面量-----》元字符（不是字符串）
+			
+			//双引里面不允许加双引的
+			//想要实现 双引里面加双引
+			//字符串 没有单\, 需要转义 \ ====> \\
+			//  \n ==》 换行
+			// var str="\"apple\"";
+			// console.log(str);
+			
+			// var str="abc \n def";
+			// console.log(str);
+			
+			
+			//  元字符： \d  0-9之间任意取一个值
+			var str="8";
+			var reg1=new RegExp("\\d");
+			
+			console.log(reg1.test(str));//true
+			
+			var reg2=/\d/;
+			console.log(reg2.test(str));//true
+		
+			
+			// var str="Apple one nana";
+			// var apstr="apple";
+			// var reg1=new RegExp(apstr,"i");
+			
+			// console.log(reg1.test(str));//true
+			
+			// var reg2=/apstr/i;
+			// console.log(reg2.test(str));//false
+			
+			
+			
+			//元字符: 很多 很多规则
+			//修饰符: 三个   i g m
+			//  i: 不区分大小写
+			
+			//方法： test() 验证字符串中是否有匹配的内容，有 true  没有 false
+			
+			
+			
+			// var str="Apple one nana";
+			// var reg1=new RegExp("apple","i");
+			
+			// console.log(reg1.test(str));//true
+			
+			// var reg2=/apple/i;
+			// console.log(reg2.test(str));//true
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//Array 数组(引用类型)
+			//[]--->可以是任意类型值,个数不限制,每个值用”逗号“分隔
+			// 0,1,2...序号：索引下标 从0开始，累加
+			// length: 数组内容的个数，数组长度
+
+            //创建数组，方法一：直接法 []
+			// var arr=[100,200,300,"apple",true,{name:"lili"},[11,22,33]];
+			// console.log(arr);
+			
+			//创建数组，方法二：构造函数法  new
+			// var arr=new Array(100,200,300,"apple");
+			// console.log(arr);
+			
+			// //获取和修改，数组里面的值
+			// var arr=[100,200,300,"apple",true,{name:"lili"},[11,22,33]];
+			// console.log(arr);
+			
+			// //获取 数组里面的值 通过下标
+			// console.log(arr[3]);
+			// console.log(arr[1]);
+			
+			// //修改 数组里面的值 通过下标
+			// arr[3]="banana";
+			// arr[1]="hello";
+			// console.log(arr);
+			
+			// //获取 数组的长度 
+			// //既能读取，也能修改
+			// console.log(arr.length);//7
+			
+			
+		// 	var arr=[100,200,300];
+		// 	console.log(arr);
+		
+		// 	//修改数组长度，引发2种情况
+		// 	//情况1： 突然数组长度增加好多值，剩余的值都用 undefined 来填充
+		// 	arr.length=10;
+		// 	console.log(arr);// [100, 200, 300, empty × 7]   empty:空
+		// 	console.log(arr[5]);//undefined 值
+			
+		// 	//情况2：突然数组长度减少，变相的删除数组的内容
+		// 	arr.length=2;
+		// 	console.log(arr);//[100]
+		</script>
+	</body>
+</html>

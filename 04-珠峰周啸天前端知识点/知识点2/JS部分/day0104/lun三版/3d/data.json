@@ -1,0 +1,73 @@
+[{
+    "id": 1,
+    "pic": "images/01.jpg",
+    "descript": {
+        "name": "蒙奇·D·路飞",
+        "identity": "草帽海贼团船长",
+        "dream": "找到ONE PIECE，并成为海贼王"
+    }
+}, {
+    "id": 2,
+    "pic": "images/02.jpg",
+    "descript": {
+        "name": "罗罗诺亚·索隆",
+        "identity": "草帽海贼团战斗员",
+        "dream": "世界第一大剑豪"
+    }
+}, {
+    "id": 3,
+    "pic": "images/03.jpg",
+    "descript": {
+        "name": "“小贼猫”娜美",
+        "identity": "草帽海贼团航海士",
+        "dream": "绘制出自己的世界地图、绘制全世界的航海图"
+    }
+}, {
+    "id": 4,
+    "pic": "images/04.jpg",
+    "descript": {
+        "name": "“GOD”▪乌索普",
+        "identity": "草帽海贼团狙击手",
+        "dream": "成为勇敢的海上战士"
+    }
+}, {
+    "id": 5,
+    "pic": "images/05.jpg",
+    "descript": {
+        "name": "“黑足”山治",
+        "identity": "草帽海贼团厨师",
+        "dream": "寻找传说中的奇迹之海－ALL BLUE"
+    }
+}, {
+    "id": 6,
+    "pic": "images/06.jpg",
+    "descript": {
+        "name": "托尼托尼·乔巴",
+        "identity": "草帽海贼团船医",
+        "dream": "成为万能药"
+    }
+}, {
+    "id": 7,
+    "pic": "images/07.jpg",
+    "descript": {
+        "name": "“改造人”弗兰奇",
+        "identity": "草帽海贼团船工",
+        "dream": "制造出梦想之船"
+    }
+}, {
+    "id": 8,
+    "pic": "images/08.jpg",
+    "descript": {
+        "name": "“鼻歌”&“灵魂之王”布鲁克",
+        "identity": "草帽海贼团音乐家",
+        "dream": "环绕世界一周到伟大航道双子岬跟伙伴鲸鱼“拉布”重逢"
+    }
+}, {
+    "id": 9,
+    "pic": "images/09.jpg",
+    "descript": {
+        "name": "“恶魔之子”妮可·罗宾",
+        "identity": "草帽海贼团考古学家",
+        "dream": "在历史正文碑的指引下，到达伟大航道的尽头“拉夫德鲁”"
+    }
+}]

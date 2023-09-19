@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var ary=[12,13];//0x001
+			function fn(ary){
+			   //私有 ary---0x001---0x002
+			   console.log(ary);//[12,13] 0x001
+			   ary[0]=100;//0x001[0]=100  [100,13]
+			   
+			   ary=[100];//ary 0x002 [100]
+			   ary[0]=0;//0x002  [0]
+			   console.log(ary);//0x002 [0]
+			}
+			fn(ary);//0x001
+			console.log(ary);//0x001 [100,13]
+		</script>
+	</body>
+</html>

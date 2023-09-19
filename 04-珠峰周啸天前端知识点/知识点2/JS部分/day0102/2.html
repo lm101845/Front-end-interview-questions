@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box"></div>
+		元素的批量操作: 文档碎片，模板字符串拼接
+		<script>
+			//5次 render Tree
+			// for(var i=0;i<5;i++){
+			// 	var span=document.createElement("span");
+			// 	span.innerHTML=i;
+			// 	box.appendChild(span);
+			// }
+			
+			//1次  render Tree   模板字符串拼接
+			// let str=''
+			// for(var i=0;i<5;i++){
+			// 	str+=`<span>${i}</span>`
+			// }
+			// box.innerHTML=str;
+			
+			//文档碎片   1次  render Tree
+			let fg=document.createDocumentFragment()
+			for(var i=0;i<5;i++){
+				var span=document.createElement("span");
+				span.innerHTML=i;
+				fg.appendChild(span);
+			}
+			box.appendChild(fg);
+		</script>
+	</body>
+</html>

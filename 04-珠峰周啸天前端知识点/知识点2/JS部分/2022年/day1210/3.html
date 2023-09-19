@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		7. class 创建类
+		<script>
+			function Fn(name,age){
+				this.name=name;//私有
+				this.age=age;
+			}
+			//公有
+			Fn.prototype.show=function(){
+				console.log("show");
+			}
+			Fn.prototype.num=100;
+			
+			//静态
+			Fn.str="hello";
+			Fn.showa=function(){
+				console.log("我是静态方法");
+			}
+			
+			var f=new Fn("lili",18);
+			
+			console.dir(Fn);//构造函数---类---静态
+		</script>
+	</body>
+</html>

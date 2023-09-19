@@ -1,0 +1,53 @@
+.container {
+    box-sizing: border-box;
+    margin: 20px auto;
+    padding: 10px;
+    width: 600px;
+    border: 1px dashed #AAA;
+}
+
+.level {
+    display: none;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.level.level0 {
+    display: block;
+    margin-left: 0;
+}
+
+.level li {
+    position: relative;
+    padding-left: 15px;
+    line-height: 30px;
+}
+
+.level li .icon {
+    position: absolute;
+    left: 0;
+    top: 9px;
+    box-sizing: border-box;
+    width: 12px;
+    height: 12px;
+    line-height: 8px;
+    text-align: center;
+    border: 1px solid #AAA;
+    background: #EEE;
+    cursor: pointer;
+}
+
+.level li .icon:after {
+    display: block;
+    content: "+";
+    font-size: 12px;
+    font-style: normal;
+}
+
+.level li .icon.open:after {
+    content: "-";
+}
+
+.level li .title {
+    color: #000;
+}

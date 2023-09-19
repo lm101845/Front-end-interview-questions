@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		元字符：
+		  字符集
+		  [abc]  abc之中任意抽取1个
+          [^abc] 除了abc之中任意抽取1个
+		  [0-9]  0-9之中任意抽取1个
+		  [a-z]  任意抽取一个小写字母
+		  [A-Z]  任意抽取一个大写字母
+		  [A-z]  任意抽取一个 大写字母,小写字母 [\]^_`
+		  [a-zA-Z]  任意抽取一个 大写字母,小写字母
+		  [0-9a-zA-Z]  任意抽取一个 字母或数字
+		  
+		  ^: 如果在[]里面，就是 除了xxx之外 的含义
+		     如果不是在[]里面，必须以XXX开头
+	      $: 必须以XXX结尾
+		  
+		  
+		<script>
+			var str="1a2";
+			//必须以1开头
+			//必须以2结尾
+		    //中间你写的元字符为准
+			//个数一定要与正则匹配
+			var reg=/^1[a-zA-Z]2$/;// 严谨
+			console.log(reg.test(str));
+			
+	
+			
+			// var str="A";
+			// //必须以 数字或字母开头
+			// //必须以 数字或字母结尾
+			// //中间必须抽取1个
+			// //必须以抽取的内容开头，必须以抽取的内容结尾，中间一个内容
+			// var reg=/^[0-9a-zA-Z]$/;
+			// console.log(reg.test(str));
+			
+			// var str="`";
+			// var reg=/[A-z]/;
+			// console.log(reg.test(str));
+			
+			
+			var str="4";
+			var reg=/[0-9]/;
+			console.log(reg.test(str));
+			
+			// var str="a";
+			// var reg=/[^abcdef]/;
+			// console.log(reg.test(str));
+		</script>
+		
+	</body>
+</html>

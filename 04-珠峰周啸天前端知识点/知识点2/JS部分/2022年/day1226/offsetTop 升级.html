@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			#bigBox{
+				height:500px;
+				width:500px;
+				border:10px solid blue;
+				background-color: yellowgreen;
+				margin:100px 100px;
+				overflow: hidden;
+				position: relative;
+			}
+			#parentBox{
+				height:300px;
+				width:300px;
+				border:10px solid hotpink;
+				background-color: red;
+				margin:100px 100px;
+				overflow: hidden;
+				position: relative;
+			}
+			#box{
+				height:100px;
+				width:100px;
+				background-color: blue;
+				position: absolute;
+				left:100px;
+				top:100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="bigBox">
+			<div id="parentBox">
+				<div id="box"></div>
+			</div>
+		</div>
+		
+		<script src="utils.js"></script>
+		<script>
+			//盒子模型 13 个属性
+			//clientTop 盒子的上边框
+			//clientLeft 盒子的左边框
+		
+			
+			console.log(utils.offset(box).top);//300
+			console.log(utils.offset(parentBox).top);//200
+			console.log(utils.offset(parentBox).left);//200
+		</script>
+		
+		
+		
+		<script>
+			// let top1=box.offsetTop;
+			// let pbox=box.offsetParent;
+			
+			// let top2=pbox.offsetTop;
+			// let bbox=pbox.offsetParent;
+			
+			// let top3=bbox.offsetTop;
+			
+			// console.log(top1+top2+top3);
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#box{
+				height:500px;
+				width:500px;
+				background-color: #00FF7F;
+			}
+			#pbox{
+				height:300px;
+				width:300px;
+				background-color: #A6E1EC;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<p id="pbox"></p>
+		</div>
+		
+		<script>
+			//mouseover  mouseout 有冒泡
+			//没有层级关系
+			// box.onmouseover=function(){
+			// 	console.log("box移入")
+			// }
+			// box.onmouseout=function(){
+			// 	console.log("box移出")
+			// }
+			
+			// pbox.onmouseover=function(){
+			// 	console.log("p移入")
+			// }
+			// pbox.onmouseout=function(){
+			// 	console.log("p移出")
+			// }
+			
+			//mouseenter  mouseleave 没有冒泡
+			//层级关系
+			box.onmouseenter=function(){
+				console.log("box移入")
+			}
+			box.onmouseleave=function(){
+				console.log("box移出")
+			}
+			
+			pbox.onmouseenter=function(){
+				console.log("p移入")
+			}
+			pbox.onmouseleave=function(){
+				console.log("p移出")
+			}
+		</script>
+	</body>
+</html>

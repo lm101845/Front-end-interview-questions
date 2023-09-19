@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			body{
+				height:2000px;
+			}
+			#box{
+				height:100px;
+				width:100px;
+				background-color: blue;
+				margin:100px 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script>
+			//es6新增
+			//getBoundingClientRect() 获取 元素 与 可视窗口的交叉位置信息
+			//有的时候可以取负值
+			
+			// rectObject.top：元素上边到视窗上边的距离;
+			// rectObject.right：元素右边到视窗左边的距离;
+			// rectObject.bottom：元素下边到视窗上边的距离;
+			// rectObject.left：元素左边到视窗左边的距离;
+			
+			let rect=box.getBoundingClientRect();
+			console.log(rect.top);
+			console.log(rect.left);
+			console.log(rect.bottom);
+			console.log(rect.right);
+		</script>
+		
+	</body>
+</html>

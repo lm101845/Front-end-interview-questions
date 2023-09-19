@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            height:100px;
+            width:100px;
+            background-color: aquamarine;
+            position: relative;
+            left:0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        let startX,startY,endX,endY;
+        box.onmousedown=function(e){//进入盒子按下的一瞬间，获取初始坐标
+            startX=e.offsetX;
+            startY=e.offsetY;
+           //再整个文档中移动鼠标，抬起瞬间获取结束坐标
+            window.addEventListener("mouseup",up);
+        }
+
+        function up(e){
+            endX=e.clientX;
+            endY=e.clientY;
+
+            box.style.left=(endX-startX)+"px";
+            box.style.top=(endY-startY)+"px";
+
+            //不会跟着一直移动，第一次抬起后，就关闭抬起事件
+            window.removeEventListener("mouseup",up);
+        }
+    </script>
+</body>
+</html>

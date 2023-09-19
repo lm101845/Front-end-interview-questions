@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#box{
+				height:300px;
+				width:300px;
+				background-color: red;
+				/* display: none; */
+			}
+		</style>
+	</head>
+	<body>
+		<button id="btn">显示 隐藏</button>
+		<div id="box"></div>
+		
+		<script src="jquery.min.js"></script>
+		<script>
+			//show(时间,回调函数) 显示
+			//hide(时间,回调函数) 隐藏
+			//toggle(时间,回调函数)  显示隐藏来回切换
+			//时间：1000 2000 毫秒  fast 快  slow 慢  normal 正常
+			//回调函数：动画执行完，执行的函数
+			
+			$("#btn").click(function(){
+				// $("#box").hide(1000,function(){
+				// 	alert("隐藏啦")
+				// })
+				
+				$("#box").fadeToggle(1000)
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,96 @@
+1. 什么是事件？
+  浏览器为元素“天生赋予”的一些行为；即便我们没有给元素设置事件绑定「onxxx/addEventListener」，当我们触发了元素的某一行为后，事件也会被触发！！
+  浏览器支持的内置事件(标准/非标准)：http://web.h3399.cn/Events.htm 「对于这些事件来讲，浏览器会自动监测事件是否触发，如果做了事件绑定，会把绑定的方法执行」
+
+2. 什么是事件绑定？
+  给元素的某一个事件行为绑定方法，目的：当元素的事件行为被触发后，可以执行我们绑定的方法，做一些处理！！
+  + DOM0级事件绑定
+    元素.onxxx=function(){}
+    原理：给元素的onxxx这样的“内置事件私有属性”赋值
+      + 只能给元素的某一个事件，绑定“一个”方法，再次绑定的方法会覆盖之前的「只能给属性设置一个值」
+      + 如果某一种事件类型，并不具备onxxx这样的事件属性，则不能基于DOM0做事件绑定了，例如：DOMContentLoaded
+      + 性能相对较快一些
+  + DOM2级事件绑定
+    元素.addEventListener('事件',function(){},false);
+    元素.addEventListener('事件',function(){},true);
+    元素.addEventListener('事件',function(){},{
+        capture:false, //设置执行的阶段  true:捕获  false:冒泡
+        once:true, //事件只绑定一次，当第一次触发后，会自动移除事件绑定，默认是false
+        passive:true //不允许阻止默认行为（也就是不能再执行preventDefault），默认是false
+    });
+    元素.removeEventListener('事件',function(){},false);
+    原理：利用浏览器的“事件池机制”，把元素、事件类型、绑定的方法、触发阶段等信息，都放在事件池中，当后期事件行为触发，会自动去事件池中查找，把所有符合的方法按顺序依次执行！！
+      + 可以给当前元素的某一个事件行为绑定多个不同的方法
+      + 所有浏览器内置事件都可以基于这种方案做事件绑定
+      + 方法是定义在 EventTarget.prototype 上面的，每一次事件绑定，都需要先基于__proto__找到这个原型对象，才可以基于addEventListener/removeEventListener实现事件的绑定，消耗的性能比DOM0略高！！
+   真实项目中，为了保证事件绑定的方法不冲突，我们建议使用DOM2事件绑定的方案处理！！
+
+3. 什么是事件对象？
+  一个页面中，同时只能触发一个事件「即便有多个元素或者多个事件都符合触发机制了，也是一个个按顺序去触发」
+  每一次(内置)事件触发的时候，浏览器都会自动帮我们去：收集本次事件触发的相关信息，把收集的信息放在一个对象中，并且提供一些操作的方法... 这个记录事件触发信息的对象，就是“事件对象”！！
+  当事件触发，绑定的方法执行的时候，浏览器会把收集的事件对象，传递给函数！！
+     box.onclick=function(ev){
+        ev -> 事件对象
+     };
+     box.addEventListener('click',function(ev){
+        ev -> 事件对象
+     });
+  根据事件行为不同（或者操作的媒介不同），会产生不同类型的事件对象：
+    + PointerEvent：PointerEvent -> MouseEvent -> UIEvent -> Event -> Object
+    + MouseEvent：MouseEvent -> UIEvent -> Event -> Object
+    + KeyboardEvent：KeyboardEvent -> UIEvent -> Event -> Object
+    + Event：Event -> Object
+    + TouchEvent：移动端单手指事件对象模型  TouchEvent -> UIEvent -> Event -> Object
+      touchstart 手指按下
+      touchmove 手指移动
+      touchend 手指离开
+      touchcancel 因为意外原因，导致本次操作取消
+    + GestureEvent：多手指事件对象模型
+      gesturestart
+      gesturechange
+      gestureend
+      gesturecancel
+    + ...
+
+4. 事件的传播机制
+  NONE: 0
+  CAPTURING_PHASE: 1  捕获阶段
+  AT_TARGET: 2  目标阶段
+  BUBBLING_PHASE: 3  冒泡阶段
+  例如：我们触发了#box盒子的click事件「层级结构 box->container->body->html->document->window」
+
+5. 事件委托/事件代理
+  利用“事件的冒泡传播机制”(不具备传播机制的事件行为，无法使用事件委托)，如果一个容器中，其很多后代元素，都要在“点击(还可以是其它的行为)”的时候，做一些事情：
+    + 利用传统方案：先获取所有需要操作的元素，然后逐一(或循环)做事件绑定！
+    + 利用事件委托：我们只需要给容器绑定点击事件，这样点击后代中任意的元素，都会让容器的点击行为触发(因为冒泡传播机制)，绑定的方法也会被执行！我们在方法中，基于ev.target获取事件源(操作谁,谁就是事件源)，基于不同的事件源，做不同的处理！！
+  利用事件委托处理的优势：
+    + 性能提高40%~60%以上「主要原因：减少了内存的消耗」
+    + 可以给动态绑定的元素，非常便捷的处理事件绑定「因为不需要关注它是啥时候新增成功的，也不需要获取新增的元素，但凡可以操作的时候，说明元素已经新增成功了」
+    + 某些功能必须基于事件委托处理，例如：点击按钮展示/隐藏详细区域，点击详细区域啥都不处理，除此之外，点击剩下的任何位置，都是让详细隐藏！！
+  建议开发的总原则：但凡遇到事件绑定(不论是在Vue还是React中)，首先看是否需要事件委托处理，只有真的没必要，才会单独做事件绑定，否则都要基于事件委托处理！！
+
+
+
+
+
+
+扩展知识：mouseenter(mouseleave) VS mouseover(mouseout)
+  A是大盒子  B是小盒子
+  mouseenter：进入「从A进入B，不会触发A的mouseleave，从B再回到A，也不会重新触发A的mouseenter，因为始终没有离开过A」
+  mouseover：滑过「从A进入B，会触发A的mouseout，从B再回到A，会重新触发A的mouseover」
+  ----
+  mouseenter不具备事件传播机制；但是mouseover是具备事件传播机制的！！
+
+
+扩展知识：
+  load VS DOMContentLoaded  
+  或者 
+  $(func...)/$(document).ready(func...) VS window.onload
+// DOM0事件绑定：onload事件属性存在
+// load事件：资源加载完毕「对于window来讲就是：浏览器相关资源都已加载完毕，页面已经渲染了」
+window.onload=function(){};
+window.addEventListener('load',function(){});
+
+// DOMContentLoaded：只要DOM TREE构建完毕就触发
+window.onDOMContentLoaded=function(){}; //这样做是不可以的，因为window对象不具备onDOMContentLoaded这个私有属性，所以无法基于DOM0做事件绑定！！
+window.addEventListener('DOMContentLoaded',function(){});

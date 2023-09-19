@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		组合式继承：原型继承改良版（修改原型链）+call继承（私有）
+		
+		原型继承改良版： 
+		Object.create(xxx)  创建一个空的对象, 参数(XXX)==》是谁__proto__就指向谁
+		
+		子类.prototype=Object.create(父类.prototype)
+		
+		<script>
+			function Parent(namea,age){
+				this.namea=namea;
+				this.age=age;
+			}
+			Parent.prototype.show=function(){
+				console.log("父类11111");
+			}
+			var p=new Parent("李飒",38);
+			console.log(p);
+			
+			
+			
+			function Child(job){
+				this.job=job;
+				//call继承
+				Parent.call(this,"lili",18);
+			}
+			//原型继承改良版
+			Child.prototype=Object.create(Parent.prototype);
+			var c=new Child("学生");
+		
+			console.log(c);
+			console.log(c.namea);
+		
+		</script>
+	</body>
+</html>

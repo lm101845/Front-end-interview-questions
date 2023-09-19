@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/reset.min.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_2563873_9ougqni9itc.css">
+</head>
+<body>
+    <div class="loginBox">
+       <div class="header">
+          <i class="iconfont icon-fanhui"></i>
+       </div>
+       <div class="con">
+           <h1>登入知乎日报</h1>
+           <p>选择登录方式</p>
+           <div class="icon">
+                <i class="iconfont icon-shejiaotubiao-46" id="zhihu"></i>
+                <i class="iconfont icon-weibo" id="weibo"></i>
+           </div>
+           <div class="check">
+               <input type="checkbox" id="info">
+               <label for="info">
+                   我同意
+                   <a href="#">《知乎协议》</a>
+                   和
+                   <a href="#">《隐私保护指引》</a>
+                </label>
+           </div>
+       </div>
+       <div class="footer">
+           <p id="yejian">
+             <i class="iconfont icon-yejianmoshi"></i>
+             <br>
+             <span>夜间模式</span>
+           </p>
+           <p class="set">
+             <i class="iconfont icon-shezhi"></i>
+             <br>
+             <span>设置</span>
+           </p>
+       </div>
+    </div> 
+    <script src="../js/rem.js"></script>
+    <script src="../js/jquery.min.js"></script>
+   <script src="../js/login.js"></script>
+   <!-- <script>
+	   let inp=document.getElementById("info");
+	   let zhihu=document.getElementById("zhihu");
+	   let check=false;
+	   inp.onchange=function(){
+		   if(check){
+			   check=false;
+		   }else{
+			   check=true;
+		   }
+	   }
+	   
+	   zhihu.onclick=function(){
+		   if(check){
+			   alert("点击了知乎！")
+		   }else{
+			   alert("请先阅读");
+		   }
+	   }
+   </script> -->
+</body>
+</html>

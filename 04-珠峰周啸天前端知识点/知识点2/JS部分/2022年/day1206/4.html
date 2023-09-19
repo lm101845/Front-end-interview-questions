@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			function Fn(name, age) {
+				this.name = name; //私有
+				this.age = age;
+			}
+			Fn.prototype.show = function() { //公有
+				console.log("111");
+			}
+			Object.prototype.name = "Tom"; //公有
+			
+			var f1 = new Fn("lisa", 18)
+			
+			 console.log(f1);
+			 
+		</script>
+		
+	</body>
+</html>

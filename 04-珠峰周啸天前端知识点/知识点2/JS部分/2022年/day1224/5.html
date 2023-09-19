@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		捕获练习题
+		<script>
+			//1.字符串中每个单词的首字母大写
+			let str = "good good study，day day up！";
+			//good   $1:g   $2:ood
+			let reg =/\b([a-z])([a-z]*)\b/ig;
+			//console.log(str.match(reg));
+			
+			let newStr=str.replace(reg,(value,$1,$2)=>{
+				//value: good    $1:g    $2:ood
+				//value: good    $1:g    $2:ood
+				//value: study   $1:s    $2:tudy  ...
+				return $1.toUpperCase()+$2
+			})
+			
+			
+			console.log(newStr);
+		</script>
+	</body>
+</html>

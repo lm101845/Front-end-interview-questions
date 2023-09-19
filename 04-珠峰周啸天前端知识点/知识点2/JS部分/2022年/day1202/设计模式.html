@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		单例设计模式
+		   每个成员都是一个单独的个体，不会相互影响
+		   
+		工厂设计模式（批量生产---函数封装）
+		   把相同功能的代码封装到一个函数里
+		   
+		构造函数
+		发布订阅
+		承诺者
+		观察者...
+		
+		
+		<script>
+			//单例
+			// var obja={
+			// 	name:"lili",
+			// 	age:18
+			// }
+			// var objb={
+			// 	name:"Tom",
+			// 	age:20
+			// }
+			// console.log(obja,objb)
+			 
+			 function createObj(name,age){
+				// let obj={
+				// 	name:name,
+				// 	age:age
+				// }
+				// return obj;
+				
+				return {
+					name,
+					age
+				}
+			 }
+			 let obja=createObj("lili",18);
+			 let objb=createObj("Tom",20);
+			 
+			 console.log(obja,objb);
+		</script>
+		
+		
+		<script>
+			// var name="lili";
+			// var age=18;
+			
+			// var name="Tom";
+			// var age=20;
+			
+			// console.log(name,age)
+			
+			//单例
+			// var obja={
+			// 	name:"lili",
+			// 	age:18
+			// }
+			// var objb={
+			// 	name:"Tom",
+			// 	age:20
+			// }
+			// console.log(obja,objb)
+			
+			
+			//高级单例
+			let ModelA=(function(){ //闭包
+				var name="lili";
+				var age=18;
+				function show(){
+					console.log("1111")
+				}
+				function showaa(){
+					console.log("aaa");
+				}
+				return {
+					name,
+					age,
+					show,
+					showaa
+				}
+			})()
+			
+			// console.log(ModelA.name);
+			// ModelA.show();
+			
+			let ModelB=(function(){
+				var name="Tom";
+				var age=28;
+				function show(){
+					console.log("2222");
+					ModelA.show();
+				}
+				return {
+					name,
+					age,
+					show
+				}
+			})()
+			
+			//console.log(ModelB.name);
+			ModelB.show();
+		</script>
+	</body>
+</html>

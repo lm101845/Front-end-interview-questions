@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		捕获
+		正则的属性和方法
+		
+		属性:
+		global : 修饰符g是否添加  添加true  没添加false
+        ignoreCase: 修饰符i是否添加  添加true  没添加false
+		multiline: 修饰符m是否添加  添加true  没添加false
+        lastIndex: 匹配的位置（(下一次/开始)找的索引下标）
+		source: 正则表达式中元字符的字符串写法
+	    $1--$9: 正则的小括号  $1第一小括号匹配成功的内容
+		                     $2第二小括号匹配成功的内容...
+		
+	    方法：
+		 test() 匹配 检索字符串中是否有正则匹配的内容 有true 没有false  修改lastIndex
+		 
+		 exec() 捕获 检索字符串中将正则匹配的内容查找出来 修改lastIndex
+		             有 g，每次只找1个，每次找都是下一个，最后找不到 null
+					 
+		 compile() 重新编译正则，加快执行速度(了解)
+		<script>
+			// var str="12"
+			// var reg=/\d{2}/ig;
+			// console.dir(reg);
+			
+			
+			// var str="Apple one apple two"
+			// var reg=/apple/ig;
+			// do{
+			// 	console.log(reg.lastIndex);//0 5 15
+			// }while(reg.test(str))
+			
+			
+			// var str="Apple one apple two"
+			// var reg=/apple/ig;
+			// console.log(reg.exec(str));//每次只找一个 Apple
+		 //    console.log(reg.exec(str));//apple
+			// console.log(reg.exec(str));//null
+			
+			
+			var str="1a2c 1a2d"
+			var reg=/1(a|b)2(c|d)/ig;
+			
+			let result=reg.exec(str);//1a2c
+			
+			console.log(result[1])//$1  a
+			console.log(result[2])//$2  c
+			
+			console.log(reg.exec(str));
+			console.log(reg.exec(str));
+		
+		</script>
+	</body>
+</html>

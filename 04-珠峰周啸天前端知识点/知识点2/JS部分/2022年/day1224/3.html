@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		正则结合一块使用的 字符串方法
+		
+		replace() 替换
+		match() 捕获 将匹配成功的内容放到一个数组里
+		search()查询  g不起作用   找到匹配的内容的第一个索引下标 （了解）
+		split() 分隔符
+		
+		<script>
+			//练习题：去掉一个字符串开头和结尾的空白字符
+			var str="     hello  world     one two         ";
+			var newstr=str.replace(/(^\s+|\s+$)/g,"1");
+			console.log(newstr);
+			
+			// var str="hello  world     one two";
+			// var arr=str.split(/\s+/);
+			// console.log(arr);
+			
+			
+			// var str="hello do Hello two HEllo scee do one";
+			// var reg=/\bdo\b/ig;
+			// var index=str.search(/e/g);
+			// console.log(index)
+			
+			// while(reg.test(str)){
+			//      var newstr=str.search(reg);
+			//      console.log(newstr);//6 
+			// }
+		
+			
+			// var str="apple one Apple two";
+			// var reg=/apple/ig;
+			// var newstr=str.replace(reg,"苹果");
+			// console.log(newstr);
+			
+			
+			// var str="red one blue two green scee";
+			// var reg=/(red|blue|green)/ig;
+			// //直接使用 $1
+			// //var newstr=str.replace(reg,"<b style='color:$1'>$1</b>");
+			
+			// //第二个参数可以是函数  参数 value 匹配成功的内容  $1匹配成功的第一个小括号内容
+			// // return 返回的是什么，提换的结果就是什么
+			// var newstr=str.replace(reg,(value,$1)=>{
+			// 	return `<b>${value}</b>`
+			// });
+			// document.write(newstr);
+			
+			// ?两个作用
+			// 1. 如果问号左边不是数量词,问号就是0次或1次
+			// 2. 如果问号左边是数量词,问号就是将 贪婪匹配===>惰性匹配
+			
+			// var str="<b>hello</b> one <b>two</b> scee";
+			// //var reg=/<b>.*<\/b>/ig;//贪婪匹配：尽可能长的匹配
+			// var reg=/<b>.*?<\/b>/ig;//惰性匹配：尽可能短的匹配
+			// console.log(str.match(reg));
+		</script>
+	</body>
+</html>

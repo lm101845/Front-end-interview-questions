@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//数组去重，方法2
+			var arr=[1,1,1,2,3,2,4];
+			
+			function  unique(arr){//形参
+				var newarr=[];
+				//循环数组的每一项
+				for(var i=0;i<arr.length;i++){//i=0,1,2....   内容 arr[i] 1，1，1，2....
+				    //1:newarr看看含不含有 1， 不含有（-1），就将1给放到新数组里
+					//2:newarr看看含不含有 1， 含有(返回索引下标0),  不做任何操作
+					//3:newarr看看含不含有 1， 含有(返回索引下标0),  不做任何操作
+					//4:newarr看看含不含有 2， 不含有(-1),  就将2给放到新数组里
+					if(newarr.indexOf(arr[i])==-1){
+						newarr.push(arr[i]);//[1]  //[1,2]
+					}
+				}
+				return newarr;//去重后的数组
+			}
+			
+			console.log(unique(arr))//实参
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+我的客户 全部客户  一个页面
+
+1. 区分我的客户(my) 全部客户(all)    默认----我的客户(my) 
+   let urlLx=location.href.queryParams("lx")||"my";
+ 
+2. 获取 表格和分页 数据，渲染 表格和分页
+  2.1 获取 表格和分页 数据----》ajax---> /customer/list
+  
+	   let obj={
+		lx:urlLx,
+		type,
+		search,
+		limit,
+		page
+	  }
+	  //获取数据
+	  let result=await axios.get("/customer/list",{
+		params:obj
+	  })
+	  
+  2.2 表格 result.data 循环渲染
+  2.3 分页   
+     page:0,//当前页
+	 limit:0,//每页显示几条
+	 total:0,// 总共有多少条数据
+	 totalPage:0,//总页码
+	 
+	 上一页   page>1
+	 每页页码 如只有一页，页码不显示了  totalPage>1
+	 下一页   page<totalPage
+	 
+3.功能
+
+分页功能
+   上一页  page--
+   具体某页  page=具体页码（获取当前页码的内容）
+   下一页  page++
+下拉列表筛选
+    render() 重新渲染(从第一页) page=1
+搜索功能
+    render() 重新渲染(从第一页) page=1   按回车的时候
+删除功能
+    调用删除接口---》ajax--> /customer/delete
+去回访记录页面
+    <a href="visit.html?id=${id}">回访记录</a>
+去编辑页面
+    <a href="customeradd.html?customerid=${id}">编辑</a>

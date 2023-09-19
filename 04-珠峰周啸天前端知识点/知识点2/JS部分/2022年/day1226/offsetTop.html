@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			#parentBox{
+				height:300px;
+				width:300px;
+				background-color: red;
+				margin:50px 100px;
+				overflow: hidden;
+				position: relative;
+			}
+			#box{
+				height:100px;
+				width:100px;
+				background-color: blue;
+				/* margin:50px 100px; */
+				position: absolute;
+				left:30px;
+				top:50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="parentBox">
+			<div id="box"></div>
+		</div> 
+		
+		<script src="utils.js"></script>
+		<script>
+		// 盒子模型 13 个属性
+		// 1. offsetTop ：盒子距离body的顶部距离（没定位） 盒子距离最近的定位元素的顶部距离（有定位）
+		//    offsetLeft：盒子距离body的左侧距离（没定位） 盒子距离最近的定位元素的左侧距离（有定位）
+		//    offsetParent：没有定位指的就是body, 有定位指的就是距离最近的上一级定位元素
+			
+			// console.log(box.offsetTop);
+		 //    console.log(box.offsetLeft);
+			// console.log(box.offsetParent);
+		
+			
+			console.log(utils.offset(box).top);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			#box{
+				height:100px;
+				width:100px;
+				background-color: orange;
+				position: relative;
+				left:0;
+				top:0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script>
+	     //固定时间移动盒子  总时间: 1000ms
+		 let html=document.documentElement||document.body;
+		 let allWidth=html.clientWidth-box.offsetWidth;
+		 let alltime=1000;
+		 //每1ms 移动的距离   10ms移动距离
+		 let speed=allWidth/alltime*10;
+		 
+		 var timer=null;
+		 box.onclick=function(){
+			let l=0;
+			timer=setInterval(()=>{
+				l+=speed;
+				if(l>=allWidth){
+					clearInterval(timer);
+					timer=null;
+					box.style.left=allWidth+"px";
+					return;
+				}
+				box.style.left=l+"px";
+			},10)
+		 }
+		 
+		</script>
+	</body>
+</html>

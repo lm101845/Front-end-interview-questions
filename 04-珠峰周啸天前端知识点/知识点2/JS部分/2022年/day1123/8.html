@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//5.Math.sqrt() 开平方
+			//console.log(Math.sqrt(9));
+			
+			//6.Math.pow(n,m) 幂
+			//3的2次幂==》9
+			//console.log(Math.pow(3,2));
+			
+			//7. Math.PI    π
+			//console.log(Math.PI);
+			
+			//8.*** Math.max/Math.min   获取最大值和最小值
+			// console.log(Math.max(12,4,78,3));//取最大数 78
+			// console.log(Math.min(12,4,78,3));//取最小数  3
+			
+			//9.*** Math.random()   取0-1之间的随机数 (大于等于0，小于1)
+			//console.log(Math.random())
+			
+			//获取 n 到 m  之间的随机数（包含小数）：Math.random()*(m-n)+n
+			
+			// 获取10 到20 之间的随机数
+			//console.log(Math.random()*(20-10)+10)
+			
+			//获取 min 到 max 的 随机 “整数”
+			
+			// min ≤ r ≤ max :  Math.round(Math.random() * (max - min)) + min
+			// min﹤r ≦ max  :  Math.ceil(Math.random() * (max - min)) + min
+			// min≦ r ﹤ max :  Math.floor(Math.random() * (max - min)) + min
+			
+			// 获取N-M的随机数 parseInt(Math.random() * (M - N + 1) +  N)
+			
+			// https://www.jianshu.com/p/755bc48467f1
+			// https://blog.csdn.net/weixin_30336061/article/details/99792885
+			
+			//获取 1 到 5 的 随机 “整数”
+			// 1 ≤ r ≤ 5     1,2,3,4,5
+			// var num=Math.round(Math.random()*(5-1))+1
+			// console.log(num);
+			
+			// 1 ﹤ r ≤ 5     2,3,4,5
+			// var num=Math.ceil(Math.random()*(5-1))+1
+			// console.log(num);
+			
+			//1 ≤ r ﹤ 5      1,2,3,4
+			// var num=Math.floor(Math.random()*(5-1))+1
+			// console.log(num);
+		</script>
+	</body>
+</html>

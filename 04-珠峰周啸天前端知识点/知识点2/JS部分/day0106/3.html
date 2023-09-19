@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <script>
+        console.log(1); 
+        setTimeout(() => {
+            console.log(2);
+        }, 0); 
+        console.log(3);
+        for (let i = 0; i < 99999999; i++) {} //循环完大概需要100MS
+        console.log(4);
+    </script> -->
+    <script>
+        setTimeout(() => {
+            console.log(1);
+        }, 20);
+        console.log(2);
+        setTimeout(() => {
+            console.log(3);
+        }, 10);
+        console.log(4);
+        console.time('AA');
+        for (let i = 0; i < 90000000; i++) {
+            // do soming
+        }
+        console.timeEnd('AA'); //=>AA: 79ms 左右    输出AA
+        console.log(5);
+        setTimeout(() => {
+            console.log(6);
+        }, 8);
+        console.log(7);
+        setTimeout(() => {
+            console.log(8);
+        }, 15);
+        console.log(9);
+    </script>
+
+    <!-- <script>
+        //a 3    3 a
+        requestAnimationFrame(()=>{
+            console.log("a");
+        })//13.333
+        setTimeout(() => {
+            console.log(3);
+        }, 0);//5-7
+    </script> -->
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		数量词
+		n? :  出现0或1次
+		n* :  出现0或多次
+		n+ :  出现1或多次,最少要出现1次
+		n{x} : 出现 x 次
+		n{x,y} : 出现 x--y 次
+		n{x,} : 出现 x 次 及 x以上次  大于等于x次
+		
+		分组，选择
+		()  分组
+		 |（或者）  选择
+		 
+		 一般情况下 结合一块用
+		<script>
+			var str="b";
+			var reg=/^(a|b|c)$/;
+			console.log(reg.test(str));
+			
+			var str="b";
+			var reg=/^[abc]$/;
+			console.log(reg.test(str));
+			
+			
+			
+			// var str="aaaaaaaa";//3,4,5,6，7，8，9....
+			// var reg=/^a{3,}$/;
+			// console.log(reg.test(str));
+			
+			
+			// var str="aa";//3,4,5,6
+			// var reg=/^a{3,6}$/;
+			// console.log(reg.test(str));
+	
+			
+			// var str="aaaaaa";
+			// var reg=/^a+$/;
+			// console.log(reg.test(str));
+			
+			
+			// var str="";
+			// var reg=/^a*$/;
+			// console.log(reg.test(str));
+			
+			
+			// var str="aaaa";
+			// var reg=/^a?$/;
+			// console.log(reg.test(str));
+		</script>
+	</body>
+</html>

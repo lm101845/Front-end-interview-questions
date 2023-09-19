@@ -1,0 +1,178 @@
+/* 通用样式 */
+.text-clip {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+/* 基本骨架 */
+html {
+  font-size: 100px;
+}
+html,
+body,
+#app {
+  height: 100%;
+  overflow: hidden;
+}
+#app {
+  position: relative;
+  margin: 0 auto;
+  max-width: 750px;
+}
+.back-img-box {
+  position: absolute;
+  z-index: -2;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background: url('../images/myDream.jpg') no-repeat;
+  background-size: cover;
+  filter: blur(6px);
+}
+.back-mark-box {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+.header-box,
+.footer-box {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+}
+.header-box {
+  top: 0;
+  height: 2rem;
+}
+.footer-box {
+  bottom: 0;
+  height: 2rem;
+}
+.lyric-box {
+  box-sizing: border-box;
+  padding: 2rem 0;
+  height: 100%;
+  overflow: hidden;
+}
+/* 头部区域 */
+.header-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem;
+}
+.header-box .play-btn {
+  margin-left: 0.1rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  background: url('../images/music.svg') no-repeat;
+  background-size: 100% 100%;
+}
+.header-box .play-btn.move {
+  animation: manjianghong 1s linear 0s infinite both;
+}
+.header-box .base-info {
+  flex-grow: 1;
+  display: flex;
+}
+.header-box .base-info .portrait {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.header-box .base-info .info {
+  flex-grow: 1;
+  margin-left: 0.1rem;
+  max-width: 4.6rem;
+}
+.header-box .base-info .title,
+.header-box .base-info .author {
+  line-height: 0.7rem;
+  color: #fff;
+  font-size: 0.34rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.header-box .base-info .author {
+  font-size: 0.3rem;
+}
+@keyframes manjianghong {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* 歌词区域 */
+.lyric-box .container {
+  height: 100%;
+  overflow: hidden;
+}
+.lyric-box .wrapper {
+  transform: translateY(0);
+  transition: transform 0.3s;
+}
+.lyric-box .wrapper p {
+  height: 1rem;
+  line-height: 1rem;
+  text-align: center;
+  font-size: 0.3rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+.lyric-box .wrapper p.active {
+  color: #31C27C;
+  transition: color 0.3s;
+}
+/* 尾部区域 */
+.footer-box {
+  padding: 0 0.2rem;
+}
+.footer-box .progress {
+  display: flex;
+  align-items: center;
+}
+.footer-box .progress .current,
+.footer-box .progress .duration {
+  width: 0.8rem;
+  line-height: 0.92rem;
+  text-align: center;
+  font-size: 0.24rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+.footer-box .progress .back-bar {
+  position: relative;
+  flex-grow: 1;
+  height: 0.04rem;
+  background: rgba(255, 255, 255, 0.5);
+}
+.footer-box .progress .back-bar .already {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #31C27C;
+}
+.footer-box .download-btn {
+  display: block;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+  width: 4.26rem;
+  height: 1rem;
+  line-height: 1rem;
+  text-align: center;
+  font-size: 0.36rem;
+  color: #fff;
+  text-indent: 0.4rem;
+  background: url('../images/sprite_play.png') no-repeat #31C27C;
+  background-size: 0.8rem 7rem;
+  background-position: 0.2rem -5.83rem;
+}

@@ -1,0 +1,136 @@
+NPM（Node Package Manager）：Node模块(包)管理工具
+  + 主要用于安装/卸载“第三方”模块「含插件/组件/类库/框架等」
+  + 安装Node则自带NPM管理工具
+
+1. 安装Node
+https://nodejs.org/en 「安装LTS稳定版」
+$ node -v
+$ npm -v
+要求：node的版本号需要是18版本「或者基于 nvm 在电脑上安装多个Node版本」
+
+2. NPM的基础使用
+  + 安装在全局
+    MAC电脑前面要加sudo
+    $ npm install(简写:i) 模块名 --global(简写:-g)
+    $ npm uninstall 模块名 -g
+  + 安装在本地项目中
+    在指定的目录下安装，不设置 -g 即可
+      + 安装的模块在本地项目的 node_modules 目录下
+    $ npm i 模块1 模块2 ...
+    $ npm uni 模块1 ...
+
+3. 安装指定版本的模块
+  查看具备哪些版本
+    $ npm view 模块 versions
+  安装指定版本 
+    $ npm i 模块  //安装最新稳定版本
+    $ npm i 模块@2  //安装主版本号是2的最新版本
+    $ npm i 模块@2.11.3  //安装具备的某个版本
+    $ npm i 模块@latest  //安装最新稳定版本
+    $ npm i 模块@next   //安装最新版「但是不一定是官方发布的稳定版本」
+
+4. 本地项目中基于npm安装，基本的流程
+  第一步：先创建一个 package.json 文件
+    文件中会记录安装的模块和版本、可以配置脚本命令、还可以设置一些打包的配置项...
+    $ npm init -y
+    要求：项目文件的名字必须符合npm模块命名规范「只能用 数字、小写字母、_ 命名」
+  第二步：基于 npm 在本地项目中安装需要的模块
+    $ npm i jquery axios --save(可以不写)  //安装在生产依赖中
+    $ npm i less less-loader --save-dev(简写：-D)  //安装在开发依赖中
+    ---
+    package.json
+    "dependencies": { //生产依赖：生产环境和开发环境都需要的模块
+        "axios": "^1.4.0",
+        "jquery": "^3.7.0"
+    },
+    "devDependencies": { //开发依赖：只有开发的时候需要用到的模块，部署服务器不需要
+        "less": "^4.1.3",
+        "less-loader": "^11.1.3"
+    }
+  第三步：跑环境
+    本地安装的所有模块都在 node_modules 目录下，这个目录很大，所以在基于 git/svn 等版本管理工具处理的时候，node_modules文件一般是被忽略提交的「.gitignore」，这样就导致：A在自己的电脑上安装了几个模块，但是提交到仓库中，没有其安装的模块，B拉取了最新的代码，需要用到这些模块，但是B本地没有这些模块，此时B需要把依赖的模块都安装一下，才可以启动项目！！
+    $ npm i  //按照package.json中记录的依赖，把所有模块都安装一遍（安装过的则跳过）
+    $ npm i --production  //只把package.json中的生产依赖安装一遍
+
+5. 安装在全局和安装在本地项目中的区别
+  + 安装在全局
+    $ npm root -g  //查看全局安装目录 
+    + 安装在全局的模块，一般都是为了使用相应的命令
+      create-react-app 「$ create-react-app」
+      @vue/cli 「$ vue」
+      yarn 「$ yarn」
+      pnpm 「$ pnpm」
+      pm2
+      nrm
+      ...
+    + 弊端：无法在代码中导入模块使用、而且可能存在版本冲突问题
+  + 安装在本地项目中「常用的」
+    + 弊端：无法直接使用命令操作「但是可以配置脚本命令」
+      + 首先要确保安装的模块支持命令操作
+        node_modules/.bin
+        在这里有的命令，就是支持的！
+      + 然后在 package.json 的 scripts 中配置“可执行的脚本命令”
+        "scripts": {
+            // 自己设置的脚本名  需要执行的命令
+            "guojun": "webpack --version"
+        }
+        $ npm run guojun  //启动脚本，执行相应的命令
+    + 可以在代码中导入使用，而且也无需担心不同项目间版本冲突问题
+
+6. 基于npm安装，其安装的来源都在 https://www.npmjs.com/
+  + 安装速度慢「源是国外的」
+  + 而且npm是单线程同步安装
+  ----我们接下来想做的事情：更快的安装和管理
+  @1 改变安装源
+    + cnpm  安装源：淘宝镜像源
+      $ npm i cnpm -g 
+      $ cnpm ...
+    + nrm 改变安装的来源
+      $ npm i nrm -g
+      $ nrm ls
+      $ nrm use xxx
+      以后还是基于npm管理
+    + ...
+  @2 换模块管理工具
+    $ npm i yarn pnpm -g 
+    向全局安装建议依然使用 npm 来操作；向本地安装，全部使用 yarn/pnpm！
+    + yarn
+    + pnpm
+    -----yarn
+    + 安装源变了
+    + 多线程异步安装
+    $ yarn add xxx
+    $ yarn remove xxx
+    $ yarn add xxx@2.1.12
+    $ yarn add xxx -D
+    $ yarn //跑环境
+    $ yarn init -y
+    $ yarn guojun //执行脚本命令
+    ...
+    -----npm/yarn/pnpm 不要混淆使用
+    + package-lock.json -> npm
+    + yarn.lock -> yarn
+    + pnpm-lock.yaml -> pnpm
+
+==============================
+扫盲：终端命令的一些操作
+  windows -> DOS命令 CMD/PowerShell
+    @1 win键 + R  -> 运行窗口  -> cmd  「搜索：命令提示符 / powershell」
+       在系统指定的根目录下打开命令窗口
+    @2 在指定目录下打开命令窗口
+       + 找到具体的目录
+       + 地址栏中，删掉现在的地址，直接输入 cmd 即可
+    @3 也可以基于DOS命令来操作
+       + 磁盘符:   进入指定的磁盘
+       + cd 路径地址  进入指定的目录
+       + cd ../  返回上级目录
+       + cd /  直接回到根目录  
+       + cls 清屏
+       + ...
+  MAC -> 终端命令「Linux」
+    @1 进入指定目录下执行命令
+       + cd 把需要进入的文件夹拖到后面，按下Enter键即可
+       + clear 清屏
+  VSCODE -> TERMINAL命令
+    + 快捷键：CTRL + `
+    + 选中项目中的某个文件，右键->在TERMINAL中打开

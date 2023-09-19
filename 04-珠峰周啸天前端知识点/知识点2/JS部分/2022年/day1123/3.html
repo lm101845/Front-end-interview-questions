@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//6.slice()   数组,字符串都能用
+			//获取子字符串   slice有负下标
+			// (n,m)  含头不含尾
+			// var str="helloApple";
+			// //var newstr=str.slice(5,10);//含头不含尾
+			// //var newstr=str.slice(5);//只写开头，默认截取到最后
+			// //var newstr=str.slice(0);//复制str
+			// //var newstr=str.slice();//复制str
+			// //var newstr=str.slice(-5);//负数下标 Apple
+			// var newstr=str.slice(-5,-2);//负数下标 含头不含尾 App
+			// console.log(newstr);
+			
+			//7.substring(n,m)   字符串用
+			//跟slice()作用一样，但是不支持负下标
+			// var str="helloApple";
+			// //var newstr=str.substring(5,10);//含头不含尾
+			// //var newstr=str.substring(5);//只写开头，默认截取到最后
+			// //var newstr=str.substring(0);//复制str
+			// //var newstr=str.substring();//复制str
+			// console.log(newstr);
+			
+			//8.substr(n,m)   字符串用 
+			// 作用：获取子字符串
+			// 参数：n（开始下标），m(***个数)
+			// 返回值：截取的字符串
+			// 也支持从负索引开始
+			
+			// var str="helloApple";
+			// //var newstr=str.substr(5,5);//Apple
+			// var newstr=str.substr(-5,5);//负数截取 Apple
+			// console.log(newstr);
+			
+			//目前，支持负数索引的就是 slice substr
+			
+			//9.replace() 替换
+			// 作用：替换
+			// 参数：（str1，str2）第一个参数代表的是要替换的字符或者是正则；
+			//                    第二个参数代表的是替换后的字符
+			// 返回值：替换后新的字符串
+			
+			// var str="aaa hello Apple hello banana";
+			// //第一个参数是普通的字符串，只能替换第一个内容，后面的替换不了
+			// var newstr=str.replace("hello","你好");
+			// console.log(newstr);
+			
+			// var str="aaa hello Apple hello banana";
+			// //第一个参数是正则，可以替换所有（了解）
+			// var newstr=str.replace(/hello/g,"你好");
+			// console.log(newstr);
+			
+			//10.*****split()  字符串---》数组 
+			 // 作用：按照指定的 分隔符(字符) 把 字符串 分割成 数组
+			 // 参数：分隔符
+			 // 返回值：分割后的数组
+			 
+			 var str="a-b-c";
+			 var arr=str.split("-");
+			 console.log(arr);
+		</script>
+	</body>
+</html>

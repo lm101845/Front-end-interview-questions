@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			#box {
+				height: 100px;
+				width: 100px;
+				background-color: blueviolet;
+				position: relative;
+				left: 0;
+				top: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script>
+			//固定速度移动盒子
+			//周期性定时器 ---》一次性定时器
+			let html = document.documentElement || document.body;
+			let allWidth = html.clientWidth - box.offsetWidth;
+			//每10ms 移动 10px
+			let speed = 10;
+
+			let timer = null;
+
+			box.onclick = function() {
+				let l = 0;
+				timer = setInterval(() => {
+					l += speed;
+					if (l > allWidth) {
+						clearInterval(timer);
+						timer = null;
+						box.style.left = allWidth + "px";
+						return; //不要忘了 return
+					}
+					box.style.left = l + "px";
+				}, 10)
+			}
+		</script>
+	</body>
+</html>

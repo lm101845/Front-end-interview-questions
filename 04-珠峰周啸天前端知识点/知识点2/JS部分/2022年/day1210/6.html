@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			Function.prototype.mybind = function(data, ...args) {
+
+				typeof data === "null" || data === "undefined" ? data = window : data !== "object" || data !== "function" ?
+					data = Object(data) : null;
+				data.ts = this
+				let result = String(this)
+				let newstr=result.replace(')', '...args)')
+				
+				console.log(newstr);
+				
+			}
+
+			function show() {
+				console.log(this, arguments);
+				console.log(this.name);
+			}
+
+			var obj = {
+				name: "lili"
+			}
+
+			var a = show.mybind('obj', 10, 20);
+		</script>
+	</body>
+</html>

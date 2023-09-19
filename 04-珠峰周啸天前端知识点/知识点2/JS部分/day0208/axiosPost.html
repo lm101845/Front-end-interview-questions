@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    axios.post(url[,data,config])  返回值是一个Promise实例
+    1.url:请求的地址
+    2.data 对象，字符串 传递参数
+    3.config 配置项 对象 可有可无
+       baseURL:基础路径
+       timeout：超时时间
+       withCredentials:false是否允许携带跨域资源凭证（cookie)
+       responseType:'json' 接收服务器返回的类型  
+       可以是'arraybuffer', 'blob', 'document', 'json', 'text', 'stream'
+       onUploadProgress：监控文件的上传进度
+       onDownloadProgress：监控文件的下载进度
+       设置状态码的范围
+       validateStatus: function (status) {
+            return status >= 200 && status < 300; // default
+        }
+       自定义请求头
+       headers: {'X-Requested-With': 'XMLHttpRequest'}
+       headers中Content-Type会根据data的形式自动识别值
+       //在”发送数据之前“可以对data进行二次处理
+       transformRequest: [function (data, headers) {
+        // 对 data 进行任意转换处理
+        return data;
+      }]
+    <script src="./axios.min.js"></script> 
+    <script src="./md5.min.js"></script>
+    <script src="./qs.js"></script>
+    <script>
+       //按照正常情况下，code:1 失败
+    //    axios.post("/user/login",{
+    //     account:"18310612838",
+    //     password:md5("1234567890")
+    //    },{
+    //       baseURL:"http://127.0.0.1:9999",
+    //       timeout:1000,
+    //       withGredentials:true,
+    //       validateStatus: function (status) {
+    //         return status >= 200 && status < 400; // default
+    //       }
+    //    }).then(response=>{
+    //      return response.data
+    //    }).then(val=>{
+    //      console.log(val)
+    //    }).catch(err=>{
+    //      console.log(err)
+    //    })
+  
+    //    //应该传递 urlencoded格式---该方法1 不推荐
+    //    axios.post("/user/login",`account=18310612838&password=${md5("1234567890")}`,{
+    //       baseURL:"http://127.0.0.1:9999"
+    //       //headers:{"Content-Type":"application/x-www-form-urlencoded"}
+    //    }).then(response=>{
+    //      return response.data
+    //    }).then(val=>{
+    //      console.log(val)
+    //    }).catch(err=>{
+    //      console.log(err)
+    //    })
+
+       //应该传递 urlencoded格式---该方法2 （推荐）
+       axios.post("/user/login",{
+            account:"18310612838",
+            password:md5("1234567890")
+       },{
+          baseURL:"http://127.0.0.1:9999",
+          transformRequest:function(data){//只是post类有该属性
+            //console.log(Qs.stringify(data));
+            //qs.js---》Qs.stringify() 将普通对象---》urlencoded
+            return Qs.stringify(data)
+          }
+       }).then(response=>{
+         return response.data
+       }).then(val=>{
+         console.log(val)
+       }).catch(err=>{
+         console.log(err)
+       })
+
+    //   axios({
+    //      url:"/user/login",
+    //      baseURL:"http://127.0.0.1:9999",
+    //      method:"post",
+    //      data:{//专门给post类发送数据
+    //         account:"18310612838",
+    //         password:md5("1234567890")
+    //      },
+    //      transformRequest:function(data){
+    //         return Qs.stringify(data)
+    //      }
+    //    }).then(response=>{
+    //      return response.data
+    //    }).then(val=>{
+    //      console.log(val)
+    //    }).catch(err=>{
+    //      console.log(err)
+    //    })
+    </script>
+</body>
+</html>

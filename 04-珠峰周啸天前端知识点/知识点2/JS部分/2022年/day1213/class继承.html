@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		class继承(新语法)----寄生组合式继承 一样的原型图
+		
+		extends(继承) + super() 
+		
+		class 子类 extends 父类{}
+		<script>
+			class Parent{
+				constructor(name,age) {
+				    this.name=name;
+					this.age=age;
+				}
+				show(){
+					console.log("111");
+				}
+			}
+			let p=new Parent("丽丽",38)
+			console.log(p)
+			
+			
+			class Child extends Parent{
+				constructor(job) {
+					super("lisa",18);//this.name=name  this.age=age
+				    this.job=job;
+				}
+				showa(){
+					super.show();//可以直接获取父类原型上的方法
+					console.log("222");
+				}
+			}
+			let c=new Child("学生")
+			console.log(c)
+			
+			// console.log(c.name);
+			// c.show();
+			c.showa();
+		</script>
+	</body>
+</html>

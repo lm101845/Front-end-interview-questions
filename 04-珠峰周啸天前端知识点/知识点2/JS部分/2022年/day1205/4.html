@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			function Fn(x, y) {
+			    let sum = 10;
+			    this.total = x + y;             
+			    this.say = function () {
+			        console.log(`我计算的和是:${this.total}`);
+			    };
+			    //return {name:'哈哈'};
+			}
+			//let res1 = Fn(10, 20); //普通函数执行
+			
+			// let res2 = Fn;//将Fn的函数赋值给res2
+			// //普通函数并没有执行   普通函数执行，必须加()
+			// console.log(res2);
+			
+		    let f1 = new Fn(10, 20); //构造函数执行  传参  优先级：18
+			console.log(f1);//实例对象 0x001
+			
+			let f2=new Fn;//构造函数执行，不传参      优先级：17
+			//构造函数执行了, 可以不加()
+			console.log(f2);//实例对象 0x002
+			
+			// console.log(f1.sum); //undefined
+			// console.log(f1.total); //30 
+			// console.log(f1.say===f2.say);//false
+		</script>
+	</body>
+</html>

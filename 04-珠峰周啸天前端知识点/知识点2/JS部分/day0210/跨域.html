@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    跨域
+
+    由于浏览器的安全策略(同源策略)，
+    只要域名，协议，端口号，有一个不一样，就无法访问数据
+
+    想要客户端成功访问服务器的数据，必须保证域名，协议，端口号一致，才能访问到数据
+
+    demo:
+    客户端：http://127.0.0.1:5500/2022_06/JS%E9%83%A8%E5%88%86/day0210/fetch.html
+    服务器：http://localhost:8888/api/articleList?date=2021-05-21
+
+    按照正常情况下，客户端无法获取服务器的数据，但是成功获取了数据，采用了一个方法（跨域）
+    跨域有个前提条件，服务器端允许（或不做限制）
+
+    真实的工作中,用不用跨域？用
+    1.大公司，多个服务器，每个服务器存放的东西不一样，需要跨域，获取数据（部署和研发都跨域）
+    2.小公司，研发过程中需要跨域，部署不跨域
+
+    跨域的方法
+    1. cors 跨域（了解，服务器做的）
+      
+      1.1 直接设置白名单，可以携带跨域资源凭证
+       服务器(nodejs,java)要设置 白名单
+       let safeList = ["http://127.0.0.1:8848", "http://127.0.0.1:3000", "http://127.0.0.1:8080"];
+       app.use((req, res, next) => {
+        let origin = req.headers.origin || req.headers.referer || "";
+        origin = origin.replace(/\/$/g, '');
+        origin = !safeList.includes(origin) ? '' : origin;
+        res.header("Access-Control-Allow-Origin", origin);
+       });
+
+      1.2 允许所有源来访问，这种方式不允许携带跨域资源凭证
+      res.header("Access-Control-Allow-Origin", '*');
+
+    2. proxy代理跨域***** （必须会，目前知道原理 webpack nginx nodejs----vue、react)
+       vue+react----webpack（开发环境）*****
+       nginx----项目部署（生产环境）
+
+    3. jsonp 跨域(只能get，目前公司已经没有用的)
+    <img src="" alt="">
+    <link rel="stylesheet" href="">
+    <script src=""></script>
+    html中 img,link,script...没有域的限制，可以直接访问数据，只能是get请求
+    获取的数据还需要进一步处理(script)
+
+    4. postMessage + iframe （最早）
+    postMessage、window.name、document.domin、location.hash、...这些方案结合 iframe 也可以实现跨域处理
+
+
+
+</body>
+</html>

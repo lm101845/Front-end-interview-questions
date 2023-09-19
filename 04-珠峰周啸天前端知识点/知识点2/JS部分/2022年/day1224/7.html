@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		3.queryURLParams 问号参数处理
+		
+		<script>
+			//正则
+			String.prototype.queryURLParams=function queryURLParams(){
+			   //1.this===》str    2.参数 无
+			   let str=this;
+			   let obj={};
+			   let reg1=/([^?=&#]+)=([^?=&#]+)/g;
+			   str.replace(reg1,(value,$1,$2)=>{
+				   // value：name=xxx  $1:name  $2:xxx
+				   // value：age=12    $1:age   $2:12
+				   obj[$1]=$2;
+			   })
+			   
+			   let reg2=/#([^?=&#]+)/g;
+			   str.replace(reg2,(value,$1)=>{
+				   // value: #teacher  $1:teacher
+				   obj["HASH"]=$1;
+			   })
+			   
+			   return obj;   
+			}
+			let str="http://www.zhufengpeixun.cn/index.html?name=xxx&age=12&n=111#teacher";
+			console.log(str.queryURLParams());
+			//结果：{name:"xxx",age:"12",n:111,HASH:"teacher"}
+		</script>
+	</body>
+</html>

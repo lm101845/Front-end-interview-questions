@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			body{
+				height:2000px;
+			}
+			#box{
+				height:100px;
+				width:100px;
+				background-color: pink;
+				position: fixed;
+				left:100px;
+				top:100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script>
+			//offsetX offsetY  相对元素的左侧 顶部的距离
+			//clientX clientY  相对于视口的左侧 顶部的距离
+			//pageX pageY  相对于整个文档的左侧 顶部的距离
+			//pageX=clientX+滚动条滚动的X轴的距离 
+			//pageY=clientY+滚动条滚动的Y轴的距离
+			
+			//screenX screenY 相对于电脑屏幕左侧 顶部的距离
+			
+			box.onclick=function(e){
+				//console.log(e.offsetX,e.offsetY);
+				//console.log(e.clientX,e.clientY);
+				//console.log(e.pageX,e.pageY);
+				console.log(e.screenX,e.screenY);
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,178 @@
+前后端数据通信
+  1. 从输入URL到看到页面，中间所经历的事情
+    + http和https的区别
+    + 端口号的作用和范围，以及各协议默认的端口号
+    + URL的编码：encodeURI/decodeURI、encodeURIComponent/decodeURIComponent、escape/unescape
+    + 强缓存的机制「重点是：如何保证服务器资源更新，客户端即便有缓存，也可以获取最新的资源?」
+    + 协商缓存的机制
+    + 本次存储方案：cookie、localStorage、sessionStorage、全局变量(或者vuex/redux)...
+    + DNS Prefetch && 分服务器部署
+    + TCP和UDP的区别
+    + TCP的三握及四挥
+    + HTTP报文、HTTP事物、HTTP状态码
+    + 浏览器渲染机制(或者渲染步骤)，重点关注：DOM的重排(回流)和重绘！
+  2. ajax的相关知识 
+    + ajax解决的问题：告别了全局刷新的年代(或者服务器渲染的年代)，开起了客户端渲染及局部刷新的时代！！
+    + 基础知识围绕的就是其核心四步骤
+      + let xhr = new XMLHttpRequest;  「ajax的核心本质是XMLHttpRequest」
+      + xhr.open(请求方式,请求地址,同步/异步)
+      + xhr.onreadystatechange=()=>{};
+        + xhr.readyState：0/1/2/3/4
+        + xhr.status
+        + xhr.response/responseText... 「当代前端开发，服务器返回的响应主体信息，一般都是：JSON字符串、文件流...」
+      + xhr.send(请求主体) 
+        请求主体信息的格式是有要求的「Content-Type记录发送格式的MIME类型」
+        + JSON字符串  application/json  「Axios中，如果我们传递的是一个对象，其内部会默认把对象转换为JSON字符串，然后传递给服务器」
+        + URLENCODED格式字符串  application/x-www-form-urlencoded  「例如：xxx=xxx&xxx=xxx」
+        + 普通字符串  text/plain
+        + FormData格式的对象  multipart/form-data  「主要用于：文件上传或者表单提交」
+        + 文件流
+        + 二进制
+        + ....
+        + 但是不支持传递普通对象、数组对象等「默认都会转字符串」
+    + ajax中有几个方法？
+      事件
+      + onabort
+      + onreadystatechange
+      + ontimeout
+      + upload.onprogress
+      + ...
+      私有属性
+      + readyState
+      + response/responseText...
+      + status
+      + timeout
+      + withCredentials
+      + ...
+      公有方法
+      + abort
+      + getResponseHeader/getAllResponseHeaders
+      + open
+      + overrideMimeType
+      + send
+      + setRequestHeader
+  3. Axios的相关知识
+    + 基于Promise对ajax进行封装「核心原理：XMLHttpRequest」
+    + 如何发送请求
+      axios是Axios类的一个实例，基于create是创建另外一个实例，http实例的操作语法和axios一样~
+      let http=axios.create();
+      -----
+      axios(配置项)
+      axios.get/delete/head/options(请求地址,配置项)
+      axios.post/put/patch(请求地址,请求主体内容,配置项)
+    + 配置项中的内容
+      https://www.axios-http.cn/docs/req_config
+      + url
+      + baseURL
+      + method
+      + transformRequest 针对POST请求，对请求主体的信息进行格式化处理
+      + headers 设置请求头信息
+      + params 问号传参
+      + data 设置请求主体信息
+      + timeout
+      + withCredentials
+      + responseType 预设服务器返回信息转换的格式 json/arraybuffer/document/text/stream/blob
+      + onUploadProgress
+      + onDownloadProgress
+      + validateStatus 自定义axios结果的处理机制，默认：服务器返回状态码以2开始，axios请求返回的promise实例才会为成功态，其余都是失败态！！
+      + ...
+    + 返回响应信息的内容
+      + axios发送请求，都会返回一个promise实例，根据请求的结果，决定实例的状态！！
+      + data 响应主体信息
+      + status/statusText HTTP状态码
+      + headers 响应头信息
+      + config  请求的配置项
+      + request  XHR实例
+    + Axios的二次配置：对公共的配置项进行封装
+      + interceptors拦截器
+        请求拦截器：发送请求之前的拦截，例如携带Token
+        响应拦截器：在服务器返回数据后，和我们自己在页面中获取数据前，进行拦截
+          + 成功一般返回响应主体信息
+          + 失败一般做统一的提示
+    + 服务器返回的结果，如果是失败，有两种情况：
+      + 网络层失败：服务器返回的状态码不是以2开始的，则认为当前本次请求是失败的，返回的promise实例是失败的！！「提示：在二次配置的响应拦截器中做处理」
+      + 业务层失败：服务器已经正常把数据返回了，而且状态码是200，返回的promise实例是成功态；但是返回的数据不是我们期许的，这是业务逻辑上的失败！！
+  4.跨域处理「非同源请求策略」
+    + 为啥会产生跨域?
+      页面地址「web服务器的地址」和请求接口地址「数据服务器的地址」进行对比，只要 协议、域名、端口号 三者有一个不一样，就是跨域！！
+      如果要保证同源访问，我们需要把页面和后台代码，都部署在相同服务器的同一个服务(或端口)下！
+      + 开发环境：基本都是跨域访问
+        我们电脑上只有自己的前端代码，没有后台程序，也就没办法部署在一起；此时需要调用测试服务器上的接口地址，这样就一定是跨域了！！
+      + 生产环境：也基本都是跨域访问
+        因为我们最好的部署方案，是根据资源不同，分服务器进行部署！！
+    + 为啥跨域访问是获取不到数据的！
+      + 因为浏览器的安全策略，而且只是针对XMLHttpRequest/Fetch请求
+      + 服务器之间是没有跨域限制的
+      + <script>/<link>/<img>这样的标签，默认也是没有跨域限制的！！
+    + 如何解决跨域问题
+      + 使用JSONP
+        原理：利用<script>不存在域的限制
+        操作步骤：
+          + 创建“全局函数”：请求成功，全局函数会被执行，接收的参数值就是服务器返回的结果
+          + 基于<script src>向服务器发送请求，把全局函数名传递给服务器
+          + 服务为接收请求后，把数据准备好，返回给客户端 “全局函数(数据)” 这样的字符串！
+          + 客户端浏览器获取字符串后，因为是基于script获取的，自动转换为js代码执行！！
+        扩展：基于promise封装JSONP请求库！！
+      + 使用CORS跨域资源共享
+        原理：由服务器设置允许的信息「包含：允许源、允许请求方式、允许请求头、允许携带资源凭证等等」
+      + 基于proxy实现跨域代理 「最常用的」
+        + 开发环境：webpack-dev-server
+        + 生产环境：nginx/apache反向代理
+        原理：利用服务器和服务器之间是不存在跨域的
+        操作步骤：
+          + 启动一个代理服务器(或web服务器)，让代理服务器负责页面的预览，而且和页面是同源的
+          + 以后发送请求都发送给代理服务器
+          + 代理服务器再去真正的服务器获取信息，把获取的信息返回给页面
+      + ...
+  5. Fetch操作
+    + Fetch和Ajax（或axios/$.ajax）的区别
+    + Fetch的语法
+      https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch
+      let xxx = fetch(请求地址，配置项);
+      + xxx是一个promise实例：服务器只要有反馈，不论HTTP状态码是多少，xxx实例都是成功的！只有无法返回任何的信息（例如：网络断了、请求中断、请求超时...）才会让实例为失败！！
+      配置项
+        + method
+        + cache
+        + credentials
+        + headers 「学习Headers类」
+        + body 只能针对POST系列请求
+      响应结果
+        + 获取的结果是一个可读流，要基于response.json()/text()/arraybuffer()...去获取指定格式的数据
+        + ...
+    + Fetch的二次配置
+
+请求方式之间的区别
+   客户端向服务器发送请求，可以把信息传递给服务器，基于“问号传参、请求头、请求主体”等方式传递
+   服务器会把客户端需要的信息，返回给客户端，基于“响应头、响应主体”等方式传输
+   GET系列和POST系列的种种区别，都是因为传递数据的方式不同导致的，按照“约定俗成”的规范：
+     + GET系列传递给服务器的数据，一般都是基于“问号传参”的方式完成
+     + POST系列传递给服务器的数据，一般都是基于“请求主体”的方式完成
+   -----
+   GET系列「GET、DELETE、HEAD、OPTIONS」
+     + GET传递的数据有大小限制，是因为浏览器地址栏中，URL地址的长度是有限制的「IE:2KB 谷歌:8KB」
+     + GET容易产生缓存：当请求地址和参数完全一致的情况，浏览器可能会从缓存中获取数据
+       解决：在请求地址的末尾，追加一个时间戳(或随机数)
+       xhr.open('GET',`/api/list?lx=0&page=1&_=${+new Date()}`)
+     + GET相对不安全，因为有一种非常简单的“黑客”技术：URL劫持！！
+   POST系列「POST、PUT、PATCH」
+     + POST传递的数据理论上是没有大小限制的，但实际上为了传输的效率，我们会手动限制大小！
+     + POST是不会受到浏览器缓存影响的
+     + POST相对来讲比较安全「但是：互联网面前，人人都在裸奔」
+
+本次存储方案之间的区别
+   cookie
+     + 存在过期时间：我们可以在设置cookie信息的时候，设置这个时间
+     + 有大小限制：同源下最多只允许存储4KB
+     + 不稳定：清除历史记录，可能会把cookie干掉；如果浏览器开启了无痕(隐私)模式，是保留不下来cookie的！
+     + 和服务器之间有“猫腻儿”：无论服务器是否需要，每一次向服务器发送请求，浏览器总会把本地存储的所有Cookie信息，都基于请求头发送给服务器！！
+   localStorage
+     + 持久化存储：只要自己不手动删除，则一直会存储着！！
+     + 有大小限制：同源下最多只允许存储5MB
+     + 相对稳定：清除历史记录、或者无痕模式等，对其没有效果！！
+     + 和服务器之间没关系：但是我们可以手动的把localStorage存储的信息，传递给服务器！！
+   sessionStorage
+     + 语法上和localStorage一致
+     + 唯一的区别是：在页面刷新的时候，sessionStorage存储的信息不消失，但是一旦页面关闭（属于会话结束），存储的信息都会被释放！！
+   vuex/redux
+     + 它们类似于全局变量，是把信息存储在虚拟内存「堆栈内存」中，所以：不论页面刷新还是关闭，存储的信息都会被释放掉！！
+扩展：实现具备有效期的localStorage存储「字节面试题」

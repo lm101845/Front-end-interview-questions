@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#box{
+				height:500px;
+				width:500px;
+				background-color: #00FF7F;
+			}
+			#pbox{
+				height:300px;
+				width:300px;
+				background-color: #A6E1EC;
+			}
+			#sbox{
+				display: block;
+				height:100px;
+				width:100px;
+				background-color: #D43F3A;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<p id="pbox">
+				<span id="sbox"></span>
+			</p>
+		</div>
+		<script>
+			// 事件周期:
+			// 1. 事件捕获(IE没有):沿着DOM由外到里传播
+			// 2. 目标触发: 监控事件触发
+			// 3. 冒泡阶段:沿着DOM由里到外传播
+			// 取消冒泡  event
+			// e.stopPropagation(); //FF
+			// e.cancelBubble=true; //IE
+			
+			box.onclick=function(){
+				alert("box");
+			}
+			pbox.onclick=function(e){
+				if(typeof e.stopPropagation!="undefined"){
+					e.stopPropagation();
+				}else{
+					e.cancelBubble=true;
+				}
+				alert("pbox");
+			}
+			sbox.onclick=function(e){
+				//e.stopPropagation();//取消冒泡
+				//if(e&&e.stopPropagation)
+				//!==  ===           != ==
+				// if(typeof e.stopPropagation!="undefined"){
+				// 	e.stopPropagation();
+				// }else{
+				// 	e.cancelBubble=true;
+				// }
+				alert("spanbox");
+			}
+			
+            //方向反了，取消冒泡的位置也要反着
+			// 冒泡阶段====>true 方向变成 捕获方向
+			// box.addEventListener("click",function(e){
+			// 	// if(typeof e.stopPropagation!="undefined"){
+			// 	// 	e.stopPropagation();
+			// 	// }else{
+			// 	// 	e.cancelBubble=true;
+			// 	// }
+			// 	alert("box");
+			// },true)
+			// pbox.addEventListener("click",function(e){
+			// 	// if(typeof e.stopPropagation!="undefined"){
+			// 	// 	e.stopPropagation();
+			// 	// }else{
+			// 	// 	e.cancelBubble=true;
+			// 	// }
+			// 	alert("pbox");
+			// },true)
+			// sbox.addEventListener("click",function(e){
+			// 	if(typeof e.stopPropagation!="undefined"){
+			// 		e.stopPropagation();
+			// 	}else{
+			// 		e.cancelBubble=true;
+			// 	}
+			// 	alert("spanbox");
+			// },true)
+		</script>
+	</body>
+</html>

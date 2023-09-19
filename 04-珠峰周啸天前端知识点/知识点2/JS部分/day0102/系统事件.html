@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <style>
+			#box{
+				height:300px;
+				width:300px;
+				background-color: #008000;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		
+		系统事件
+		1. load 预加载  整个页面加载完毕后最后加载，包括相关联的文件
+		2. DOMContentLoaded 预加载---》jQuery
+		   整个DOM加载完毕后最后加载
+		3. scroll 滚动
+		4. resize 监控页面大小后执行
+		
+		移动端事件(手机独有)
+		能click,但是 有 300ms延迟
+		1. touchstart  手指按下
+		2. touchend 手指抬起
+		3. touchmove 手指按下移动
+		<script>
+			// let html=document.documentElement||document.body;
+			// window.onresize=function(){
+			// 	console.log(html.clientWidth);
+			// }
+			// box.onclick=function(){
+			// 	console.log("click");
+			// }
+			box.ontouchstart=function(){
+				console.log("touchstart");
+			}
+			box.ontouchend=function(){
+				console.log("touchend");
+			}
+			box.ontouchmove=function(){
+				console.log("touchmove");
+			}
+		</script>
+	</body>
+</html>

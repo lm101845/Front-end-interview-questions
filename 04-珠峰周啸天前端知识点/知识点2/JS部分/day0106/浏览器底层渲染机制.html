@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+    <style>
+
+    </style>
+</head>
+<body>
+    <img src="" alt="">
+    <video src=""></video>
+    <h1></h1>
+    <script src=""></script>
+    浏览器底层渲染机制
+        1. 读取HTML,生成 DOM Tree树
+        2. 解析css,生成CSSOM Tree
+        3. DOM Tree+CSSOM Tree===>Render Tree
+        4. 根据 位置 大小 结构，进行排列布局===》Layout
+        5. 根据颜色等信息,进行绘制painting
+
+    每打开一个程序或者浏览器的一个页面，都是一个进程
+    每个进程都包含好多线程，线程是进程具体办事的
+
+    线程:（多线程，默认异步）
+    GUI渲染线程：解析HTML和css的，来绘制出页面内容
+    JS引擎线程：渲染和解析JS的
+    事件触发线程：监听事件是否触发
+    定时器触发线程：监控定时器是否到达时间
+    异步HTTP请求线程：请服务器来获取资源（ajax/link/img/script)
+    //....
+  
+    异步：多件事情可以同时进行
+    同步：必须等前面的事件完成，才能做后面事情，必须排队
+
+    1. 读取link,开启 HTTP请求线程(异步),不会阻碍GUI渲染
+    2. 读取style,不需要开启 HTTP请求线程，同步渲染
+    3. @import,开启 HTTP请求线程 , 会阻碍GUI渲染
+       必须等着样式获取后，再同步渲染
+
+    如何优化性能？（从样式方面入手）
+    样式少，就用style, 样式多就用link, 除特殊情况外@import
+
+    4. 读取img(audio、video),开启 HTTP请求线程(异步),不会阻碍CUI渲染
+    GUI空闲了就可以解析图片
+
+    为什么还要做图片懒加载？
+    同源中一次只能发5-7 HTTP请求线程,如果同时发送HTTP请求线程，
+    就是造成 HTTP 通道传输阻塞（而且，图片一般请求的慢；其他HTTP请求线程也要等待）
+
+    假设都已经获取了,图片渲染还需要大量的时间
+
+    5. 读取script,同步渲染,阻碍GUI渲染
+
+    一般情况下，都将script放到body的最后，不会阻碍生成 DOM Tree树，
+    可能阻碍CSSOM Tree和Render Tree生成，毕竟是阻碍GUI的
+
+    解决：
+    1.设置事件监听
+    使用 window.onload----》生成render Tree后再执行js
+    区别：
+        window.onDOMContextLoaded(jq的预加载的底层)===》生成 DOM Tree 后就可以执行js
+        
+    2.script变成异步,不会阻碍GUI渲染
+    <script src="xxx.js" async></script>
+    获取资源的时候GUI继续渲染，但是资源一但获取到，立即阻断GUI，继续渲染JS「
+    获取js后，立刻先去渲染js,忽略了js的引入顺序
+
+    <script src="xxx.js" defer></script>
+    必须等GUI都渲染完后，生成render-Tree，获取js,按照js的引入规则，依次执行
+
+    回流+重绘
+    如何减少回流？
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    服务器
+    数据库的存储：mysql 、sql server 、oracle、Mangodb(nodejs)...
+    会话存储：session
+
+    客户端
+    物理内存存储（硬盘）
+      1.cookie   获取document.cookie  设置document.cookie="name=zhufeng"
+        1.1 有存储限制，最多存储4KB
+        1.2 cookie可以设置过期时间，日期到了就可以自动删除
+        1.3 稳定性差，使用360完全卫士，就会不小心清除cookie,清除浏览数据也会清除cookie
+        1.4 浏览器在隐私（无痕）模式下，cookie将无法存储数据
+        1.5 跟服务器有“猫腻”,只要发送请求，客户端就会默认携带cookie给服务器
+
+      2.localStorage（推荐使用）
+        2.1 有存储限制，但是可以存储5MB
+        2.2 本身不能设置过期时间，刷新或关闭出口,长期存储，除非手动都删除
+        2.3 稳定性强，只有Application中localStorage删除
+        2.4 浏览器在隐私（无痕）模式下，照样存储数据
+        2.5 跟服务器没有“猫腻”，除非客户端发送数据的时候，自愿携带
+
+        localStorage.setItem(key,value)//存储数据 value必须是字符串
+        localStorage.getItem(key)//获取数据
+        localStorage.removeItem(key)//删除数据
+        localStorage.clear()//删除所有数据
+
+      3.sessionStorage
+        同localStorage一样
+        3.2 本身不能设置过期时间,只要关闭窗口数据就会删除，刷新数据依旧存在
+
+      客户端数据库：IndexedDB  Web SQL（很少）
+     
+    虚拟内存存储: 特色:刷新页面和关闭页面数据就会消失
+    全局变量
+    vuex/redux
+
+    1.明文存储，有部分需要注意安全的，不能存储，尽量加密存储
+    2.有域的限制
+    3.有浏览器的限制
+
+    面试题：localStorage如何设置过期时间？ 30天后过去
+    1.存储数据的时候，把现在时间(a)给存储上
+    2.获取数据的时候，现在的时间(b)-(a)>30 过期了，删除
+    
+    <script src="axios.min.js"></script>
+    <script>
+      let storage={
+        get(key,cycle=30){
+           let data=localStorage.getItem(key);
+           //未获取到数据
+           if(!data){ return null }
+           //获取数据---判断过期时间
+           data=JSON.parse(data);//字符串变成对象
+           let {val,time}=data;
+           let newTime=+new Date();
+           cycle=cycle*24*60*60*1000;//30天的毫秒数
+           if(newTime-time>cycle){//超过30天 删除
+             storage.remove(key);
+             return null;
+           }else{
+             return val
+           }
+        },
+        set(key,value){
+            let obj={
+               val:value,
+               time:+new Date() 
+            }
+            localStorage.setItem(key,JSON.stringify(obj))
+        },
+        remove(key){
+            localStorage.removeItem(key)
+        }
+      }
+    //   storage.set("name","zf")
+    //   console.log(storage.get("name"));
+
+     //如果缓存中有数据，直接从缓存中获取，如果没有就发ajax
+     //固定不变数据
+      async function getData(){
+        let data=storage.get("mydata");
+        if(data){
+            console.log("数据从缓存中获取：",data);
+            return;
+        }
+
+        data=await axios.get("./1.json").then(res=>res.data)
+        console.log("数据通过ajax中获取：",data);
+        storage.set("mydata",data);
+      }
+      getData()
+    </script>
+</body>
+</html>

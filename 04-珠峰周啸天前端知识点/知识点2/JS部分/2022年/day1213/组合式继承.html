@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		组合式继承：原型继承（修改原型链）+call继承（私有）
+		缺点：子类的新的原型上，多出了父类的私有
+		<script>
+			function Parent(namea,age){
+				this.namea=namea;
+				this.age=age;
+			}
+			Parent.prototype.show=function(){
+				console.log("父类11111");
+			}
+			var p=new Parent("李飒",38);
+			console.log(p);
+			
+			
+	
+			function Child(job){
+				this.job=job;
+				//call继承
+				Parent.call(this,"lili",18);
+			}
+			//原型继承
+			Child.prototype=new Parent;
+			var c=new Child("学生");
+		
+			console.log(c);
+			console.log(c.namea);
+		
+		</script>
+	</body>
+</html>

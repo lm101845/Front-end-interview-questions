@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//数组给没有索引的内容改值
+			// 数组，会自动补齐(undefined) 剩余的索引 0--9
+			// 长度自动修改 10
+			// var arr=[100,200,300];
+			// arr[1]=2002;
+			// arr[9]=9009;
+			// console.log(arr);//[100, 2002, 300, empty × 6, 9009]
+			// console.log(arr[6]);
+			
+
+			//数组循环
+		    var arr=[100,200,300];
+			console.log(arr);
+			// console.log(arr[0]);
+			// console.log(arr[1]);
+			// console.log(arr[2]);
+			
+			// i：索引下标
+			for(var i=0;i<arr.length;i++){//0,1,2
+				console.log(arr[i]);
+			}
+			
+			//for in  自动查找所有内容循环---专门讲一下
+			// i：索引下标
+			for(var i in arr){
+				console.log(arr[i]);
+			}
+			
+			//多维数组  数组里面套数组  二维数组
+			var arr=[
+				[1,2,3],
+				[4,5,6],
+				[7,8,9]
+			]
+			console.log(arr);
+			console.log(arr[1][1]);//5
+			console.log(arr[2][2]);//9
+		</script>
+	</body>
+</html>

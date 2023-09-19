@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>珠峰培训”JS初期阶段”练习题</title>
+    <meta charset='utf-8'>
+    <link href='https://cdn.maxiang.io/res-min/themes/marxico.css' rel='stylesheet'>
+    <style>
+        #preview-contents {
+            margin-top: -20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='preview-contents' class='note-content'>
+        <h4 id="珠峰培训js初期阶段复习专用测试题">珠峰培训”JS初期阶段”复习专用测试题</h4>
+        <ol start="1">
+            <li rel="1">
+                <p>下面程序输出的结果</p>
+            </li>
+        </ol>
+        <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">27.2</span>, <span class="hljs-number">0</span>, <span class="hljs-string">'0013'</span>, <span class="hljs-string">'14px'</span>, <span class="hljs-number">123</span>];
+</div><div class="hljs-line">arr = arr.map(<span class="hljs-built_in">parseInt</span>);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(arr);
+</div></code></pre>
+
+        <ol start="2">
+            <li rel="2">
+                <p>下面程序输出的结果</p>
+            </li>
+        </ol>
+        <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">let</span> result = <span class="hljs-number">100</span> + <span class="hljs-literal">true</span> + <span class="hljs-number">21.2</span> + <span class="hljs-literal">null</span> + <span class="hljs-literal">undefined</span> + <span class="hljs-string">"Tencent"</span> + [] + <span class="hljs-literal">null</span> + <span class="hljs-number">9</span> + <span class="hljs-literal">false</span>;
+</div></code></pre>
+
+        <ol start="3">
+            <li rel="3">
+                <p>a等于什么值，可以让条件成立</p>
+            </li>
+        </ol>
+        <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">var</span> a = ?;
+</div><div class="hljs-line"><span class="hljs-keyword">if</span> (a == <span class="hljs-number">1</span> &amp;&amp; a == <span class="hljs-number">2</span> &amp;&amp; a == <span class="hljs-number">3</span>) {
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'OK'</span>);
+</div><div class="hljs-line">}
+</div></code></pre>
+
+        <ol start="4">
+            <li rel="4">
+                <p>下⾯代码是否可以，每隔1000MS依次输出 0 1 2 3 4 ? <br>
+                    如果不可以，说明为啥？以及如何解决？ </p>
+            </li>
+        </ol>
+        <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
+</div><div class="hljs-line">    setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">        <span class="hljs-built_in">console</span>.log(i);
+</div><div class="hljs-line">    }, (i + <span class="hljs-number">1</span>) * <span class="hljs-number">1000</span>);
+</div><div class="hljs-line">}
+</div></code></pre>
+
+        <ol start="5">
+            <li rel="5">
+                <p>编写_new方法，实现如下需求</p>
+            </li>
+        </ol>
+        <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params">name</span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-keyword">this</span>.name = name;
+</div><div class="hljs-line">}
+</div><div class="hljs-line">Dog.prototype.bark = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'wangwang'</span>);
+</div><div class="hljs-line">}
+</div><div class="hljs-line">Dog.prototype.sayName = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'my name is '</span> + <span class="hljs-keyword">this</span>.name);
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_new</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line">    <span class="hljs-comment">//=&gt;完成你的代码   </span>
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-keyword">let</span> sanmao = _new(Dog, <span class="hljs-string">'三毛'</span>);
+</div><div class="hljs-line">sanmao.bark(); <span class="hljs-comment">//=&gt;"wangwang"</span>
+</div><div class="hljs-line">sanmao.sayName(); <span class="hljs-comment">//=&gt;"my name is 三毛"</span>
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(sanmao <span class="hljs-keyword">instanceof</span> Dog); <span class="hljs-comment">//=&gt;true</span>
+</div></code></pre>
+
+        <ol start="6">
+            <li rel="6">
+                <p>下面代码输出结果是什么？为啥？</p>
+            </li>
+        </ol>
+        <pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-keyword">let</span> obj = {
+</div><div class="hljs-line">    <span class="hljs-number">2</span>: <span class="hljs-number">3</span>,
+</div><div class="hljs-line">    <span class="hljs-number">3</span>: <span class="hljs-number">4</span>,
+</div><div class="hljs-line">    <span class="hljs-attr">length</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">    <span class="hljs-attr">push</span>: <span class="hljs-built_in">Array</span>.prototype.push
+</div><div class="hljs-line">}
+</div><div class="hljs-line">obj.push(<span class="hljs-number">1</span>);
+</div><div class="hljs-line">obj.push(<span class="hljs-number">2</span>);
+</div><div class="hljs-line"><span class="hljs-built_in">console</span>.log(obj);
+</div></code></pre>
+    </div>
+</body>
+
+</html>

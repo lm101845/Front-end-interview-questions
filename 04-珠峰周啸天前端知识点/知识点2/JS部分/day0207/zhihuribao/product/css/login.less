@@ -1,0 +1,88 @@
+html,body,.loginBox{
+    height:100%;
+    width:100%;
+}
+.dark{
+    background-color: pink;
+    color:red;
+    .con{
+        p{
+            color:aquamarine;
+        }
+    }
+}
+.loginBox{
+    font-size:0.16rem;
+    display: flex;
+    flex-direction: column;
+    .header{
+        height:0.55rem;
+        line-height:0.55rem;
+        padding:0 0.1rem;
+        i{
+            font-size:0.2rem;
+            font-weight: bold;
+        }
+    }
+    .con{
+        flex:1;
+        text-align: center;
+        h1{
+            font-size:0.28rem;
+            margin-top:1rem;
+        }
+        p{
+            margin:0.2rem 0;
+        }
+        #zhihu{
+            font-size:0.5rem;
+            color:rgb(44, 79, 235);
+        }
+        #weibo{
+            font-size:0.5rem;
+            color:rgb(240, 141, 48);
+            padding-left:0.1rem;
+        }
+        .check{
+            position: relative;
+            margin-top: 0.1rem;
+            #info{
+                display: none;
+            }
+            #info+label::before{
+              content:"";
+              display: inline-block;
+              height:0.18rem;
+              width:0.18rem;
+              border-radius: 50%;
+              border: 1px solid #ccc;
+              position: absolute;
+              top:0.02rem;
+              left:0.06rem;
+            }
+            #info:checked+label::after{
+                content:"";
+                display: inline-block;
+                height:0.12rem;
+                width:0.12rem;
+                border-radius: 50%;
+                background-color: #ccc;
+                position: absolute;
+                top:0.06rem;
+                left:0.1rem;
+              }
+        }
+    }
+    .footer{
+        height:0.8rem;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        p{
+            flex:1;
+            i{
+                font-size:0.28rem;
+            }
+        }
+    }
+}

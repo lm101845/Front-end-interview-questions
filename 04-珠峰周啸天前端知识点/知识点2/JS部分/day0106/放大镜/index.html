@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="reset.min.css">
+		<style>
+			#box{
+				width:700px;
+				overflow:hidden;
+				display: flex;
+				margin:30px auto;
+			}
+			.boxleft{
+				width:300px;
+				height:300px;
+				position: relative;
+			}
+			.boxleft img{
+				width:300px;
+				height:300px;
+			}
+			.mark{
+				width:100px;
+				height:100px;
+				background-color: red;
+				position: absolute;
+				left:0;
+				top:0;
+				opacity: 0.5;
+				display:none;
+			}
+			.boxright{
+				width:400px;
+				height:400px;
+				display:none;
+				overflow:hidden;
+				position: relative;
+			}
+			.bigimg{
+				position: absolute;
+				left:0;
+				top:0;
+			}
+			/* .bigimg{
+				width:1200px;
+				height:1200px;
+			} */
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div class="boxleft">
+				<img src="images/1.jpg" alt="">
+				<div class="mark"></div>
+			</div>
+			<div class="boxright">
+				<img src="images/2.jpg" alt="" class="bigimg">
+			</div>
+		</div>
+		<script src="index.js"></script>
+	</body>
+</html>

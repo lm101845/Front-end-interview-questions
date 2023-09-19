@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>距离结束时间：<span id="spanbox"></span>  </h1>
+    <script>
+        let timer=0,nowTime;
+        //结束时间
+        //let endTime=new Date(2023,1,17,18,0,0);// 1---Feb
+        let endTime=new Date("2023/2/17 20:00:00");//2--Feb
+
+        function addZero(n){//补零函数
+         return n>9?n:"0"+n;
+        }
+
+       
+        //从服务器获取时间
+        function getTime(){
+            return new Promise((reslove,reject)=>{
+                let xhr=new XMLHttpRequest;
+                xhr.open("head","/");
+                xhr.onreadystatechange=function(){
+                    if(xhr.readyState===2){
+                        if(xhr.status>=200&&xhr.status<400){
+                            let time=xhr.getResponseHeader("date");
+                            let newTime=new Date(time);
+                            reslove(newTime);
+                        }
+                    }
+                }
+                xhr.send();
+            }) 
+        }
+        //getTime()//返回Promise的实例--->.then .catch   async await
+        // getTime().then((val)=>{
+        //     console.log(val);
+        // })
+
+        function changeTime(){
+            //现在的时间---应该从服务器获取
+            //不能每隔1000毫秒发一次请求，消耗性能， 误差大
+            //每个1000毫秒，执行一次方法，刚好每个1000加一次时间
+            nowTime=nowTime+1000;
+            
+            let difftime=endTime-nowTime;//时间戳
+
+            if(difftime<=0){
+                clearInterval(timer);
+                timer=null;
+                spanbox.innerHTML="活动结束";
+                return;
+            }
+
+            let day=parseInt(difftime/(24*60*60*1000));
+            let hour=parseInt(difftime/(60*60*1000)%24);
+            let min=parseInt(difftime/(60*1000)%60);
+            let second=parseInt(difftime/1000%60);
+            
+            let result=`${addZero(day)}天,
+            ${addZero(hour)}:${addZero(min)}:${addZero(second)}`;
+            spanbox.innerHTML=result;
+        
+        }
+        
+        //1.获取服务时间----》2.倒计时
+        async function endfn(){
+            let serverTime=await getTime();
+            nowTime=serverTime.getTime();
+            //注意，要将serverTime改为时间戳，
+            //这样每个1000才能是数值相加
+
+            changeTime();//先调用一次
+            timer=setInterval(changeTime, 1000)
+        }
+       
+        endfn();
+    </script>
+</body>
+</html>

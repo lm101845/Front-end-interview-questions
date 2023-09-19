@@ -1,0 +1,67 @@
+|- 企业CRM后台
+	|- server.js    服务文件
+	|- config.js    配置文件
+	|- API.TXT      API接口文档
+	|- json 存放数据的文件夹
+		|- user.json
+		|- customer.json
+		|- xxx.json
+	|- routes 存放各个板块后台功能的实现代码
+		|- user.js
+		|- xxx.js
+	|- utils 存放公共的方法
+	|- package.json 有模块依赖清单
+
+后台技术栈：NODE + EXPRESS + JSON存储数据（真实项目中是基于数据库存储 mongodb/mysql/sqlserver/oracle...）
+
+===========================
+
+|- 企业CRM
+	|- css  项目的CSS
+		|- reset.min.css
+		|- ...
+	|- font 字体图片
+	|- images 静态资源图片
+	|- js
+		|- login.js  以下都是我们自己实现每个页面的功能JS
+		|- xxx.js
+	|- page 具体的单独的业务页面
+		|- userlist.html
+		|- xxx.html
+	|- login.html 登录页面
+	|- index.html 首页面（公共的头、尾、左侧导航等信息，后期会基于IFRAME把page下的指定页面嵌入到首页中）
+
+客户端技术栈：AXIOS + MD5加密 + 单例设计模式/发布订阅设计模式 + AJAX的串行和并行 + 本地存储(COOKIE/LOCAL-STORAGE) ...
+
+==================================
+进入公司做的项目：
+   + ToB：不是给所有人用的产品，只针对于特定人群「例如：公司员工、合作伙伴...」
+     一般是管理系统类的项目偏多
+	 OA:企业办公管理系统「例如：钉钉、飞书、今目标...」  
+	 ERP:企业战略计划管理系统「一般会比OA大，集成了很多公司的管理制度和运行流程」
+	 CRM:客户管理系统「例如：纷享销客...」，但是一般CRM只是OA或者ERP中的某个板块
+	 CMS:内容管理系统，公司内部使用，主要是针对于ToC项目中的内容管理
+	 TIM 即使通讯系统 「例如：QQ、微信、飞信」
+	 ...
+
+   + ToC：针对于所有人的产品
+     + 电商网站
+	 + 门户网站「含官网」
+	 + 视频网站
+	 + ...
+
+==================================
+
+MPA:multi page web application 多页面应用
+   + 一个项目由好多页面组成，我们基于页面跳转，实现产品的访问
+   window.location.href='xxx.html';
+   @1 多个页面之间公共的部分，每个页面还需要单独写一次
+   @2 每一次打开新页面，所有资源都需要重新渲染
+   ...
+SPA:single page web application 单页面应用
+   + 一个产品只有一个页面，包含很多模块，我们控制哪些模块显示/隐藏来实现不同信息的展示
+   @1 可以有效的提取公共部分，提高开发效率
+   @2 公共资源无需重复渲染
+   @3 更好的实现模块化开发
+   ...
+   方案：vue-router或者react-router-dom前端路由技术管理

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<ul>
+			<li>0000</li>
+			<li>1111</li>
+			<li>2222</li>
+		</ul>
+		<script src="jquery.min.js"></script>
+		<script>
+			//创建节点 $(节点) 直接 添加内容 或 属性
+			//let $li=$("<li class='one'>hello</li>")
+		
+			//创建的节点写入到页面上
+			// 内部插入(父子)  .append() 插入到父级元素的最后
+			// 内部插入(父子)  .prepend() 插入到父级元素的第一位
+			
+			//外部插入(兄弟)  .after() 当做兄弟元素插入到后面
+			//外部插入(兄弟)  .before() 当做兄弟元素插入到上面
+			//$("ul").before($li);
+			
+			//1插入到0的上面
+			//$("li:eq(0)").before($("li:eq(1)"))
+			
+			//删除 remove()  删除全部   remove(selector)  删除某个
+			//empty()  清空内容
+			//$("ul").empty()//清空内容
+			
+			$("li").remove("li:eq(0)")
+			$("li:eq(0)").remove()
+		</script>
+	</body>
+</html>

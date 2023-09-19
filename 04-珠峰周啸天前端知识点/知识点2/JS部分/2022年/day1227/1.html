@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			.showimg{
+				margin:1000px auto;
+				height:450px;
+				width:300px;
+				border:1px solid red;
+				background: url(./img/default.gif) no-repeat #ddd center;
+			}
+			img[src=""]{
+				display: none;
+			}
+			img{
+				height:450px;
+				width:300px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="showimg">
+			<img src="" alt="" data-src="img/1.jpg">
+		</div>
+		<script src="utils.js"></script>
+		<script>
+			//1.图片底部距离容器的高度=获取图片容器的高度+图片距离顶部的高度
+			//2.当前滚动到你所看到的高度=获取滚动条滚动的高度+页面可视区域的高度
+			// 当前滚动到你所看到的高度>图片底部距离容器的高度,就要显示图片
+			
+			var img=document.querySelector(".showimg img");
+			var showimg=document.querySelector(".showimg");
+			imgbottomTotop=showimg.offsetHeight+utils.offset(showimg).top;
+			
+			window.onscroll=function(){
+				let scrollt=document.documentElement.scrollTop||document.body.scrollTop;
+				let cheight=document.documentElement.clientHeight||document.body.clientHeight;
+				let cheightscroll=scrollt+cheight;
+				if(cheightscroll>imgbottomTotop){
+					if(img.isload){return;}
+					showimg();
+				}
+			}
+			
+			var showimg=function showimg(){
+				var src=img.getAttribute("data-src");
+				console.log(src);//null
+				var newImg= new Image();
+				newImg.src=src;
+				newImg.onload=function(){
+					//img.src=src;
+					img.isload=true;//每次显示完图片，下次就不用在获取data-src显示，会报错
+					img.setAttribute("src",src);
+					img.removeAttribute("data-src");
+					newImg=null;
+				}
+			}
+		</script>
+	</body>
+</html>

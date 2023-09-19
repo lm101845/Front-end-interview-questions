@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            height:100px;
+            width:100px;
+            background-color: pink;
+            position: relative;
+            left:0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        let html=document.documentElement||document.body;
+        let maxW=html.clientWidth-box.offsetWidth;//可移动的最大宽度
+        let maxH=html.clientHeight-box.offsetHeight;//可移动的最大高度
+
+        let startX,startY,endX,endY;
+        box.onmousedown=function(e){
+            startX=e.offsetX;
+            startY=e.offsetY;
+
+            //鼠标移动一次，小盒子的坐标就会改变一次
+            window.addEventListener("mousemove",move);
+            //在整个文档中，鼠标抬起，盒子不会移动了
+            window.addEventListener("mouseup",up);
+        }
+        function move(e){
+           endX=e.clientX;
+           endY=e.clientY;
+
+           let resultX=endX-startX;
+           let resultY=endY-startY;
+
+        //    if(resultX>=maxW){
+        //       resultX = maxW;
+        //    }
+        //    if(resultX<=0){
+        //       resultX = 0;
+        //    }
+           
+           resultX = resultX>=maxW?maxW:(resultX<=0?0:resultX);
+           resultY = resultY>=maxH?maxH:(resultY<=0?0:resultY);
+
+           box.style.left=resultX+"px";
+           box.style.top=resultY+"px";
+        }
+
+        function up(){//移出事件 鼠标移动事件 鼠标抬起事件
+            window.removeEventListener("mousemove",move);
+            window.removeEventListener("mouseup",up);
+        }
+    </script>
+</body>
+</html>

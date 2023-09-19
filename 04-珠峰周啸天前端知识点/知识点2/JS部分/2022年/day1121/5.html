@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		数组的方法（15个）
+		<script>
+			//1. push()
+			//作用： 在数组的尾部添加内容
+			//参数：任意类型 ，一项或者多项
+			//是否修改原来数组：修改
+			//返回值：新数组的长度
+			
+			// var arr=[10,20,30];
+			// let n=arr.push(100,200,300,true);
+			// console.log(n);
+			// console.log(arr);
+			
+			//2. pop()
+			//作用： 删除数组尾部的最后一项内容
+			//参数：无参数
+			//是否修改原来数组：修改
+			//返回值：删除的那一项
+			
+			// var arr=[10,20,30];
+			// let n=arr.pop();
+			// console.log(n);
+			// console.log(arr);
+			
+			//3. shift()
+			//作用： 删除数组顶部的第一项内容
+			//参数：无参数
+			//是否修改原来数组：修改
+			//返回值：删除的那一项
+			
+			// var arr=[10,20,30];
+			// let n=arr.shift();
+			// console.log(n);
+			// console.log(arr);
+			
+			//4. unshift()
+			//作用： 在数组的顶部添加内容
+			//参数：任意类型 ，一项或者多项
+			//是否修改原来数组：修改
+			//返回值：新数组的长度
+			
+			// var arr=[10,20,30];
+			// let n=arr.unshift(100,200,300,true);
+			// console.log(n);
+			// console.log(arr);
+			
+			
+			//5.reverse 倒序
+			//作用： 将数组倒转
+			//参数：无参数
+			//是否修改原来数组：修改
+			//返回值：倒转后的数组
+			// var arr=[10,20,30,40,50];
+			// var n=arr.reverse();
+			// console.log(n);
+			// console.log(arr);
+			
+			//6.sort 排序
+			//作用： 数组排序
+			//参数：无参数(默认升序，10（不包含10）以内) 
+			//     有参数 (函数)  无范围
+			//            function(a,b){ return a-b }  升序
+			//            function(a,b){ return b-a }  降序
+			//是否修改原来数组：修改
+			//返回值：排序后的数组
+			
+			// var arr=[4,3,1,5,2,6,10,11,12,13];
+			// var n=arr.sort(function(a,b){ return b-a });
+			// console.log(n);
+			// console.log(arr);
+			
+			//7. splice()
+			// splice(开始的索引下标,删除的个数,增加的内容(从第三个开始，到后面))
+			//作用： 增加 删除 修改（替换）
+			//参数：三类(至少写一个参数)
+			//是否修改原来数组：修改
+			//返回值：删除的内容放到一个数组里（没有，空数组）
+			
+			//增加
+			// var arr=[1,2,3,4];
+			// //从索引下标2的位置开始，删除0个，增加20，30，40
+			// var n=arr.splice(2,0,20,30,40);
+			// console.log(n);
+			// console.log(arr);//[1, 2, 20, 30, 40, 3, 4]
+			
+			//删除
+			// var arr=[1,2,3,4];
+			// //从索引下标1的位置开始，删除2个，不新增
+			// var n=arr.splice(1,2);
+			// console.log(n);//[2,3]
+			// console.log(arr);//[1,4]
+			
+			// var arr=[1,2,3,4];
+			// //从索引下标1的位置开始，删除后面所有
+			// var n=arr.splice(1);
+			// console.log(n);//[2,3,4]
+			// console.log(arr);//[1]
+			
+			
+			//修改--替换
+			var arr=[1,2,3,4];
+			//从索引下标1的位置开始，删除2个（2，3）,增加（"a","b"）
+			var n=arr.splice(1,2,"a","b");
+			console.log(n);//[2,3]
+			console.log(arr);//[1, 'a', 'b', 4]
+		</script>
+	</body>
+</html>

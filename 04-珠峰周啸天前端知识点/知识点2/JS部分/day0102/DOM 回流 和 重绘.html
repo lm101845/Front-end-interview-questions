@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		浏览器底层渲染机制
+		
+		打开浏览器解析代码（回流和重绘） 一半
+		
+		1. 先获取所有的HTML解析，渲染 DOM 树（Tree）
+		2. 获取所有的css解析， 渲染 CSSOM 树（Tree）
+		3. 将 DOM 树 + CSSOM 树 ====》render Tree
+		4. 计算元素在页面的位置和大小===》Layout(布局)
+		5. 绘制颜色等其他信息===》绘制
+		
+		回流：第一次绘制完成后，修改元素的 位置 大小 结构，
+		重新生成 render Tree的过程，就叫回流（重排），
+		触发回流，一定会触发重绘
+		
+		重绘：第一次绘制完成后，如果修改元素的 颜色等其他信息，
+		不会重新生成 render Tree，只是重新绘制的过程，就是重绘，
+		重绘不一定触发回流
+		
+		减少回流？****（优化性能）
+		1.不操作DOM , 使用虚拟DOM (vue react)
+		2.读写分离 集中修改样式
+		  把修改样式和获取样式的操作分离开，避免渲染队列的刷新
+		3.元素的批量操作: 文档碎片，模板字符串拼接
+		4.开启GPU加速：
+		  4.1 transform，不会引发回流
+		  4.2 尽可能修改那些脱离文档流的{例如:position定位,我们修改top/left等信息}：
+		     虽然也会引发重排，只是对当前层进行处理，其他层没有改变，不需要重新渲染
+		5. 基于JS实现动画{定时器触发、requestAnimationFrame},使用requestAnimationFrame;
+		   动画能用CSS3写的不用js,CSS3中的transition、animation来实现
+	</body>
+</html>

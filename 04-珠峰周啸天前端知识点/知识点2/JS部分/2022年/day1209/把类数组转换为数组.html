@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		把类数组转换为数组
+		1. Array.from(arguments)
+		2. [...arguments]
+		3. for循环
+		4. [].slice.call(arguments)/Array.prototype.slice.call(arguments)
+		   原理：原来是循环数组，改为循环类数组
+		5. Array.prototype.concat.call([],...arguments)
+		   [].concat.apply([],arguments)/Array.prototype.concat.apply([],arguments)
+		   
+		   
+		类数组如何使用 forEach
+		方法一： 将类数组----》数组， 使用forEach
+		方法二：Array.prototype.forEach.call(arguments,(item,index,arr)=>{})
+		       [].forEach.call(arguments,(item,index,arr)=>{})
+			   
+	<!-- 	<script>
+			Array.prototype.forEach.call(arguments,(item,index,arr)=>{})
+			//this---》arr 改为 arguments
+			
+			Array.prototype.forEach=forEach(fn){
+				//1.this---》arr  2. 参数 fn
+			}
+			
+			var arr=[1,2,3]
+			arr.forEach((item,index,arr)=>{})
+		</script> -->
+		<script>
+			function show(){
+				//类数组  像数组一样具有 索引下标和长度，但是没有数组的方法
+				console.log(arguments);
+				
+				//console.log(Array.from(arguments));
+				
+				//console.log([...arguments]);
+				
+				// var arr=[];
+				// for(var i=0;i<arguments.length;i++){
+				// 	arr.push(arguments[i])
+				// }
+				// console.log(arr);
+				
+				//console.log([].slice.call(arguments))
+				
+				console.log(Array.prototype.concat.call([],...arguments))
+				
+				// [].forEach.call(arguments,(item,index,arr)=>{
+				// 	console.log(item);
+				// })
+			}
+			show(1,2,3,4,5)
+		</script>
+		
+		<!-- <script>
+			Array.prototype.slice.call(arguments)
+			//执行slice方法，不传参数
+			//将 this----》arguments
+			
+			//slice() 获取子数组
+			Array.prototype.slice=function slice(startIndex=0,endIndex){
+				//1.this---》arr [1,2,3,4,5,6]  2.参数 
+				let narr=[];
+				endIndex= endIndex|| this.length;
+				for(var i=startIndex;i<endIndex;i++){
+					narr.push(this[i]);
+				}
+				return narr;
+			}
+			
+			var arr=[1,2,3,4,5,6];
+			var newarr=arr.slice();//含头不含尾
+			console.log(arr,newarr);
+		</script> -->
+		
+		
+
+	</body>
+</html>

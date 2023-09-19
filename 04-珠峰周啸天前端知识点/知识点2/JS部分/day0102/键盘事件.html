@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			input{
+				outline:0;
+			}
+		</style>
+	</head>
+	<body>
+		2.键盘事件
+		keydown 键盘按下
+		keyup 键盘抬起
+		keypress 按下抬起为1组  
+		不是所有的键都能触发该事件（ shif alt ctrl esc 都不行，用keydown
+		
+		只有这些元素可以绑定键盘事件 input textarea window 
+		documet.documentElement  document.body
+		
+		3.表单事件
+		focus:获取焦点
+		blur:失去焦点
+		input:内容(value)改变就会触发
+		change:内容(value)改变+失去焦点  就会触发
+		
+		<input type="text">
+		
+		<select name="" id="">
+			<option value="1" selected="selected">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</select>
+		
+		<script>
+			let sel=document.querySelector("select");
+			
+			// sel.oninput=function(){
+			// 	console.log("111");
+			// }
+			
+			sel.onchange=function(){
+				console.log("222");
+			}
+			
+
+			// let input=document.querySelector("input");
+			
+			// input.onchange=function(){
+			// 	console.log(this.value);
+			// }
+			
+			// input.oninput=function(){
+			// 	console.log(this.value);
+			// }
+			
+			// input.onfocus=function(){
+			// 	this.style.border="10px solid blue";
+			// }
+			
+			// input.onblur=function(){
+			// 	this.style.border="10px solid red";
+			// }
+			
+			// input.onkeydown=function(){
+			// 	console.log("按下");
+			// }
+			// input.onkeyup=function(){
+			// 	console.log("抬起");
+			// }
+			
+			// input.onkeypress=function(){
+			// 	console.log("按下抬起");
+			// }
+			
+			// document.body.onkeydown=function(){
+			// 	console.log("111");
+			// }
+		</script>
+	</body>
+</html>

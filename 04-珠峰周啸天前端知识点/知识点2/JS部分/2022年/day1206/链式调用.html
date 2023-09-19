@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		var arr=[5,8,2,1,10] ;
+		想要让这个数组先排序(升序)，然后再倒序，
+		然后再往里面添加一个100(数组最后)，然后再删除第一项；
+		<script>
+			var arr=[5,8,2,1,10];
+			arr.sort((a,b)=>{return a-b});
+			arr.reverse();
+			arr.push(100);
+			arr.shift();
+			console.log(arr);
+		</script>
+		
+		<script>
+			var arr=[5,8,2,1,10];
+			//链式操作
+			//前提：上一步的操作，必须返回相同数据类型，才能继续链式操作
+			//根据返回值的类型,继续链式操作
+			arr.sort((a,b)=>{return a-b}).reverse().push(100);
+			arr.shift();
+			//console.log(n);//数值 6  6.shift()  6.toFixed(2)
+			console.log(arr);
+		</script>
+	</body>
+</html>

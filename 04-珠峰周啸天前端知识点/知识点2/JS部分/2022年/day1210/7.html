@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			const fn1 = function fn1() {
+				console.log(1);
+			};
+			const fn2 = function fn2() {
+				console.log(2);
+			};
+
+			//fn1.call("111");//1
+			//fn1函数执行   this--->"1111"
+			
+			fn1.call(fn2);//1
+			//哪个函数执行   this改为谁
+			//fn1函数执行    this--->fn2
+		
+			fn1.call.call.call(fn2);//2
+			//哪个函数执行   this改为谁
+			//fn1.call.call函数执行  this--->fn2 =======》fn2.call()
+			//总结：两个级两个以上call  "call方法".call(fn2)
+			// "call方法".call(fn2) 
+			// 把call的一个参数取出来，提掉"call方法",其余参数进位
+			// fn2.call()  =====> f2函数执行，this--->window
+			
+			 Function.prototype.call(fn2);// 什么也没有
+			// Function.prototype 是一个匿名空函数
+			// 匿名空函数执行   this--->fn2
+			 
+			Function.prototype.call.call.call(fn2);// 2
+			//"call方法".call(fn2)
+			// fn2.call();
+			// fn2函数执行  this-->window
+		</script>
+	</body>
+</html>

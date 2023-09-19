@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		重写call
+		1. Function.prototype 函数原型的身上---函数调用call方法
+		call的主要作用：修改this
+		<script>
+			//初级版
+			Function.prototype.mycall=function mycall(obj,...params){
+				//1. this---》show函数   2.参数 obj   params:[10,20]
+				
+				//1.第一参数如果传 null 或者 undefined
+				//this 返回的是 window    show 方法就挂到window 身上
+				// if(obj==undefined){
+				// 	obj=window;
+				// }
+				if(obj===undefined||obj===null){
+					obj=window;
+				}
+				
+				//2.如果obj 是在值类型----》引用类型
+				if(typeof obj!=="object"||typeof obj!=="function"){
+					obj=Object(obj);
+				}
+				
+				let show=this;
+				obj["show"]=show;//给 obj 添加一个show 方法
+				let result=obj.show(...params);//通过 obj.show() 调用
+				//调用完成后，obj身上添加的show 给 删除掉
+				delete obj["show"];
+				return result;
+			}
+			
+			function show(){
+				console.log(this,arguments);
+			}
+			
+			var obj={
+				name:"lili"
+			}
+			
+			//1. 如果第一个参数是null  undefined，返回的this---》 window
+			//   将show 方法  挂载到 window 上
+			//2. 如果第一个参数是值类型，show方法 是挂载不上取的
+			//   要将值类型=====》引用类型 ----》Object(XXX)
+			show.mycall(null,10,20);
+			
+			//1. show函数执行 
+			//2. this---》obj
+			//3. 给 show 传递参数 10,20
+		</script>
+		
+	
+	</body>
+</html>

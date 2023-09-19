@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<img src="" alt="">
+		<button id="btn">1111</button>
+		
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+		
+		<ol>
+			<li>a</li>
+			<li>b</li>
+			<li>c</li>
+		</ol>
+		
+		<script src="jquery.min.js"></script>
+		
+		<script>
+			// $("ul li").click(function(){
+			// 	console.log(this);
+			// })
+			
+			//第二个参数是 父级范围
+			$("li","ul").on("click",function(){
+				console.log(this);
+			})
+
+			// $("#btn").click(function(){
+			// 	console.log("1111");
+			// })
+			
+			// $("#btn").on("click",function(){
+			// 	console.log("222");
+			// })
+		</script>
+		<script>
+			//DOM 中 预加载
+			//页面中所有元素（包括相关联的元素，加载完成后），最后加载
+			// window.onload=function(){
+			// 	console.log("111");
+			// }
+			// //后面会把前面的覆盖
+			// window.onload=function(){
+			// 	console.log("222");
+			// }
+			
+			//页面中DOM加载完毕，最后加载
+			$(document).ready(function(){
+				console.log("aaa");
+			})
+			
+			//可以共存
+			$(document).ready(function(){
+				console.log("bbb");
+			})
+			
+			//有简写
+			$().ready(function(){
+				console.log("ccc");
+			})
+			
+			$(function(){
+				console.log("ddd");
+			})
+			
+		</script>
+	</body>
+</html>

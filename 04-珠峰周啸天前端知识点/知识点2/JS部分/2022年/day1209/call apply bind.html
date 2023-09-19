@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		call/apply/bind----Function.prototype(函数原型上的方法)
+		谁可以使用---->所有的函数
+		作用：修改this的指向
+		
+		函数.call(新的this,参数1,参数2,....)  
+		call第一参数 新的this ; 其余的参数都是给函数参数赋值
+		一定将call前面的执行函数
+		
+		函数.apply(新的this,[参数1,参数2,....])
+		apply第一参数 新的this ; 第二个参数 是给函数参数赋值（是数组，或类数组)
+		一定将call前面的执行函数
+		
+		函数.bind(新的this,参数1,参数2,....)
+		bind第一参数 新的this ; 其余的参数都是给函数参数赋值
+		不会将bind前面的执行函数
+		
+		想要执行： 函数.bind(新的this,参数1,参数2,....)()   执行
+		
+		
+		如果第一个参数传 null/undefined--->非严格模式下 window
+		                null/undefined--->严格模式下 null/undefined
+						
+		如果第一个参数不传  非严格模式下 window, 严格模式下undefined				
+		<script>
+			//"use strict";
+			function show(n,m){
+				console.log("这是this的值：",this);
+				//console.log("这是函数的参数：",n,m);
+			}
+			
+			show.call(undefined);//不传
+		
+			//show()//普通函数执行  this--->window
+			
+			//this--->"hello"
+			//show函数执行，this--->call方法的第一个参数("hello")
+			//call方法里面剩余参数，都是函数的参数传参
+			//show.call("hello",10,200);
+			
+			//this--->"apple"
+			//show.apply("apple",[101,202]);
+			
+			//this--->"one"
+			//show.bind("one",1,2)();// bind 不会执行函数
+		</script>
+	</body>
+</html>

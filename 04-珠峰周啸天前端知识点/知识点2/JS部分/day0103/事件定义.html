@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#box{
+				height:100px;
+				width:100px;
+				background-color: #0000FF;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box" onclick="show(1,2)">111</div>
+		
+		<!-- <div id="box">111</div> -->
+		<script>
+			// 事件定义:
+			// DOM0级  2 
+			   //方法1： HTML和JS 混合在一起不好分离
+			   // <div id="box" onclick="show(1,2)">111</div>
+			   // function show(a,b){
+			   // 	console.log(a,b,"111");
+			   // }
+			   
+			   //方法2：
+			   //原理：给元素的事件属性赋值（函数）
+			   // 一个事件属性，只能赋一个值，同一个事件句柄，只能执行1个函数
+			   // 都是冒泡阶段触发（方向 由里向外）
+			   // box.onclick=function(e){
+			   // 	console.log(e,222);
+			   // }
+			
+			// DOM2级  1
+			
+			
+			function show(a,b){
+				//了解
+				var e = window.event || arguments.callee.caller.arguments[0];
+				console.log(e,"111");
+			}
+			
+			// console.dir(box);
+			
+			// box.onclick=function(e){
+			// 	console.log(e,222);
+			// }
+			
+			// box.onclick=function(e){
+			// 	console.log(e,333);
+			// }
+
+			// //DOM级 取消事件绑定  ele.onclick=null;
+			// box.onclick=null;
+			
+			
+		</script>
+	</body>
+</html>

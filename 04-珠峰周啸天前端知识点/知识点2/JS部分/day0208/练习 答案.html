@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./axios.min.js"></script>
+    <script src="./md5.min.js"></script>
+    <script src="./qs.js"></script>
+    <script>
+        axios.defaults.baseURL="http://127.0.0.1:6666";
+        axios.defaults.timeout=1000;
+        axios.defaults.withGredentials=true;
+        axios.defaults.responseType="json";
+        axios.defaults.validateStatus=function(status){
+            return status >= 200 && status < 400;
+        }
+        //判断对象是不是纯对象
+        const isPlainObject = function isPlainObject(obj) {
+            let proto, Ctor;
+            if (!obj || Object.prototype.toString.call(obj) !== "[object Object]") return false;
+            proto = Object.getPrototypeOf(obj);
+            if (!proto) return true;
+            Ctor = proto.hasOwnProperty('constructor') && proto.constructor;
+            return typeof Ctor === "function" && Ctor === Object;
+        };
+        axios.defaults.transformRequest=function(data){
+           if(isPlainObject(data)){
+              data=Qs.stringify(data)
+           }
+           return data
+        }
+
+        // 添加响应拦截器  返回数据后之前，统一处理
+        axios.interceptors.response.use(function (response) {
+            //console.log(response);
+            // 对响应数据做点什么
+            return response.data;
+        }, function (error) {
+            //......
+            return Promise.reject(error);
+        });
+    </script>
+   <script>
+      // 伪代码  localhost---127.0.0.1
+        axios.get("/api/swiper",{
+            params:{
+                name:"lili",
+                age:18
+            }
+        }).then(val=>{
+            console.log(val.data)
+        }).catch(err=>{
+            cosnole.log(err);
+        })
+
+
+        axios.post("/user/login",{
+            account:"18310612838",
+            password:md5("1234567890")
+       },{
+          responseType:'XML'
+       }).then(val=>{
+         console.log(val)
+       }).catch(err=>{
+         console.log(err)
+       })
+   </script> 
+</body>
+</html>

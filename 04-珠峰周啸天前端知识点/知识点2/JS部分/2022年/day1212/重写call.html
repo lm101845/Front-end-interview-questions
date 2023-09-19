@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		call 方法 在  函数原型身上
+		作用：修改 this 的指向
+		<script>
+			Function.prototype.mycall=function mycall(obj,...params){
+				//1.this--->show    2.参数 obj  ...params==10,20
+				if(obj===null||obj===undefined){
+					obj=window;
+				}
+				
+				//值类型
+				if(typeof obj!=="object"||typeof obj!=="function"){
+					obj=Object(obj);//值--》引用
+				}
+				
+				let show=this;
+				obj["show"]=show;//给obj 添加 show 方法
+				let result=obj.show(...params);//对象调用show函数执行   this===>obj
+				delete obj["show"];//删除 obj 添加的 show 方法
+				return result;
+			}
+			
+			function show(n,m){
+				console.log(this,n,m);
+			}
+			
+			// var obj={
+			// 	name:"Tom"
+			// }
+			//var arr=[10,20]
+			var str="aaa";//值类型（没有原型链）===》引用类型（有原型链）
+			console.log(str);
+			
+			//0.传递的第一个参数，沿着原型链找到 Object.prototype  都可更新this的指向
+			//1.传递的第一个参数是 null/undefined    show函数里面的this---》window
+			//2.传递的第一个参数，不能沿着原型链找到 Object.prototype   报错
+			//  解决报错问题：值类型（没有原型链）===》引用类型（有原型链）  Object(XXX)
+			show.mycall(str,10,20);
+		</script>
+	</body>
+</html>

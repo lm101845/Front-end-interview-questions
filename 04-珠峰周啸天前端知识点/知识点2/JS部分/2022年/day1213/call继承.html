@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		call继承（call函数的特色,修改this,来实现的继承，并没有修改原型链）
+		
+		父类.call(this);
+		
+		子类私有 只能继承 父类私有
+		
+		缺点：无法继承公有
+		<script>
+			function Parent(namea,age){
+				//this==》实例p
+				this.namea=namea;
+				this.age=age;
+			}
+			Parent.prototype.show=function(){
+				console.log("父类11111");
+			}
+			var p=new Parent("李飒",38);
+			//console.log(p);
+			
+			
+			
+			function Child(job){
+				//this==>实例c
+				this.job=job;
+				
+				Parent.call(this,"lili",18);
+				//哪个函数执行  Parent当做普通函数执行
+				//this修改为谁  实例c
+				//Parent 参数  "lili"  18
+			}
+			Child.prototype.showJob=function(){
+				console.log("父类11111");
+			}
+			var c=new Child("学生");
+			console.log(c);
+		</script>
+	</body>
+</html>

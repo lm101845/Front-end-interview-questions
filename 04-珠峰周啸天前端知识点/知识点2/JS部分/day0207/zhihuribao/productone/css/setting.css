@@ -1,0 +1,144 @@
+html,
+body,
+.setBox {
+  height: 100%;
+  width: 100%;
+}
+.setBox {
+  background-color: #c9c6c6;
+}
+.setBox .header {
+  height: 0.5rem;
+  background-color: #fff;
+  line-height: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.setBox .header i {
+  font-size: 0.22rem;
+}
+.setBox .header span {
+  font-size: 0.22rem;
+  font-weight: bold;
+}
+.setBox .con .item {
+  height: 0.5rem;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.1rem;
+  line-height: 0.5rem;
+}
+.setBox .con .item p {
+  font-size: 0.18rem;
+}
+.setBox .con .item:nth-child(1),
+.setBox .con .item:nth-child(3),
+.setBox .con .item:nth-child(4),
+.setBox .con .item:nth-child(6) {
+  margin-top: 0.2rem;
+}
+.setBox .con .bigcon {
+  position: relative;
+  line-height: 0.25rem;
+  padding: 0.1rem;
+}
+.setBox .con .bigcon input {
+  display: none;
+}
+.setBox .con .bigcon label {
+  font-size: 0.18rem;
+}
+.setBox .con .bigcon #big + label::before {
+  content: "";
+  display: block;
+  height: 0.15rem;
+  width: 0.4rem;
+  border-radius: 0.5rem;
+  background-color: #c9c6c6;
+  position: absolute;
+  right: 0.1rem;
+  top: 0.3rem;
+  transition: all 0.3s;
+}
+.setBox .con .bigcon #big + label::after {
+  content: "";
+  display: block;
+  height: 0.25rem;
+  width: 0.25rem;
+  border-radius: 50%;
+  background-color: #b4b1b1;
+  position: absolute;
+  right: 0.3rem;
+  top: 0.25rem;
+  transition: all 0.3s;
+}
+.setBox .con .bigcon #big:checked + label::before {
+  background-color: #15455B;
+}
+.setBox .con .bigcon #big:checked + label::after {
+  background-color: #07A3F0;
+  right: 0.08rem;
+}
+.setBox .con .yecon {
+  position: relative;
+}
+.setBox .con .yecon input {
+  display: none;
+}
+.setBox .con .yecon label {
+  font-size: 0.18rem;
+}
+.setBox .con .yecon #ye + label::before {
+  content: "";
+  display: block;
+  height: 0.15rem;
+  width: 0.4rem;
+  border-radius: 0.5rem;
+  background-color: #c9c6c6;
+  position: absolute;
+  right: 0.1rem;
+  top: 0.2rem;
+  transition: all 0.3s;
+}
+.setBox .con .yecon #ye + label::after {
+  content: "";
+  display: block;
+  height: 0.25rem;
+  width: 0.25rem;
+  border-radius: 50%;
+  background-color: #b4b1b1;
+  position: absolute;
+  right: 0.3rem;
+  top: 0.15rem;
+  transition: all 0.3s;
+}
+.setBox .con .yecon #ye:checked + label::before {
+  background-color: #15455B;
+}
+.setBox .con .yecon #ye:checked + label::after {
+  background-color: #07A3F0;
+  right: 0.08rem;
+}
+.setBox .fp {
+  height: 0.8rem;
+  line-height: 0.8rem;
+  text-align: center;
+}
+#dark {
+  background-color: #010101;
+}
+#dark .header {
+  background-color: #010101;
+  color: #999999;
+  border: 1px solid #252525;
+}
+#dark .con {
+  color: #999;
+}
+#dark .con .item {
+  background-color: #1A1A1A;
+}
+#dark .fp {
+  color: #999;
+}

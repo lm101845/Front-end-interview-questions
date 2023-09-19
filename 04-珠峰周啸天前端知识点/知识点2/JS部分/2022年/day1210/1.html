@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		es6新增
+		1、展开运算 ...
+		2. Set 对象存储的值总是唯一的
+		3. 箭头函数
+		<script>
+			// let show=function(a){
+			// 	return a;
+			// }
+			
+			//1.将 function 改为 箭头
+			// let show=(a)=>{
+			// 	return a;
+			// }
+			//2. 如果有一个形参，可以去掉()
+			// let show=a=>{
+			// 	return a;
+			// }
+			//3. 如果只有一条语句，可以省略{},如果这一条语句是return,可以省略return
+			// let show=a=>a;
+		 //    console.log(show(100));
+			
+			//4.箭头函数没有 arguments,用剩余运算来取参数
+			// let show=(...args)=>{
+			// 	console.log(args);//数组
+			// }
+			
+			// show(10,20,30);
+			
+			//5.箭头函数，没有this,指向上级上下文中的this
+			var obj={
+				name:"lili",
+				show:()=>{
+					console.log(this)
+				}
+			}
+			obj.show();//window
+			
+			//6.不能用于构造函数，因为箭头函数没有 prototype属性，不能被new 执行
+		</script>
+		
+		
+		<!-- <script>
+			var arr=[1,23,45,6,78];
+			//展开运算
+			console.log(Math.max(...arr));
+			console.log(Math.min(...arr));
+		</script> -->
+		
+		<!-- <script>
+			var arr=[1,2,1,1,1,2,2,2,3,34];
+			var n=new Set(arr);//Set 对象存储的值总是唯一的,常用作数组去重(es6)
+			console.log(n);//n变成 Set对象
+			
+			var arr2=Array.from(n);//将 Set对象---》数组
+			console.log(arr2);
+		</script> -->
+	</body>
+</html>

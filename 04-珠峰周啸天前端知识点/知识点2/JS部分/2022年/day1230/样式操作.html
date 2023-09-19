@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.box{
+				color:red;
+			}
+			.one{
+				border:10px solid blue;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="one">111</div>
+		<button id="btn">点击切换样式</button>
+		<script src="jquery.min.js"></script>
+		<script>
+			$("div").addClass("box");
+			//值：移除某个   无值：移除全部
+			//$("div").removeClass("one");
+			
+			//有某个样式和没有某个样式之间来回切换
+			$("#btn").click(function(){
+				$("div").toggleClass("one")
+			})
+			
+			//判断一下是否具有某个样式
+			console.log($("div").hasClass("one"));
+			
+			// $("div").css("color","blue");
+			// $("div").css("background-color","pink");
+			
+			$("div").css({
+				"color":"green",
+				"background-color":"pink",
+				"font-size":"30px"
+			});
+			
+		</script>
+	</body>
+</html>

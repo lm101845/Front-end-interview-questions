@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>audio音频处理</title>
+</head>
+
+<body>
+    <!-- 
+        标签的属性
+          controls:显示浏览器自带的播放组件「表现形式不一样」
+          autoplay:自动播放「当代浏览器默认是禁用了自动播放的功能的」
+          loop:循环播放
+          muted:静音
+          preload:资源加载的方式
+            none:只有开始播放的时候，才会去加载音频资源（页面加载的时候不会去获取音频资源）
+            metadata:页面加载的时候，首先获取音频的一些基本信息
+            auto:页面加载的时候，同时加载音频资源
+          src:音频的地址 
+            各浏览器对不用音频格式的支持是不一样的
+     -->
+    <audio src="images/myDream.m4a" id="audioInp" controls autoplay loop preload="metadata" />
+    <!-- <audio controls>
+        <source src="images/myDream.mp3" type="audio/mpeg" />
+        <source src="images/myDream.ogg" type="audio/ogg" />
+        <source src="images/myDream.wav" type="audio/wav" />
+        您的浏览器不支持Audio!
+    </audio> -->
+
+    <script>
+        let audioInp = document.querySelector('#audioInp');
+        console.dir(audioInp);
+        /*
+         currentTime:存储了当前播放的时间「单位秒」
+         duration:存储了总的时间
+         ended:true/false 是否播放完毕
+         paused:true/false 当前是否为暂停的
+         volume:0~1 控制音量的  1最大音量 0静音
+         play方法：控制音频播放
+         pause方法：控制播放暂停
+         canplay事件：音频可以播放了
+         canplaythrough事件：也是音频可以播放了（加载很多资源后，才会触发，保证音频播放中不卡顿）
+         pause事件
+         play事件
+         playing事件
+         volumechange事件
+        */
+        /* audioInp.onpause = function () {
+            console.log('已经暂停');
+        };
+        audioInp.onplay = function () {
+            console.log('已经播放');
+        };
+        audioInp.onplaying = function () {
+            console.log('播放中', audioInp.currentTime);
+        }; */
+    </script>
+</body>
+
+</html>

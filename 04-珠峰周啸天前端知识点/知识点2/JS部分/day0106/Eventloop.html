@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    JS引擎线程--->单线程***  大部分同步,部分异步
+
+    异步：宏任务  微任务
+
+    宏任务：
+    *定时器(setTimeout,setInterval)
+    *ajax(默认版)XMLHttpRequest/Fetch
+    *事件绑定
+    setImmediate「Node 的定时器」
+    MessageChannel 消息通知队列(很少用)
+
+    微任务:
+    *Promise then/catch
+    *requestAnimationFrame (有争议)
+    *async await
+     IntersectionObserver 监听我们当前DOM元素与可视窗口交叉信息
+     queueMicrotask 可以创建一个异步的微任书
+     MutationObserver 监听DOM元素改变的
+     process.nextTick「Node」执行下一个任务或队列
+    
+    js遇到到异步的时候，会有一套自己的处理方案，事件循环机制（EventLoop)****
+    <script>
+        console.log("111");
+
+        setTimeout(function(){
+           console.log("aaa");
+        },1000)
+
+        setTimeout(function(){
+           console.log("bbb");
+        },0)
+
+        console.log("222");
+    </script>
+</body>
+</html>

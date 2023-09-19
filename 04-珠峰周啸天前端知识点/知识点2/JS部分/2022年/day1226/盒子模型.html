@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			#box{
+				height:100px;
+				width:100px;
+				background-color: blue;
+				padding:20px;
+				border:10px solid red;
+				margin:100px 100px;
+				overflow: scroll;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 盒子模型：
+		IE：width=border+padding+content
+		标准：width=content
+		
+		 offsetWidth： content+左右padding+左右border
+		 offsetHeight：content+上下padding+上下border
+		 
+		 clientWidth: content+左右padding(-滚动条)
+		 clientHeight: content+上下padding(-滚动条)
+		 
+		 不同浏览器 滚动条宽度不一样
+		  
+		-->
+		 
+		 <div id="box"></div>
+		 
+		 <script>
+			 console.log(box.offsetWidth);//160
+			 console.log(box.clientWidth);//140
+		 </script>
+	</body>
+</html>

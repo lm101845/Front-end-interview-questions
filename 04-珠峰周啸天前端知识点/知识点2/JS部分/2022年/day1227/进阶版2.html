@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			body{
+				height:4000px;
+			}
+			#imgbox{
+				height:500px;
+				width:300px;
+				background:#ccc url(./img/default.gif) no-repeat center;
+				margin:1800px 100px;
+			}
+			#imgbox img{
+				height:500px;
+				width:300px;
+			}
+			img[src=""]{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="imgbox">
+			<img src="" data-src="img/1.jpg" alt="">
+		</div>
+		
+		<script>
+			//条件 站位盒要在可视窗口中全部出现  加载图片
+			let html=document.documentElement||document.body;
+			let img=document.querySelector("img");
+			
+			function loadimg(){
+				console.log("111")
+				let dataSrc=img.getAttribute("data-src");
+				let newimg=new Image;
+				newimg.src=dataSrc;
+				newimg.onload=function(){
+					img.src=dataSrc;
+					img.removeAttribute("data-src");
+					newimg=null;
+					img.flag=true;//自定属性 img元素
+				}
+			}
+			
+			
+			window.onscroll=function(){
+				let ch=html.clientHeight;
+				let toToph=imgbox.getBoundingClientRect().bottom;
+				if(ch>=toToph){//加载图片
+				    if(img.flag){
+						return;
+					}
+					loadimg();//图片懒加载
+				}
+			}
+		</script>
+	</body>
+</html>
