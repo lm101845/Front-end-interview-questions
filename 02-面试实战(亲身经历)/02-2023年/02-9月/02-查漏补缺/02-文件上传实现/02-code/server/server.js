@@ -3,6 +3,9 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     multiparty = require('multiparty'),
     SparkMD5 = require('spark-md5');
+    //multiparty插件用于上传文件到服务器
+//Spark-md5是一个用JavaScript编写的快速、高效的md5库。
+//它根据MD5算法，将输入的任意长度的明文，经过一系列的操作，转换成一个128位（16字节）的密文。
 
 /*-CREATE SERVER-*/
 const app = express(),
@@ -13,15 +16,28 @@ app.listen(PORT, () => {
     console.log(`THE WEB SERVICE IS CREATED SUCCESSFULLY AND IS LISTENING TO THE PORT：${PORT}，YOU CAN VISIT：${HOSTNAME}`);
 });
 
-/*-中间件-*/
+/*-中间件-允许任何客户端都可以向我发送请求：允许跨域*/
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
+    //Access-Control-Allow-Origin是响应头的一部分，而不是请求头的一部分。它用于指示服务器哪些站点可以访问此资源。
     req.method === 'OPTIONS' ? res.send('CURRENT SERVICES SUPPORT CROSS DOMAIN REQUESTS!') : next();
 });
+
 app.use(bodyParser.urlencoded({
     extended: false,
     limit: '1024mb'
 }));
+/**
+ * 这段代码是在使用Node.js的Express框架。app.use(bodyParser.urlencoded({ extended: false, limit: '1024mb' }));
+ * 是设置Express的中间件，用于解析从客户端发送到服务器的URL编码的请求体。
+ *
+ * 在这个配置中，extended: false表示使用严格的URL编码解析，这不会解析请求体中的嵌套对象。如果设置为true，则允许解析嵌套对象。
+
+ * limit: '1024mb'设置了解析请求体的最大大小，超过这个限制的请求将被拒绝。这个值是1024兆字节（MB）。
+ *
+ * 请注意，从Express 4.16.0开始，bodyParser.urlencoded已被弃用，
+ * 建议使用express.urlencoded({ extended: false, limit: '1024mb' }));替代。
+ */
 
 /*-API-*/
 // 延迟函数
@@ -96,15 +112,19 @@ const writeFile = function writeFile(res, path, file, filename, stream) {
 
 // 基于multiparty插件实现文件上传处理 & form-data解析
 const uploadDir = `${__dirname}/upload`;
+//__dirname:返回正在执行脚本所在目录(即xx/xx/xx/server)
 const multiparty_upload = function multiparty_upload(req, auto) {
     typeof auto !== "boolean" ? auto = false : null;
     let config = {
         maxFieldsSize: 200 * 1024 * 1024,
     };
     if (auto) config.uploadDir = uploadDir;
+    //uploadDir: 只有当autoFiles为true时才有效，用于设置放置上传文件的目录。
+    //如果是自动上传的话，会帮我们把上传的文件自动存放在这个目录下
     return new Promise(async (resolve, reject) => {
         await delay();
         new multiparty.Form(config)
+            //multiparty.Form方法用来把客户端传过来的formData格式数据进行解析parse
             .parse(req, (err, fields, files) => {
                 if (err) {
                     reject(err);
@@ -114,6 +134,8 @@ const multiparty_upload = function multiparty_upload(req, auto) {
                     fields,
                     files
                 });
+                //fields包含了filename值
+                //files就是客户端传过来的文件对象
             });
     });
 };
@@ -177,6 +199,7 @@ app.post('/upload_single_base64', async (req, res) => {
         suffix = /\.([0-9a-zA-Z]+)$/.exec(filename)[1],
         isExists = false,
         path;
+    //spark用来根据文件的【内容】生成一个hash名字
     file = decodeURIComponent(file);
     file = file.replace(/^data:image\/\w+;base64,/, "");
     file = Buffer.from(file, 'base64');

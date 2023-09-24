@@ -46,6 +46,7 @@ const delay = function delay(interval) {
             return;
         }
 
+        //所有条件都满足后，把这个file存起来
         _file = file;
 
         // 显示上传的文件
@@ -77,6 +78,7 @@ const delay = function delay(interval) {
     };
 
     upload_button_upload.addEventListener('click', function () {
+        console.log(_file,'是否拿到了_file')
         if (upload_button_upload.classList.contains('disable') || upload_button_upload.classList.contains('loading')) return;
         if (!_file) {
             alert('请您先选择要上传的文件~~');
@@ -85,9 +87,15 @@ const delay = function delay(interval) {
         changeDisable(true);
         // 把文件传递给服务器：FormData / BASE64
         let formData = new FormData();
+        /**
+         * FormData 对象用以将数据编译成键值对，以便用XMLHttpRequest来发送数据。其主要用于发送表单数据，
+         * 但亦可用于发送带键数据 (keyed data)，而独立于表单使用。
+         * 如果表单enctype属性设为 multipart/form-data，则会使用表单的submit()方法来发送数据，从而，发送数据具有同样形式。
+         */
         formData.append('file', _file);
         formData.append('filename', _file.name);
         instance.post('/upload_single', formData).then(data => {
+            console.log(data,'打印上传成功后的data')
             if (+data.code === 0) {
                 alert(`文件已经上传成功~~,您可以基于 ${data.servicePath} 访问这个资源~~`);
                 return;
@@ -127,18 +135,13 @@ const delay = function delay(interval) {
         return classList.contains('disable') || classList.contains('loading');
     };
 
-    // 把选择的文件读取成为BASE64
-    const changeBASE64 = file => {
-        return new Promise(resolve => {
-            let fileReader = new FileReader();
-            fileReader.readAsDataURL(file);
-            fileReader.onload = ev => {
-                resolve(ev.target.result);
-            };
-        });
-    };
+    upload_button_select.addEventListener('click', function () {
+        if (checkIsDisable(this)) return;
+        upload_inp.click();
+    });
 
     upload_inp.addEventListener('change', async function () {
+        console.log('change事件触发了',upload_inp.files)
         let file = upload_inp.files[0],
             BASE64,
             data;
@@ -152,6 +155,7 @@ const delay = function delay(interval) {
         try {
             data = await instance.post('/upload_single_base64', {
                 file: encodeURIComponent(BASE64),
+                //使用encodeURIComponent编码，防止传输过程中有乱码问题
                 filename: file.name
             }, {
                 headers: {
@@ -169,10 +173,40 @@ const delay = function delay(interval) {
             upload_button_select.classList.remove('loading');
         }
     });
-    upload_button_select.addEventListener('click', function () {
-        if (checkIsDisable(this)) return;
-        upload_inp.click();
-    });
+
+    // 把选择的文件读取成为BASE64
+    const changeBASE64 = file => {
+        return new Promise(resolve => {
+            /**
+             * 这段代码是在JavaScript中使用的。FileReader是JavaScript的一个内置对象，用于读取用户在网页上上传的文件。
+             * new FileReader()创建了一个新的FileReader对象。readAsDataURL(file)是FileReader对象的一个方法，它将读取指定的Blob或File对象，并将文件的内容作为数据URL返回。
+             * 这个数据URL可以直接用于img元素的src属性或者背景图片URL等等。
+             * 在这段代码中，file应该是一个File或Blob对象，通常来自用户上传的文件。
+             */
+            let fileReader = new FileReader();
+            /**
+             * FileReader 类型表示一种异步文件读取机制。可以把 FileReader 想象成类似于 XMLHttpRequest ，
+             * 只不过是用于从文件系统读取文件，而不是从服务器读取数据。
+             */
+            fileReader.readAsDataURL(file);
+            /**
+             * 读取文件并将内容的数据 URI 保存在 result 属性中。
+             * 这些读取数据的方法为处理文件数据提供了极大的灵活性。例如，为了向用户显示图片，可以将图
+             * 片读取为数据 URI，而为了解析文件内容，可以将文件读取为文本。
+             *
+             * 注意：这些方法都是【异步的！！】
+             * 因为这些读取方法是异步的，所以每个 FileReader 会发布几个事件，其中 3 个最有用的事件是
+             * progress 、 error 和 load ，分别表示还有更多数据、发生了错误和读取完成。
+             */
+            fileReader.onload = ev => {
+                console.log(ev,'文件上传完成')
+                resolve(ev.target.result);
+            };
+        });
+    };
+
+
+
 })();
 
 /* 文件缩略图 & 自动生成名字 */
@@ -466,7 +500,7 @@ const delay = function delay(interval) {
         upload_inp = upload.querySelector('.upload_inp'),
         upload_submit = upload.querySelector('.upload_submit'),
         upload_mark = upload.querySelector('.upload_mark');
-    let isRun = false;
+    let isRun = false;   //用于防抖,防止多次上传
 
     // 实现文件上传
     const uploadFile = async file => {
@@ -493,18 +527,28 @@ const delay = function delay(interval) {
     };
 
     // 拖拽获取 dragenter dragleave dragover drop
-    /* upload.addEventListener('dragenter', function () {
-        console.log('进入');
-    });
-    upload.addEventListener('dragleave', function () {
-        console.log('离开');
-    }); */
-    upload.addEventListener('dragover', function (ev) {
-        ev.preventDefault();
-    });
+    // upload.addEventListener('dragenter', function () {
+    //     console.log('进入');
+    // });
+    // upload.addEventListener('dragleave', function () {
+    //     console.log('离开');
+    // });
+    // upload.addEventListener('dragover', function (ev) {
+    //     console.log('区域内移动');
+    //     ev.preventDefault()
+    // });
+    // upload.addEventListener('dragleave', function () {
+    //     console.log('离开');
+    // });
+    // upload.addEventListener('drop', function (ev) {
+    //     ev.preventDefault();
+    //     console.log('放置到容器中')
+    // });
+
     upload.addEventListener('drop', function (ev) {
         ev.preventDefault();
         let file = ev.dataTransfer.files[0];
+        //获取到你拖进来的文件
         if (!file) return;
         uploadFile(file);
     });
@@ -515,6 +559,7 @@ const delay = function delay(interval) {
         if (!file) return;
         uploadFile(file);
     });
+    //点击超链接
     upload_submit.addEventListener('click', function () {
         upload_inp.click();
     });
@@ -533,6 +578,7 @@ const delay = function delay(interval) {
         return classList.contains('disable') || classList.contains('loading');
     };
 
+    //把文件对象传给我，自动生成名字
     const changeBuffer = file => {
         return new Promise(resolve => {
             let fileReader = new FileReader();
@@ -582,11 +628,11 @@ const delay = function delay(interval) {
         } catch (err) {}
 
         // 实现文件切片处理 「固定数量 & 固定大小」
-        let max = 1024 * 100,
-            count = Math.ceil(file.size / max),
+        let max = 1024 * 100,   //100kb
+            count = Math.ceil(file.size / max),   //一共要多少切片
             index = 0,
-            chunks = [];
-        if (count > 100) {
+            chunks = [];    //用来定义切片的集合
+        if (count > 100) {   //限制切片最多100个，如果count超过100个，设置每个切片多大
             max = file.size / 100;
             count = 100;
         }
@@ -599,12 +645,14 @@ const delay = function delay(interval) {
         }
 
         // 上传成功的处理
-        index = 0;
+        index = 0;  //让index还从0开始
         const clear = () => {
             upload_button_select.classList.remove('loading');
             upload_progress.style.display = 'none';
             upload_progress_value.style.width = '0%';
         };
+
+        //一个切片成功了，就执行一次这个方法，进度条就走一下
         const complate = async () => {
             // 管控进度条
             index++;
